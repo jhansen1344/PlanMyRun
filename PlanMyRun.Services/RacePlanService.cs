@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace PlanMyRun.Services
 {
-    class RunPlanService
+    public class RacePlanService
     {
         private readonly Guid _userId;
-        public RunPlanService(Guid userId)
+        public RacePlanService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreateRunPlan(RacePlanCreate model)
+        public bool CreateRacePlan(RacePlanCreate model)
         {
             var entity =
                 new RacePlan()
