@@ -55,10 +55,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunPlanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PlanMyRun.Data\PlanMyRun.Data.csproj">
+      <Project>{d2de1995-761c-4c24-b3c9-bc8606c9b016}</Project>
+      <Name>PlanMyRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PlanMyRun.Models\PlanMyRun.Models.csproj">
+      <Project>{078f3dd2-ad9c-4aa8-aa00-668671aa4d14}</Project>
+      <Name>PlanMyRun.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

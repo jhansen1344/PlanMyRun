@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PlanMyRun.Models.RacePlanModels
 {
-    class RacePlanListItem
+    public class RacePlanListItem
     {
         public int Id { get; set; }
         [Display(Name = "Race Name")]
