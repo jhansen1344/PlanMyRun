@@ -2,6 +2,7 @@
 using PlanMyRun.Models.RacePlanModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,14 @@ namespace PlanMyRun.Services
     public class RacePlanService
     {
         private readonly Guid _userId;
+        private readonly ApplicationDbContext _context;
         public RacePlanService(Guid userId)
         {
             _userId = userId;
+            _context = new ApplicationDbContext();
         }
 
-        public bool CreateRacePlan(RacePlanCreate model)
+        public async Task<bool> CreateRacePlanAsync(RacePlanCreate model)
         {
             var entity =
                 new RacePlan()
@@ -30,20 +33,15 @@ namespace PlanMyRun.Services
                     Description = model.Description
                 };
 
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.RacePlans.Add(entity);
-                return ctx.SaveChanges() == 1;
-            }
+            _context.RacePlans.Add(entity);
+            return await _context.SaveChangesAsync() == 1;
+
         }
 
-        public IEnumerable<RacePlanListItem> GetRacePlans()
+        public async Task<List<RacePlanListItem>> GetRacePlansAsync()
         {
-            using(var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .RacePlans
+            var entityList = await _context.RacePlans.ToListAsync();
+            var racePlanList = entityList
                         .Where(e => e.UserId == _userId.ToString())
                         .Select(
                             e =>
@@ -57,9 +55,9 @@ namespace PlanMyRun.Services
                                     IsPublic = e.IsPublic,
                                     NumberOfRuns = e.ListOfRuns.Count
                                 }
-                        );
-                return query.ToList();
-            }
+                        ).ToList();
+            return racePlanList;
+
         }
     }
 }

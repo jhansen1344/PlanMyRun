@@ -4,6 +4,7 @@ using PlanMyRun.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,10 +13,10 @@ namespace PlanMyRun.MVC.Controllers
     public class RacePlanController : Controller
     {
         // GET: RacePlan
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             RacePlanService service = CreateRacePlanService();
-            var model = service.GetRacePlans();
+            var model = await service.GetRacePlansAsync();
 
             return View(model);
         }
@@ -27,17 +28,17 @@ namespace PlanMyRun.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RacePlanCreate model)
+        public async Task<ActionResult> Create(RacePlanCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             RacePlanService service = CreateRacePlanService();
-            service.CreateRacePlan(model);
-
-            return RedirectToAction("Index");
-
+            if(await service.CreateRacePlanAsync(model))
+                return RedirectToAction("Index");
+            ModelState.AddModelError("", "Note could not be created.");
+            return View(model);
         }
 
         private RacePlanService CreateRacePlanService()
