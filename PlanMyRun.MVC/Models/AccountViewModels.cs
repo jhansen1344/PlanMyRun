@@ -79,6 +79,16 @@ namespace PlanMyRun.MVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Display(Name = "User's average pace.")]
+        public double? Pace { get; set; }
+        [Display(Name = "Prefers to run in the heat of the day.")]
+        public bool LikesHeat { get; set; }
+        [Display(Name = "Ok with a few sprinkles.")]
+        public bool LikesRain { get; set; }
+        [Display(Name = "Prefers to run in the morning.")]
+        public bool LikesMorning { get; set; }
+        [Display(Name = "Ok with running in the dark.")]
+        public bool LikesDark { get; set; }
     }
 
     public class ResetPasswordViewModel

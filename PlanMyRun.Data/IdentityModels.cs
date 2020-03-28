@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
@@ -18,6 +20,18 @@ namespace PlanMyRun.Data
             // Add custom user claims here
             return userIdentity;
         }
+
+        public double? Pace { get; set; }
+        //[ForeignKey(nameof(RacePlan))]
+        //public int? RacePlanId { get; set; }
+        //public virtual RacePlan RacePlan { get; set; }
+        public bool LikesHeat { get; set; }
+        public bool LikesRain { get; set; }
+        public bool LikesMorning { get; set; }
+        public bool LikesDark { get; set; }
+        public virtual List<RacePlan> UsersRacePlans { get; set; }
+        public virtual List<Location> UsersLocations { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
