@@ -41,20 +41,20 @@ namespace PlanMyRun.Services
             var runList = entityList
                 .Where(e => e.RacePlan.UserId == _userId.ToString())
                 .Select(
-                    run =>
+                    e =>
                         new RunListItem
                         {
-                            Id = run.Id,
-                            RacePlanName = run.RacePlan.RaceName,
-                            PlannedDistance = run.PlannedDistance,
-                            EstimatedTime = run.EstimatedTime,
-                            ScheduledDateTime = run.ScheduledDateTime,
-                            Location = run.Location.Name,
-                            ActualDistance = run.ActualDistance,
-                            ActualTime = run.ActualTime
+                            Id = e.Id,
+                            RacePlanName = e.RacePlan.RaceName,
+                            PlannedDistance = e.PlannedDistance,
+                            EstimatedTime = e.EstimatedTime,
+                            LocationId = e.LocationId,
+                            ScheduledDateTime=e.ScheduledDateTime,
+                            ActualDistance = e.ActualDistance,
+                            ActualTime = e.ActualTime
                         }
-                ).ToList();
-            return runList;
+                );
+            return runList.ToList();
         }
 
         public async Task<RunDetail> GetRunByIdAsync(int id)
@@ -71,7 +71,6 @@ namespace PlanMyRun.Services
                 EstimatedTime = entity.EstimatedTime,
                 ScheduleDateTime = entity.ScheduledDateTime,
                 LocationId = entity.LocationId,
-                LocationName = entity.Location.Name,
                 ActualDistance = entity.ActualDistance,
                 ActualTime = entity.ActualTime
             };
@@ -95,7 +94,7 @@ namespace PlanMyRun.Services
             return await _context.SaveChangesAsync() == 1;
         }
 
-        public async Task<bool> DeletePlanAsync(int id)
+        public async Task<bool> DeleteRunAsync(int id)
         {
             var entity = await
                 _context

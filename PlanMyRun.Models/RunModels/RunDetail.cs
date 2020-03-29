@@ -19,12 +19,9 @@ namespace PlanMyRun.Models.RunModels
         [Display(Name = "Estimated Time to Complete.")]
         public TimeSpan EstimatedTime { get; set; }
         [Display(Name = "Date for Run")]
-        public DateTimeOffset? ScheduleDateTime { get; set; }
+        public DateTimeOffset ScheduleDateTime { get; set; }
         [Display(Name = "Location Id")]
         public int? LocationId { get; set; }
-        [Display(Name = "Location of Run")]
-        public string LocationName { get; set; }
-        [Display(Name = "Actual Distance Ran.")]
         public double? ActualDistance { get; set; }
         [Display(Name = "Actual Time To Complete.")]
         public TimeSpan? ActualTime { get; set; }

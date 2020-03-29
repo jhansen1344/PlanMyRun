@@ -19,7 +19,7 @@ namespace PlanMyRun.Models.RunModels
         [Display(Name = "Date for Run")]
         public DateTimeOffset ScheduledDateTime { get; set; }
         [Display(Name = "Location of Run")]
-        public string Location { get; set; }
+        public int? LocationId { get; set; }
         [Display(Name = "Actual Distance Ran.")]
         public double? ActualDistance { get; set; }
         [Display(Name = "Actual Time To Complete.")]

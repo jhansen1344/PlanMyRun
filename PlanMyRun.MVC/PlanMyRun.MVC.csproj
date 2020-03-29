@@ -241,10 +241,14 @@
     <Content Include="Views\RacePlan\Detail.cshtml" />
     <Content Include="Views\RacePlan\Details.cshtml" />
     <Content Include="Views\RacePlan\Edit.cshtml" />
+    <Content Include="Views\Run\Index.cshtml" />
+    <Content Include="Views\Run\Create.cshtml" />
+    <Content Include="Views\Run\Details.cshtml" />
+    <Content Include="Views\Run\Edit.cshtml" />
+    <Content Include="Views\Run\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Run\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

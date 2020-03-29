@@ -1,0 +1,82 @@
+﻿@model PlanMyRun.Models.RunModels.RunDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RunDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

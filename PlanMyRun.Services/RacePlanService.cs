@@ -83,7 +83,7 @@ namespace PlanMyRun.Services
                     PlannedDistance=run.PlannedDistance,
                     EstimatedTime=run.EstimatedTime,
                     ScheduledDateTime=run.ScheduledDateTime,
-                    Location=run.Location.Name,
+                    LocationId=run.LocationId,
                     ActualDistance=run.ActualDistance,
                     ActualTime=run.ActualTime
                 }).ToList()
