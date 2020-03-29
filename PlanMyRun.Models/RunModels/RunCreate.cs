@@ -26,7 +26,7 @@ namespace PlanMyRun.Models.RunModels
         public DateTimeOffset ScheduledDate { get; set; }
         [Display(Name = "Notes about this Run:")]
         [MaxLength(1000, ErrorMessage = "Please enter a shorter note")]
-        public string Notes { get; set; }
+        public string Description { get; set; }
         [Display(Name = "Location of Run")]
         public int? LocationId { get; set; }
     }

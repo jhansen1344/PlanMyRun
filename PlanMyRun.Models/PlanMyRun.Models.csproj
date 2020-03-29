@@ -60,6 +60,8 @@
     <Compile Include="RacePlanModels\RacePlanEdit.cs" />
     <Compile Include="RacePlanModels\RacePlanListItem.cs" />
     <Compile Include="RunModels\RunCreate.cs" />
+    <Compile Include="RunModels\RunDetail.cs" />
+    <Compile Include="RunModels\RunEdit.cs" />
     <Compile Include="RunModels\RunListItem.cs" />
   </ItemGroup>
   <ItemGroup>

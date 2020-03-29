@@ -93,10 +93,10 @@ namespace PlanMyRun.Services
 
         public async Task<bool> EditRacePlanAsync(RacePlanEdit model)
         {
-            var entity =
+            var entity = await
                 _context
                     .RacePlans
-                    .SingleOrDefault(e => e.Id == model.Id && e.UserId == _userId.ToString());
+                    .SingleOrDefaultAsync(e => e.Id == model.Id && e.UserId == _userId.ToString());
             entity.RaceName = model.RaceName;
             entity.RaceDate = model.RaceDate;
             entity.IsPublic = model.IsPublic;
