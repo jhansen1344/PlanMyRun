@@ -1,5 +1,4 @@
-﻿using PlanMyRun.Models.RunModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PlanMyRun.Models.RacePlanModels
 {
-    public class RacePlanDetail
+    public class RacePlanEdit
     {
         public int Id { get; set; }
         [Display(Name = "Race Name")]
@@ -23,7 +22,6 @@ namespace PlanMyRun.Models.RacePlanModels
         public TimeSpan? GoalTime { get; set; }
         [Display(Name = "Description of Race")]
         public string Description { get; set; }
-        [Display(Name = "Runs in this plan.")]
-        public List<RunListItem> ListOfRuns { get; set; }
+
     }
 }

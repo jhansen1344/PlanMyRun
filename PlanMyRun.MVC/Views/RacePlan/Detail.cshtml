@@ -1,0 +1,66 @@
+﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>RacePlanDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPublic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

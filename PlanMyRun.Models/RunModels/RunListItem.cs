@@ -9,6 +9,7 @@ namespace PlanMyRun.Models.RunModels
 {
     public class RunListItem
     {
+        public int Id { get; set; }
         [Display(Name = "Race Name")]
         public string RacePlanName { get; set; }
         [Display(Name = "Planned Distance for Run.")]

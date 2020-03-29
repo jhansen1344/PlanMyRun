@@ -1,5 +1,6 @@
 ﻿using PlanMyRun.Data;
 using PlanMyRun.Models.RacePlanModels;
+using PlanMyRun.Models.RunModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -58,6 +59,62 @@ namespace PlanMyRun.Services
                         ).ToList();
             return racePlanList;
 
+        }
+
+        public async Task<RacePlanDetail> GetPlanByIdAsync(int id)
+        {
+            var entity = await _context.RacePlans.FindAsync(id);
+            if (entity == null)
+                return null;
+
+            var model = new RacePlanDetail()
+            {
+                Id = entity.Id,
+                RaceName = entity.RaceName,
+                RaceDate = entity.RaceDate,
+                IsPublic = entity.IsPublic,
+                RaceLength = entity.RaceLength,
+                GoalTime = entity.GoalTime,
+                Description = entity.Description,
+                ListOfRuns = entity.ListOfRuns.Select(run => new RunListItem
+                {
+                    Id=run.Id,
+                    RacePlanName = entity.RaceName,
+                    PlannedDistance=run.PlannedDistance,
+                    EstimatedTime=run.EstimatedTime,
+                    ScheduledDateTime=run.ScheduledDateTime,
+                    Location=run.Location.Name,
+                    ActualDistance=run.ActualDistance,
+                    ActualTime=run.ActualTime
+                }).ToList()
+            };
+            return model;
+        }
+
+        public async Task<bool> EditRacePlanAsync(RacePlanEdit model)
+        {
+            var entity =
+                _context
+                    .RacePlans
+                    .SingleOrDefault(e => e.Id == model.Id && e.UserId == _userId.ToString());
+            entity.RaceName = model.RaceName;
+            entity.RaceDate = model.RaceDate;
+            entity.IsPublic = model.IsPublic;
+            entity.RaceLength = model.RaceLength;
+            entity.GoalTime = model.GoalTime;
+            entity.Description = model.Description;
+
+            return await _context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<bool> DeletePlanAsync(int id)
+        {
+            var entity =
+                _context
+                    .RacePlans
+                    .Single(e => e.Id == id && e.UserId == _userId.ToString());
+            _context.RacePlans.Remove(entity);
+            return await _context.SaveChangesAsync() == 1;
         }
     }
 }
