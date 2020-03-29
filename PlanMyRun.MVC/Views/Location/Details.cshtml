@@ -1,0 +1,58 @@
+﻿@model PlanMyRun.Models.LocationModels.LocationDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LocationDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasLoops)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasLoops)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

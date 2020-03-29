@@ -26,6 +26,7 @@ namespace PlanMyRun.Services
                 new Location()
                 {
                   Name=model.Name,
+                  UserId=_userId.ToString(),
                   MaxDistance=model.MaxDistance,
                   HasLoops=model.HasLoops,
                   Address=model.Address,
@@ -34,7 +35,7 @@ namespace PlanMyRun.Services
             _context.Locations.Add(entity);
             return await _context.SaveChangesAsync() == 1;
         }
-        public async Task<List<LocationListItem>> GetLocationssAsync()
+        public async Task<List<LocationListItem>> GetLocationsAsync()
         {
             var entityList = await _context.Locations.ToListAsync();
             var runList = entityList

@@ -56,6 +56,15 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Migrations\202003281520049_InitialCreate.cs" />
+    <Compile Include="Migrations\202003281520049_InitialCreate.Designer.cs">
+      <DependentUpon>202003281520049_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003291831358_UpdatedLayers.cs" />
+    <Compile Include="Migrations\202003291831358_UpdatedLayers.Designer.cs">
+      <DependentUpon>202003291831358_UpdatedLayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RacePlan.cs" />
     <Compile Include="Run.cs" />
@@ -63,6 +72,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003281520049_InitialCreate.resx">
+      <DependentUpon>202003281520049_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003291831358_UpdatedLayers.resx">
+      <DependentUpon>202003291831358_UpdatedLayers.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
