@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PlanMyRun.Models.LocationModels
 {
-    class LocationDetail
+    public class LocationDetail
     {
 
         public int Id { get; set; }
