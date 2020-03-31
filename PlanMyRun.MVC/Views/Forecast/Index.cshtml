@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PlanMyRun.Models.ForecastModels.ForecastDayModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sunrise_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sunset_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temp_Max_F)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temp_Min_F)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prop_Precip_Pct)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sunrise_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sunset_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temp_Max_F)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temp_Min_F)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prop_Precip_Pct)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

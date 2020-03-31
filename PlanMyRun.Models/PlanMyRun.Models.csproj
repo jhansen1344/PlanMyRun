@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForecastModels\ForecastDayModel.cs" />
+    <Compile Include="ForecastModels\ForecastHourlyModel.cs" />
+    <Compile Include="ForecastModels\ForecastResultModel.cs" />
     <Compile Include="LocationModels\LocationCreate.cs" />
     <Compile Include="LocationModels\LocationDetail.cs" />
     <Compile Include="LocationModels\LocationEdit.cs" />
