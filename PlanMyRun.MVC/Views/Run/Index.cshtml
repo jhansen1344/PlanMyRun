@@ -10,11 +10,59 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<div class="container">
-    <header>
-        <h4 class="display-4 mb-4 text-center">@DateTime.Now.ToString("MMMM")</h4>
-    </header>
-</div>
+
+@for (int i = DateTime.Now.Month; i <= 11; i++)
+{
+    int addMonths = i - DateTime.Now.Month;
+    <div class="container-fluid">
+        <header>
+            <h4 class="display-4 mb-4 text-center">@DateTime.Now.AddMonths(addMonths).ToString("MMMM")</h4>
+            <div class="row d-none d-sm-flex p-1 bg-dark text-white">
+                <h5 class="col-sm p-1 text-center">Sunday</h5>
+                <h5 class="col-sm p-1 text-center">Monday</h5>
+                <h5 class="col-sm p-1 text-center">Tuesday</h5>
+                <h5 class="col-sm p-1 text-center">Wednesday</h5>
+                <h5 class="col-sm p-1 text-center">Thursday</h5>
+                <h5 class="col-sm p-1 text-center">Friday</h5>
+                <h5 class="col-sm p-1 text-center">Saturday</h5>
+            </div>
+        </header>
+
+        <div class="row border border-right-0 border-bottom-0">
+            @{ int j = 0;
+                if (i == DateTime.Now.Month)
+
+                {
+
+                    j = DateTime.DaysInMonth(DateTime.Now.Year, i + addMonths);
+                }
+                else
+                {
+                    j = 1;
+
+                }
+                for (int k = j; k <= DateTime.DaysInMonth(DateTime.Now.Year, i); k++)
+                {
+                    DateTime calendarDate = new DateTime(DateTime.Now.Year, i, k);
+                    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                        <h5 class="row align-items-center">
+                            <span class="date col-1">@k</span>
+                            <small class="col d-sm-none text-center text-muted">@calendarDate.DayOfWeek</small>
+                            <span class="col-1"></span>
+                        </h5>
+                        <p class="d-sm-none">No events</p>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -41,35 +89,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RacePlanName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlannedDistance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstimatedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduledDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActualDistance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActualTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RacePlanName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlannedDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduledDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
