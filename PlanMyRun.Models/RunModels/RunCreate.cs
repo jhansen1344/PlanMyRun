@@ -18,7 +18,6 @@ namespace PlanMyRun.Models.RunModels
         public double PlannedDistance { get; set; }
         [Required]
         [Display(Name = "Estimated Time to Complete.")]
-        [DataType(DataType.Time, ErrorMessage = ("Please enter a valid time"))]
         public TimeSpan EstimatedTime { get; set; }
         [Required]
         [Display(Name = "Date for Run")]

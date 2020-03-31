@@ -26,7 +26,6 @@ namespace PlanMyRun.Models.RacePlanModels
         [Range(0,double.MaxValue,ErrorMessage ="Please enter a valid number.")]
         public double? RaceLength { get; set; }
         [Display(Name = "Goal Finish Time")]
-        [DataType(DataType.Time, ErrorMessage = ("Please enter a valid time"))]
         public TimeSpan? GoalTime { get; set; }
         [Display(Name = "Description of Race")]
         [MaxLength(1000,ErrorMessage ="Please enter a shorter description.")]
