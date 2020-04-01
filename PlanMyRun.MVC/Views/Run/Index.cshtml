@@ -114,7 +114,10 @@
                             start: moment(v.ScheduledDateTime),
                             end: v.End != null ? moment(v.End) : null,
                             color: v.ThemeColor,
-                            allDay: v.IsFullDay
+                            allDay: v.IsFullDay,
+                            extendedProps: {
+                                actualDistance:v.ActualDistance
+                            }
                         });
                     })
 
@@ -147,6 +150,7 @@
                             $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                         }
                         $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                        $description.append($('<p/>').html('<b>Actual Distance:</b>' + calEvent.actualDistance));
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
