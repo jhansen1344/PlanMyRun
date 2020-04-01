@@ -414,6 +414,39 @@ namespace PlanMyRun.MVC.Controllers
             return View();
         }
 
+        public async Task<ActionResult> Update()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            return View(user);
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>Update(ApplicationUser model)
+        {
+            var user = await UserManager.FindByIdAsync(model.Id);
+            if (user != null)
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                user.Pace = model.Pace;
+                user.ZipCode = model.ZipCode;
+                user.LikesDark = model.LikesDark;
+                user.LikesHeat = model.LikesHeat;
+                user.LikesMorning = model.LikesMorning;
+                user.LikesRain = model.LikesRain;
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+                else
+                    ModelState.AddModelError("", "User could not be updated");
+                return View(user);
+            }
+            else
+                ModelState.AddModelError("", "UserNotFound");
+            return View(user);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

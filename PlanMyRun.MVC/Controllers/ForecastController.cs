@@ -1,4 +1,5 @@
-﻿using PlanMyRun.Services;
+﻿using Microsoft.AspNet.Identity;
+using PlanMyRun.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,17 @@ namespace PlanMyRun.MVC.Controllers
         // GET: Forecast
         public async Task<ActionResult> Index()
         {
-            var service = new ForecastService();
+            var service = CreateForecastService();
             var model = await service.GetForecastAsync();
             model.Days.ToList();
             return View(model.Days);
+        }
+
+        private ForecastService CreateForecastService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ForecastService(userId);
+            return service;
         }
     }
 }
