@@ -1,78 +1,4 @@
-﻿@model IEnumerable<PlanMyRun.Models.RunModels.RunListItem>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RacePlanName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlannedDistance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduledDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActualDistance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActualTime)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RacePlanName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlannedDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScheduledDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActualDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActualTime)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-
-
-</table>
-
+﻿
 <div id="calender"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -104,11 +30,11 @@
             var events = [];
             $.ajax({
                 type: "GET",
-                url: "/Run/GetEvents",
+                url: '@Url.Action("GetRunsInPlan", new { id = Model.RacePlanId })',
                 success: function (data) {
                     $.each(data, function (i, v) {
-                        events.push({
-                            title: v.PlannedDistance + ' Mile Run',
+        events.push({
+        title: v.PlannedDistance + ' Mile Run',
 
                             description: 'Race Name:' +v.RacePlanName +'Actual Time:' +v.ActualDistance,
                             start: moment(v.ScheduledDateTime),
@@ -116,17 +42,17 @@
                             color: v.ThemeColor,
                             allDay: v.IsFullDay,
                             extendedProps: {
-                                actualDistance: v.ActualDistance
+            actualDistance: v.ActualDistance
                             }
-                        });
-                    })
+        });
+                        })
 
                     GenerateCalender(events);
-                },
+                    },
                 error: function (error) {
-                    alert('failed');
-                }
-            })
+                        alert('failed');
+                    }
+                })
 
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
@@ -160,5 +86,3 @@
         })
     </script>
 }
-
-

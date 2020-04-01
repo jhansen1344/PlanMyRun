@@ -22,9 +22,8 @@ namespace PlanMyRun.Data
         }
 
         public double? Pace { get; set; }
-        //[ForeignKey(nameof(RacePlan))]
-        //public int? RacePlanId { get; set; }
-        //public virtual RacePlan RacePlan { get; set; }
+        public string ZipCode { get; set; }
+
         public bool LikesHeat { get; set; }
         public bool LikesRain { get; set; }
         public bool LikesMorning { get; set; }

@@ -79,6 +79,11 @@ namespace PlanMyRun.MVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name ="Zip Code")]
+        [DataType(DataType.PostalCode)]
+        public string ZipCode { get; set; }
+
         [Display(Name = "User's average pace.")]
         public double? Pace { get; set; }
         [Display(Name = "Prefers to run in the heat of the day.")]

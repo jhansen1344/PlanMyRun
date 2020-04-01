@@ -347,7 +347,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\RacePlan\Create.cshtml" />
     <Content Include="Views\RacePlan\Index.cshtml" />
-    <Content Include="Views\RacePlan\Detail.cshtml" />
     <Content Include="Views\RacePlan\Details.cshtml" />
     <Content Include="Views\RacePlan\Edit.cshtml" />
     <Content Include="Views\Run\Index.cshtml" />
@@ -361,6 +360,7 @@
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Delete.cshtml" />
     <Content Include="Views\Forecast\Index.cshtml" />
+    <Content Include="Views\Run\GetRunsInPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

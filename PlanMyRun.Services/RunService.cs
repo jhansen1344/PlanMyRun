@@ -77,6 +77,28 @@ namespace PlanMyRun.Services
             return model;
         }
 
+        public async Task<List<RunDetail>> GetRunsInPlanAsync(int id)
+        {
+            var entityList = await _context.Runs.ToListAsync();
+            var runList = entityList
+                .Where(e => e.RacePlan.UserId == _userId.ToString()&&e.RacePlanId==id)
+                .Select(
+                    e =>
+                    new RunDetail()
+                    {
+                        Id = e.Id,
+                        RacePlanId = e.RacePlanId,
+                        RacePlanName = e.RacePlan.RaceName,
+                        PlannedDistance = e.PlannedDistance,
+                        EstimatedTime = e.EstimatedTime,
+                        ScheduleDateTime = e.ScheduledDateTime,
+                        LocationId = e.LocationId,
+                        ActualDistance = e.ActualDistance,
+                        ActualTime = e.ActualTime
+                    });
+            return runList.ToList();
+        }
+
         public async Task<bool> EditRunAsync(RunEdit model)
         {
             var entity = await

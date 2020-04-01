@@ -20,10 +20,10 @@ namespace PlanMyRun.MVC.Controllers
             return View(model);
         }
 
-        public async Task<JsonResult> GetEvents()
+        public async Task<JsonResult> GetRunsInPlan(int id)
         {
             var service = CreateRunService();
-            var model = await service.GetRunsAsync();
+            var model = await service.GetRunsInPlanAsync(id);
             var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             return jsonResult;
         }
