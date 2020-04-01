@@ -20,14 +20,22 @@ namespace PlanMyRun.MVC.Controllers
             return View(model);
         }
 
+        public async Task<JsonResult> GetEvents()
+        {
+            var service = CreateRunService();
+            var model = await service.GetRunsAsync();
+            var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return jsonResult;
+        }
+
         public ActionResult Create()
         {
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create (RunCreate model)
+        public async Task<ActionResult> Create(RunCreate model)
         {
             if (!ModelState.IsValid)
             {
@@ -54,13 +62,13 @@ namespace PlanMyRun.MVC.Controllers
             var model = new RunEdit
             {
                 Id = detail.Id,
-                RacePlanId=detail.RacePlanId,
-                PlannedDistance=detail.PlannedDistance,
-                EstimatedTime=detail.EstimatedTime,
-                ScheduleDateTime=detail.ScheduleDateTime,
-                LocationId=detail.LocationId,
-                ActualDistance=detail.ActualDistance,
-                ActualTime=detail.ActualTime
+                RacePlanId = detail.RacePlanId,
+                PlannedDistance = detail.PlannedDistance,
+                EstimatedTime = detail.EstimatedTime,
+                ScheduleDateTime = detail.ScheduleDateTime,
+                LocationId = detail.LocationId,
+                ActualDistance = detail.ActualDistance,
+                ActualTime = detail.ActualTime
             };
             return View(model);
         }
