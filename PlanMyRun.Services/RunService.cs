@@ -73,7 +73,8 @@ namespace PlanMyRun.Services
                 ScheduleDateTime = entity.ScheduledDateTime,
                 LocationId = entity.LocationId,
                 ActualDistance = entity.ActualDistance,
-                ActualTime = entity.ActualTime
+                ActualTime = entity.ActualTime,
+                Description=entity.Description
             };
             return model;
         }
@@ -95,7 +96,8 @@ namespace PlanMyRun.Services
                         ScheduleDateTime = e.ScheduledDateTime,
                         LocationId = e.LocationId,
                         ActualDistance = e.ActualDistance,
-                        ActualTime = e.ActualTime
+                        ActualTime = e.ActualTime,
+                        Description= e.Description
                     });
             return runList.ToList();
         }
@@ -109,20 +111,13 @@ namespace PlanMyRun.Services
             entity.RacePlanId = model.RacePlanId;
             entity.PlannedDistance = model.PlannedDistance;
             entity.EstimatedTime = model.EstimatedTime;
-            try
-            {
-                entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
-
+            entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
             entity.LocationId = model.LocationId;
             entity.ActualDistance = model.ActualDistance;
             entity.ActualTime = model.ActualTime;
-
+            entity.Description = model.Description;
             return await _context.SaveChangesAsync() == 1;
-            }
-            catch(Exception e)
-            {
-                return false;
-            }
+
         }
 
         public async Task<bool> DeleteRunAsync(int id)

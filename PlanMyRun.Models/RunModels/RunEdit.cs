@@ -25,5 +25,10 @@ namespace PlanMyRun.Models.RunModels
         public double? ActualDistance { get; set; }
         [Display(Name = "Actual Time To Complete.")]
         public TimeSpan? ActualTime { get; set; }
+
+        [Display(Name = "Notes about this Run:")]
+        public string Description { get; set; }
     }
+
 }
+

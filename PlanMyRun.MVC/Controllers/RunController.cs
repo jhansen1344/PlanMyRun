@@ -68,7 +68,8 @@ namespace PlanMyRun.MVC.Controllers
                 ScheduleDateTime = detail.ScheduleDateTime.ToString(),
                 LocationId = detail.LocationId,
                 ActualDistance = detail.ActualDistance,
-                ActualTime = detail.ActualTime
+                ActualTime = detail.ActualTime,
+                Description = detail.Description
             };
             return PartialView("_EditPartial", model);
         }

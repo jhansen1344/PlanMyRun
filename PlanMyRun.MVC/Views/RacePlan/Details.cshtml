@@ -132,7 +132,7 @@
                             </span>
                         </div>
                     </div>
-                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                    <button type="button" id="runSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
             </div>
@@ -236,6 +236,7 @@
 
                             Id: event.eventId,
                             RacePlanId: event.racePlanId,
+                            Description: event.Description,
                             PlannedDistance: event.plannedDistance,
                             EstimatedTime: event.estimatedTime,
                             ScheduleDateTime: event.start.format('MM/DD/YYYY HH:mm'),
@@ -243,7 +244,7 @@
                             LocationId: event.locationId,
                             ActualDistance: event.actualDistance,
                             ActualTime: event.acutalTime,
-                            __RequestVerificationToken:$('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val()
+                            //__RequestVerificationToken:$('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val()
 
                         };
                         SaveEvent(data);
@@ -252,6 +253,7 @@
             }
             $('#btnEdit').click(function () {
                 //Open modal dialog for edit event
+
                 openAddEditForm();
             })
             $('#btnDelete').click(function () {
@@ -300,7 +302,7 @@
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
             }
-            $('#btnSave').click(function () {
+            $('#runSave').click(function () {
                 //Validation/
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subject required');
@@ -331,29 +333,20 @@
                     LocationId:$('#LocationId').val(),
                     ActualDistance:$('#ActualDistance').val(),
                     ActualTime:$('#ActualTime').val(),
-                    //Subject: $('#txtSubject').val().trim(),
                     ScheduleDateTime: $('#txtStart').val().trim(),
-                    //End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
-                   // Description: $('#txtDescription').val(),
-                    //ThemeColor: $('#ddThemeColor').val(),
-                    //IsFullDay: $('#chkIsFullDay').is(':checked')
+
                 }
                 SaveEvent(data);
                 // call function for submit data to the server
             })
             function SaveEvent(data) {
 
-
                 AddAntiForgeryToken(data);
 
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("Edit", "Run")',
-                    //contentType: "application/json",
-                    //dataType:"json",
                     data: data,
-                    //data: AddAntiForgeryToken({ id: parseInt($(this).attr("title")) }),
-                    //data:data,
                     success: function (data) {
                         if (data.status) {
                             //Refresh the calender
