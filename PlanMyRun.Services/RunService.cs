@@ -3,6 +3,7 @@ using PlanMyRun.Models.RunModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -108,12 +109,20 @@ namespace PlanMyRun.Services
             entity.RacePlanId = model.RacePlanId;
             entity.PlannedDistance = model.PlannedDistance;
             entity.EstimatedTime = model.EstimatedTime;
-            entity.ScheduledDateTime = model.ScheduleDateTime;
+            try
+            {
+                entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+
             entity.LocationId = model.LocationId;
             entity.ActualDistance = model.ActualDistance;
             entity.ActualTime = model.ActualTime;
 
             return await _context.SaveChangesAsync() == 1;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> DeleteRunAsync(int id)

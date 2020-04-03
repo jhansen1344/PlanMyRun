@@ -23,6 +23,7 @@ namespace PlanMyRun.MVC.Controllers
         private ForecastService CreateForecastService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
+            
             var service = new ForecastService(userId);
             return service;
         }

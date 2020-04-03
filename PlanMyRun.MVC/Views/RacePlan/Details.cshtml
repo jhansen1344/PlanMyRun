@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Details";
 }
+@*<%-- used for ajax in AddAntiForgeryToken() --%>*@
+<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
 
 <h2>Details</h2>
 
@@ -102,11 +104,19 @@
                     <div class="form-group">
                         <label>Start</label>
                         <div class="input-group date" id="dtp1">
-                            <input type="text" id="txtStart" class="form-control" />
+                            <input type="text" id="ScheduleDateTime" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Actual Distance</label>
+                        <textarea id="ActualDistance" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Planned Distance</label>
+                        <textarea id="PlannedDistance" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
@@ -122,20 +132,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Theme Color</label>
-                        <select id="ddThemeColor" class="form-control">
-                            <option value="">Default</option>
-                            <option value="red">Red</option>
-                            <option value="blue">Blue</option>
-                            <option value="black">Black</option>
-                            <option value="green">Green</option>
-                        </select>
-                    </div>
+
                     <button type="button" id="btnSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
@@ -173,7 +170,9 @@
                                 extendedProps: {
                                     raceName: v.RacePlanName,
                                     actualDistance: v.ActualDistance,
-                                    actualTime: v.ActualTime
+                                    actualTime: v.ActualTime,
+                                    plannedDistance: v.PlannedDistance,
+                                    racePlanId:v.RacePlanId
                                 }
                             });
                         })
@@ -211,6 +210,7 @@
                         $description.append($('<p/>').html('<b>Actual Distance:</b>' + calEvent.actualDistance));
                         $description.append($('<p/>').html('<b>Actual Distance:</b>' + calEvent.actualDistance));
                         $description.append($('<p/>').html('<b>Actual Time:</b>' + calEvent.actualTime));
+                        $description.append($('<p/>').html('<b>PlannedDistance:</b>' + calEvent.plannedDistance));
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
@@ -232,16 +232,19 @@
                     editable: true,
                     eventDrop: function (event) {
                         var data = {
-                            EventID: event.eventID,
-                            Subject: event.title,
-                            Start: event.start.format('DD/MM/YYYY HH:mm A'),
+
+                            Id: event.eventId,
+                            RacePlanId: 1,
+                            PlannedDistance: 3,
+                            EstimatedTime: '16:30:00',
+                            ScheduleDateTime: event.start.format('MM/DD/YYYY HH:mm'),
+                           // Json.stringify({'ScheduleDateTime': new Date(Start)}),
                             End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
-                            Description: event.description,
-                            RaceName: event.raceName,
+                            LocationId: 2,
                             ActualDistance: event.actualDistance,
                             ActualTime: event.acutalTime,
-                            ThemeColor: event.color,
-                            IsFullDay: event.allDay
+                            __RequestVerificationToken:$('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val()
+
                         };
                         SaveEvent(data);
                     }
@@ -255,14 +258,13 @@
                 if (selectedEvent != null && confirm('Are you sure?')) {
                     $.ajax({
                         type: "POST",
-                        url: '/home/DeleteEvent',
-                        data: {'eventID': selectedEvent.eventID},
-                        success: function (data) {
-                            if (data.status) {
+                        url: "/Run/Delete/"+ selectedEvent.eventId,
+                        //data: {'eventID': selectedEvent.eventID},
+                        success: function () {
                                 //Refresh the calender
                                 FetchEventAndRenderCalendar();
                                 $('#myModal').modal('hide');
-                            }
+
                         },
                         error: function () {
                             alert('Failed');
@@ -283,13 +285,16 @@
             });
             function openAddEditForm() {
                 if (selectedEvent != null) {
-                    $('#hdEventID').val(selectedEvent.eventID);
+                    $('#Id').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
-                    $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
+                    $('#ScheduleDateTime').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
                     $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
                     $('#chkIsFullDay').change();
                     $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
-                    $('#txtDescription').val(selectedEvent.description);
+                   // $('#txtDescription').val(selectedEvent.description);
+                    $('#RaceName').val(selectedEvent.raceName);
+                    $('#PlannedDistance').val(selectedEvent.plannedDistance);
+                    $('#ActualDistance').val(selectedEvent.actualDistance);
                     $('#ddThemeColor').val(selectedEvent.color);
                 }
                 $('#myModal').modal('hide');
@@ -317,24 +322,37 @@
                         return;
                     }
                 }
-            
+
                 var data = {
-                    EventID: $('#hdEventID').val(),
-                    Subject: $('#txtSubject').val().trim(),
-                    Start: $('#txtStart').val().trim(),
-                    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
-                    Description: $('#txtDescription').val(),
-                    ThemeColor: $('#ddThemeColor').val(),
-                    IsFullDay: $('#chkIsFullDay').is(':checked')
+                    Id: $('#Id').val(),
+                    RacePlanId: $('#RacePlanId').val(),
+                    PlannedDistance:$('#PlannedDistance').val(),
+                    EstimatedTime:$('#EstimatedTime').val(),
+                    LocationId:$('#LocationId').val(),
+                    ActualDistance:$('#ActualDistance').val(),
+                    ActualTime:$('#ActualTime').val(),
+                    //Subject: $('#txtSubject').val().trim(),
+                    ScheduleDateTime: $('#txtStart').val().trim(),
+                    //End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                   // Description: $('#txtDescription').val(),
+                    //ThemeColor: $('#ddThemeColor').val(),
+                    //IsFullDay: $('#chkIsFullDay').is(':checked')
                 }
                 SaveEvent(data);
-                // call function for submit data to the server 
+                // call function for submit data to the server
             })
             function SaveEvent(data) {
+
+
+
                 $.ajax({
                     type: "POST",
-                    url: '/Run/Edit/'+event.eventID,
+                    url: '@Url.Action("Edit", "Run")',
+                    //contentType: "application/json",
+                    //dataType:"json",
                     data: data,
+                    //data: AddAntiForgeryToken({ id: parseInt($(this).attr("title")) }),
+                    //data:data,
                     success: function (data) {
                         if (data.status) {
                             //Refresh the calender
@@ -347,6 +365,11 @@
                     }
                 })
             }
+
+             function AddAntiForgeryToken(data) {
+    data.__RequestVerificationToken = $('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val();
+    return data;
+};
         })
     </script>
 }

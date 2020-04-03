@@ -65,12 +65,12 @@ namespace PlanMyRun.MVC.Controllers
                 RacePlanId = detail.RacePlanId,
                 PlannedDistance = detail.PlannedDistance,
                 EstimatedTime = detail.EstimatedTime,
-                ScheduleDateTime = detail.ScheduleDateTime,
+                ScheduleDateTime = detail.ScheduleDateTime.ToString(),
                 LocationId = detail.LocationId,
                 ActualDistance = detail.ActualDistance,
                 ActualTime = detail.ActualTime
             };
-            return View(model);
+            return PartialView("_EditPartial", model);
         }
 
         [HttpPost]

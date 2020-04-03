@@ -18,7 +18,7 @@ namespace PlanMyRun.Models.RacePlanModels
         [Required]
         [DataType(DataType.Date, ErrorMessage =("Please enter a valid date"))]
         [Display(Name = "Race Date")]
-        public DateTimeOffset RaceDate { get; set; }
+        public DateTime RaceDate { get; set; }
         [Required]
         [Display(Name = "Can others use this plan as a template?")]
         public bool IsPublic { get; set; }

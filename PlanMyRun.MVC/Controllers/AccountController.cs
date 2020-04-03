@@ -417,8 +417,9 @@ namespace PlanMyRun.MVC.Controllers
         public async Task<ActionResult> Update()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            return View(user);
-
+            if (user != null)
+                return View(user);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -437,7 +438,7 @@ namespace PlanMyRun.MVC.Controllers
                 user.LikesRain = model.LikesRain;
                 IdentityResult result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 else
                     ModelState.AddModelError("", "User could not be updated");
                 return View(user);
@@ -446,6 +447,35 @@ namespace PlanMyRun.MVC.Controllers
                 ModelState.AddModelError("", "UserNotFound");
             return View(user);
         }
+
+        public async Task<ActionResult> Delete()
+        {   
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+                return View(user);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<ActionResult> DeleteUser()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                IdentityResult result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+                else
+                    ModelState.AddModelError("", "User could not be deleted");
+                return View(user);
+            }
+            else
+                ModelState.AddModelError("", "UserNotFound");
+                return View(user);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202004011544077_AddedZipCode.Designer.cs">
       <DependentUpon>202004011544077_AddedZipCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004022224388_ChangedDateTime.cs" />
+    <Compile Include="Migrations\202004022224388_ChangedDateTime.Designer.cs">
+      <DependentUpon>202004022224388_ChangedDateTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RacePlan.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004011544077_AddedZipCode.resx">
       <DependentUpon>202004011544077_AddedZipCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004022224388_ChangedDateTime.resx">
+      <DependentUpon>202004022224388_ChangedDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
