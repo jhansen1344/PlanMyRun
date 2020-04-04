@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PlanMyRun.Models.RunModels.RunDetail>
+
+@foreach (var item in Model)
+{
+
+    <div class="card border-primary bg-dark mb-3">
+        <div class="card-header">@Html.DisplayFor(modelItem => item.PlannedDistance) Mile Run For @Html.DisplayFor(modelItem => item.RacePlanName)</div>
+        <div class="card-body">
+            <ul>
+
+                <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(modelItem => item.EstimatedTime)</li>
+                <li> @Html.DisplayNameFor(model => model.ScheduleDateTime): @Html.DisplayFor(modelItem => item.ScheduleDateTime)</li>
+                <li> @Html.DisplayNameFor(model => model.LocationId): @Html.DisplayFor(modelItem => item.LocationId)</li>
+                <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(modelItem => item.EstimatedTime) </li> 
+                <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(modelItem => item.Description) </li>
+                @if (item.ActualDistance != null)
+                {
+                    <li> @Html.DisplayNameFor(model => model.ActualDistance): @Html.DisplayFor(modelItem => item.ActualDistance)</li>
+                }
+                @if (item.ActualTime != null)
+                {
+                    <li> @Html.DisplayNameFor(model => model.ActualTime): @Html.DisplayFor(modelItem => item.ActualTime)</li>
+                }
+
+            </ul>
+
+            <ul>
+                <li>@Html.ActionLink("Update Run", "Edit", new { id = item.Id })</li>
+                <li>@Html.ActionLink("Advanced Stats", "Details", new { id = item.Id })</li>
+                <li>@Html.ActionLink("Delete Run", "Delete", new { id = item.Id })</li>
+            </ul>
+        </div>
+    </div>
+
+}
+

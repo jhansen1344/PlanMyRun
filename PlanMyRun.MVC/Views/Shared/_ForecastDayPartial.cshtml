@@ -1,25 +1,23 @@
 ﻿@model IEnumerable<PlanMyRun.Models.ForecastModels.ForecastDayModel>
 
-<h2>Forecast</h2>
+        @foreach (var item in Model)
+        {<div class="card border-primary bg-dark">
+                <div class="card-header">Daily Forecast</div>
+                <div class="card-body">
+                    <ul>
 
-@foreach (var item in Model)
-{
-    <div class="card border-primary bg-dark">
-        <div class="card-header">Daily Forecast</div>
-        <div class="card-body">
-            <ul>
+                        <li>@Html.DisplayNameFor(model => model.Date): @Html.DisplayFor(modelItem => item.Date)</li>
+                        <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(modelItem => item.Sunrise_Time)</li>
+                        <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(modelItem => item.Sunset_Time)</li>
+                        <li>@Html.DisplayNameFor(model => model.Temp_Max_F): @Html.DisplayFor(modelItem => item.Temp_Max_F)</li>
+                        <li>@Html.DisplayNameFor(model => model.Temp_Min_F): @Html.DisplayFor(modelItem => item.Temp_Min_F)</li>
+                        <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(modelItem => item.Prob_Precip_Pct)</li>
+                    </ul>
 
-                <li>@Html.DisplayNameFor(model => model.Date): @Html.DisplayFor(modelItem => item.Date)</li>
-                <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(modelItem => item.Sunrise_Time)</li>
-                <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(modelItem => item.Sunset_Time)</li>
-                <li>@Html.DisplayNameFor(model => model.Temp_Max_F): @Html.DisplayFor(modelItem => item.Temp_Max_F)</li>
-                <li>@Html.DisplayNameFor(model => model.Temp_Min_F): @Html.DisplayFor(modelItem => item.Temp_Min_F)</li>
-                <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(modelItem => item.Prob_Precip_Pct)</li>
-            </ul>
-
-            @Html.ActionLink("Daily Details", "Details", item.TimeFrames)
+                    @Html.ActionLink("Daily Details", "Details", item.TimeFrames)
 
 
-        </div>
-    </div>
-}
+                </div>
+            </div>
+        }
+

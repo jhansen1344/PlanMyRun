@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+ul{
+list-style-type: none;
+margin:0;
+padding:0;
+}

@@ -4,19 +4,20 @@
     ViewBag.Title = "GetRunsWithForecast";
 }
 
-<h2>GetRunsWithForecast</h2>
-
-@Html.Partial("_ForecastDayPartial", Model.WeeklyForecast.Days)
-
-
-@Html.Partial("_RunDetailList", Model.WeeklyRuns)
-<div>
-    <h4>WeeklyRunForecastList</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
+<h2>Dashboard</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        @Html.Partial("_ForecastDayPartial", Model.WeeklyForecast.Days)
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<h2>Upcoming Runs</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        @Html.Partial("_RunDetailList", Model.WeeklyRuns)
+
+    </div>
+</div>

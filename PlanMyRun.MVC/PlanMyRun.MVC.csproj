@@ -472,7 +472,7 @@
     <Content Include="Views\Shared\_RunCreate.cshtml" />
     <Content Include="Views\Shared\_ForecastDayPartial.cshtml" />
     <Content Include="Views\Run\GetRunsWithForecast.cshtml" />
-    <Content Include="Views\Run\_RunDetailList.cshtml" />
+    <Content Include="Views\Shared\_RunDetailList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
