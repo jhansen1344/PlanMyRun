@@ -87,6 +87,60 @@
     </div>
 </div>
 
+<div id="runCreateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Run</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_RunCreate", new PlanMyRun.Models.RunModels.RunCreate() { RacePlanId = Model.Id, ScheduledDate=DateTime.Now });
+                @*<form class="form-horizontal">
+                        <input type="hidden" id="hdEventID" value="0" />
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="txtSubject" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Start</label>
+                            <div class="input-group date" id="dtp1">
+                                <input type="text" id="ScheduleDateTime" class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Actual Distance</label>
+                            <textarea id="ActualDistance" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Planned Distance</label>
+                            <textarea id="PlannedDistance" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divEndDate" style="display:none">
+                            <label>End</label>
+                            <div class="input-group date" id="dtp2">
+                                <input type="text" id="txtEnd" class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" id="runSave" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>*@
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="myModalSave" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -95,46 +149,47 @@
                 <h4 class="modal-title">Save Event</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
-                    <input type="hidden" id="hdEventID" value="0" />
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" id="txtSubject" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Start</label>
-                        <div class="input-group date" id="dtp1">
-                            <input type="text" id="ScheduleDateTime" class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Actual Distance</label>
-                        <textarea id="ActualDistance" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Planned Distance</label>
-                        <textarea id="PlannedDistance" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="divEndDate" style="display:none">
-                        <label>End</label>
-                        <div class="input-group date" id="dtp2">
-                            <input type="text" id="txtEnd" class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <button type="button" id="runSave" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </form>
+                @*<form class="form-horizontal">
+                @Html.Partial("_RunCreate", new PlanMyRun.Models.RunModels.RunCreate() { RacePlanId = Model.Id });
+            <input type="hidden" id="hdEventID" value="0" />
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="txtSubject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Start</label>
+                <div class="input-group date" id="dtp1">
+                    <input type="text" id="ScheduleDateTime" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Actual Distance</label>
+                <textarea id="ActualDistance" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Planned Distance</label>
+                <textarea id="PlannedDistance" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
+                </div>
+            </div>
+            <div class="form-group" id="divEndDate" style="display:none">
+                <label>End</label>
+                <div class="input-group date" id="dtp2">
+                    <input type="text" id="txtEnd" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <button type="button" id="runSave" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </form>*@
             </div>
         </div>
     </div>
@@ -148,6 +203,19 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <script>
+        $(document).on('click', '#runCreateSubmit', function(){
+    $.ajax({
+        url: '@Url.Action("Create", "Run")',
+        type: 'POST',
+        cache: false,
+        async: true,
+        data: $('form').serialize(),
+        success: function(result){
+            FetchEventAndRenderCalendar();
+        }
+     });
+});
+
         $(document).ready(function () {
             var events = [];
             var selectedEvent = null;
@@ -222,7 +290,7 @@
                             eventID: 0,
                             title: '',
                             description: '',
-                            start: start,
+                            start: start.format("yyyy-MM-dd"),
                             end: end,
                             allDay: false,
                             color: ''
@@ -244,7 +312,6 @@
                             LocationId: event.locationId,
                             ActualDistance: event.actualDistance,
                             ActualTime: event.acutalTime,
-                            //__RequestVerificationToken:$('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val()
 
                         };
                         SaveEvent(data);
@@ -286,21 +353,27 @@
                 }
             });
             function openAddEditForm() {
-                if (selectedEvent != null) {
+                if (selectedEvent != null && selectedEvent.title!='') {
                     $('#Id').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
                     $('#ScheduleDateTime').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
                     $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
                     $('#chkIsFullDay').change();
                     $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
-                   // $('#txtDescription').val(selectedEvent.description);
+                    // $('#txtDescription').val(selectedEvent.description);
                     $('#RaceName').val(selectedEvent.raceName);
                     $('#PlannedDistance').val(selectedEvent.plannedDistance);
                     $('#ActualDistance').val(selectedEvent.actualDistance);
                     $('#ddThemeColor').val(selectedEvent.color);
+                    $('#myModalSave').modal();
+                    $('#myModal').modal('hide');
                 }
+                else {
+
                 $('#myModal').modal('hide');
-                $('#myModalSave').modal();
+                
+                $('#runCreateModal').modal();
+                }
             }
             $('#runSave').click(function () {
                 //Validation/

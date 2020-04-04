@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PlanMyRun.Services;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,18 @@ namespace PlanMyRun.MVC.Controllers
 {
     public class ForecastController : Controller
     {
+        internal ApplicationUserManager _userManager;
+        internal ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Forecast
         public async Task<ActionResult> Index()
         {
@@ -23,9 +36,11 @@ namespace PlanMyRun.MVC.Controllers
         private ForecastService CreateForecastService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            
-            var service = new ForecastService(userId);
+
+            var user = UserManager.FindById(userId.ToString());
+            var zipcode = user.ZipCode;
+        var service = new ForecastService(userId, zipcode);
             return service;
         }
-    }
+}
 }
