@@ -147,7 +147,8 @@ namespace PlanMyRun.Services
             entity.RacePlanId = model.RacePlanId;
             entity.PlannedDistance = model.PlannedDistance;
             entity.EstimatedTime = model.EstimatedTime;
-            entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+            entity.ScheduledDateTime = DateTime.Parse(model.ScheduleDateTime);
+            //entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
             entity.LocationId = model.LocationId;
             entity.ActualDistance = model.ActualDistance;
             entity.ActualTime = model.ActualTime;
