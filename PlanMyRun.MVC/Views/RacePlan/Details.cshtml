@@ -344,6 +344,7 @@
                        data: AddAntiForgeryToken({ id: selectedEvent.eventId }),
                         success: function () {
                                 //Refresh the calender
+                                $('#calender').fullCalendar('destroy');
                                 FetchEventAndRenderCalendar();
                                 $('#myModal').modal('hide');
 

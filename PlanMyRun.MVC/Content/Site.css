@@ -1,6 +1,25 @@
-﻿body {
+﻿/* This is a single-line comment
+    Dark Blue: #011627
+    White: #FDFFFC
+    BlueGreen: #2EC4B6
+    Red: #E71D36
+    Yellow: #FF9F1C
+
+*/
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+footer {
+    background-color: #2EC4B6;
+    height: 100px;
+    color: #FDFFFC;
+}
+
+.navbar {
+    background-color: #2EC4B6;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,6 +33,10 @@
 */
 .dl-horizontal dt {
     white-space: normal;
+}
+
+.bg-danger {
+    background-color: #E71D36;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

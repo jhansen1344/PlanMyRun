@@ -8,13 +8,20 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+    
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
         <div class="container">
+        <div id="logo">
+            <a href="index.html">
+                <img src="~/Content/assets/PMR_logo100.png" alt="logo">
+            </a>
+        </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            @Html.ActionLink("PlanMyRun", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                 <ul class="nav navbar-nav mr-auto">
@@ -35,10 +42,13 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - PlanMyRun</p>
-        </footer>
     </div>
+        <footer>
+            <div class="justify-content-center">
+
+            <p>&copy; @DateTime.Now.Year - PlanMyRun</p>
+            </div>
+        </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
