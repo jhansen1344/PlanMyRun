@@ -70,6 +70,7 @@
     <Compile Include="RunModels\RunDetail.cs" />
     <Compile Include="RunModels\RunEdit.cs" />
     <Compile Include="RunModels\RunListItem.cs" />
+    <Compile Include="RunModels\WeeklyRunForecastList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

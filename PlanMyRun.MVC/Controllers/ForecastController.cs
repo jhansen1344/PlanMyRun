@@ -38,9 +38,9 @@ namespace PlanMyRun.MVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
 
             var user = UserManager.FindById(userId.ToString());
-            var zipcode = user.ZipCode;
-        var service = new ForecastService(userId, zipcode);
+            var zipCode = user.ZipCode;
+            var service = new ForecastService(userId, zipCode);
             return service;
         }
-}
+    }
 }
