@@ -1,31 +1,42 @@
 ﻿/* This is a single-line comment
-    Dark Blue: #011627
-    White: #FDFFFC
-    BlueGreen: #2EC4B6
-    Red: #E71D36
-    Yellow: #FF9F1C
-
+    Grey: #595758
+    BLue: #2274A5
+    Cream: #D6F9DD
+    Black: #00394A
+    Orange: #EA4E18
+  
 */
 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #D6F9DD;
+    color: #00394A;
 }
 
 footer {
-    background-color: #2EC4B6;
-    height: 100px;
-    color: #FDFFFC;
+    background-color: #00394A;
+    height: 60px;
+    color: #D6F9DD;
+    height: 4em;
+    flex-shrink: 0;
 }
 
+.btn {
+    background-color: #2274A5;
+}
+
+
 .navbar {
-    background-color: #2EC4B6;
+    background-color: #00394A;
+    color: #D6F9DD;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    margin-top: 116px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -36,7 +47,7 @@ footer {
 }
 
 .bg-danger {
-    background-color: #E71D36;
+    background-color: #EA4E18;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -46,8 +57,8 @@ textarea {
     max-width: 280px;
 }
 
-ul{
-list-style-type: none;
-margin:0;
-padding:0;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
