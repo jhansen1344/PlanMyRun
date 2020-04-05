@@ -87,16 +87,16 @@
     </div>
 </div>
 
-@*<div id="runCreateModal" class="modal fade" role="dialog">
+<div id="runCreateModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Run</h4>
                 </div>
-                <div class="modal-body">
                     @Html.Partial("_RunCreate", new PlanMyRun.Models.RunModels.RunCreate() { RacePlanId = Model.Id, ScheduledDate=DateTime.Now })
-                    <form class="form-horizontal">
+                <div class="modal-body">
+                    @*<form class="form-horizontal">
                             <input type="hidden" id="hdEventID" value="0" />
                             <div class="form-group">
                                 <label>Subject</label>
@@ -135,11 +135,11 @@
                             </div>
                             <button type="button" id="runSave" class="btn btn-success">Save</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </form>
+                        </form>*@
                 </div>
             </div>
         </div>
-    </div>*@
+    </div>
 
 <div id="myModalSave" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -265,7 +265,7 @@
                 })
             }
             function GenerateCalender(events) {
-                $('#calender').fullCalendar('destroy');
+                //$('#calender').fullCalendar().destroy();
                 $('#calender').fullCalendar({
                     contentHeight: 400,
                     defaultDate: new Date(),
@@ -383,9 +383,10 @@
                     //$('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
                     //$('#chkIsFullDay').change();
                     $('#ddThemeColor').val(selectedEvent.color);
-
+                    $('#myModalSave').modal();
+                    $('#myModal').modal('hide');
                 }
-                $('#myModalSave').modal();
+                $('#runCreateModal').modal();
                     $('#myModal').modal('hide');
             }
             $('#runSave').click(function () {
@@ -433,6 +434,7 @@
                     success: function () {
        
                             //Refresh the calender
+                            $('#calender').fullCalendar().destroy();
                             FetchEventAndRenderCalendar();
                             $('#myModalSave').modal('hide');
                         
