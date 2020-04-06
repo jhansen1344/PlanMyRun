@@ -12,7 +12,6 @@ namespace PlanMyRun.Models.RunModels
         public bool LikesDark { get; set; }
         public bool LikesMorning { get; set; }
         public bool LikesRain { get; set; }
-
         public string Zipcode { get; set; }
     }
 }

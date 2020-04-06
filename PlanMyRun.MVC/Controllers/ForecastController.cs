@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PlanMyRun.Models.RunModels;
 using PlanMyRun.Services;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,27 @@ namespace PlanMyRun.MVC.Controllers
             return View(model.Days);
         }
 
+        public async Task<ActionResult> GetForecastEvents()
+        {
+            var service = CreateForecastService();
+            var model = await service.GetAvailableRunTimes();
+            return View(model);
+        }
+
         private ForecastService CreateForecastService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
 
             var user = UserManager.FindById(userId.ToString());
-            var zipCode = user.ZipCode;
-            var service = new ForecastService(userId, zipCode);
+            var runnerPreferences = new RunnerPreferences()
+            {
+                Zipcode = user.ZipCode,
+                LikesDark = user.LikesDark,
+                LikesHeat = user.LikesHeat,
+                LikesMorning = user.LikesMorning,
+                LikesRain = user.LikesRain
+            };
+            var service = new ForecastService(userId, runnerPreferences);
             return service;
         }
     }
