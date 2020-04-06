@@ -477,6 +477,7 @@
     <Content Include="Views\Shared\_ForecastDayPartial.cshtml" />
     <Content Include="Views\Run\GetRunsWithForecast.cshtml" />
     <Content Include="Views\Shared\_RunDetailList.cshtml" />
+    <Content Include="Views\Forecast\ForecastHourlyView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,6 +10,7 @@ namespace PlanMyRun.Models.ForecastModels
     {
         public int Time { get; set; }
         public string Wx_Desc { get; set; }
+        public int Wx_Code { get; set; }
         public string Wx_Desc_Short { get; set; }
         public string Wx_Icon { get; set; }
         public decimal Temp_F { get; set; }

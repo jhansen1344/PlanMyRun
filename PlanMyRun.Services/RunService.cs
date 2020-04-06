@@ -36,45 +36,96 @@ namespace PlanMyRun.Services
         public async Task<List<ForecastEvent>> GetAvailableRunTimes(ForecastDayModel forecastDay)
         {
             var listForecastEvents = new List<ForecastEvent>();
-            var morningUnavailable = new TimeSpan();
-            var nightUnavailable = new TimeSpan();
-            if (_likesDark == true)
+            TimeSpan morningUnavailable;
+            TimeSpan nightUnavailable;
+            bool isHot = false;
+            int startHeat = 0;
+            bool isRaining = false;
+            int startRain = 0;
+
+            if (_likesDark)
             {
                 morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(1));
                 nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(1));
             }
-            else 
+            else
             {
                 morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(.5));
                 nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(.5));
+               
             }
 
-            if(_likesMorning ==false)
+            if (!_likesMorning)
             {
                 morningUnavailable = new TimeSpan(11, 59, 00);
             }
+            var morningEvent = new ForecastEvent()
+            {
+                StartTime = forecastDay.Date,
+                EndTime = forecastDay.Date.Add(morningUnavailable),
+                Description = "Too early."
+            };
+            listForecastEvents.Add(morningEvent);
+            var nightEvent = new ForecastEvent()
+            {
+                StartTime = forecastDay.Date.Add(nightUnavailable),
+                EndTime = forecastDay.Date.AddDays(1),
+                Description = "Too late."
+            };
+            listForecastEvents.Add(nightEvent);
 
-            bool isHot = false;
-            
+
             foreach (var item in forecastDay.TimeFrames)
             {
-                if (item.FeelsLike_F>=89 && !isHot)
+                if (!_likesHeat)
                 {
-                    var startHeat = item.Time;
-                    isHot = true;
-                }
-                else if(item.FeelsLike_F<89&& isHot)
-                {
-                    var endHeat = item.Time;
-                    isHot = false;
-                    var heatEvent = new ForecastEvent()
+                    if (item.FeelsLike_F >= 89 && !isHot)
                     {
-                       // StartTime = DateTime.Parse(forecastDay.Date).Add(startHeat),
-                       // StartTime = StartTime.Add(startHeat),
-                        //StartTime = forecastDay.Date.Add(startHeat),
+                        startHeat = item.Time;
+                        isHot = true;
+                    }
+                    if (item.FeelsLike_F < 89 && isHot)
+                    {
+                        var endHeat = item.Time;
+                        isHot = false;
+                        var startTime = forecastDay.Date.AddHours(startHeat);
+                        var endTime = forecastDay.Date.AddHours(endHeat);
 
-                    };
+                        var heatEvent = new ForecastEvent()
+                        {
+                            StartTime = startTime,
+                            EndTime = endTime,
+                            Description = "Too hot"
+                        };
+                        listForecastEvents.Add(heatEvent);
+                    }
                 }
+                if (item.Prob_Precip_Pct != "<1")
+                {
+                    if (Int32.Parse(item.Prob_Precip_Pct) > 70 && !isRaining)
+                    {
+                        if(_likesRain || Int32.Parse(item.Prob_Precip_Pct) < 80 ||item.Wx_Code==21|| item.Wx_Code == 50|| item.Wx_Code == 60)
+                        startRain = item.Time;
+                        isRaining = true;
+                    }
+                    if(Int32.Parse(item.Prob_Precip_Pct)<70 && isRaining)
+                    {
+                        var endRain = item.Time;
+                        isRaining = false;
+                        var startTime = forecastDay.Date.AddHours(startRain);
+                        var endTime = forecastDay.Date.AddHours(endRain);
+                        var rainEvent = new ForecastEvent()
+                        {
+                            StartTime = startTime,
+                            EndTime = endTime,
+                            Description = "Raining"
+                        };
+                        listForecastEvents.Add(rainEvent);
+                    }
+
+                }
+
+
 
             }
 
