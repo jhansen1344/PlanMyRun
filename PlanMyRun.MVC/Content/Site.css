@@ -9,7 +9,7 @@
 
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 0;
     background-color: #D6F9DD;
     color: #00394A;
 }
@@ -18,8 +18,11 @@ footer {
     background-color: #00394A;
     height: 60px;
     color: #D6F9DD;
-    height: 4em;
+    padding-top:1em;
+    padding-left:5em;
+    /*height: 4em;*/
     flex-shrink: 0;
+
 }
 
 .btn {
@@ -30,6 +33,14 @@ footer {
 .navbar {
     background-color: #00394A;
     color: #D6F9DD;
+}
+
+.navbar-brand{
+    padding:0;
+}
+
+.nav-item{
+    margin-top:50px;
 }
 
 /* Set padding to keep content from hitting the edges */
