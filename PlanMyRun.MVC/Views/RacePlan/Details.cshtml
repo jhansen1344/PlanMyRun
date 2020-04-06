@@ -88,14 +88,14 @@
 </div>
 
 <div id="runCreateModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Create Run</h4>
-                </div>
-                <div class="modal-body">
-                    @*<form class="form-horizontal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Run</h4>
+            </div>
+            <div class="modal-body">
+                @*<form class="form-horizontal">
                     @Html.Partial("_RunCreate", new PlanMyRun.Models.RunModels.RunCreate() { RacePlanId = Model.Id, ScheduledDate=DateTime.Now })
                             <input type="hidden" id="hdEventID" value="0" />
                             <div class="form-group">
@@ -136,10 +136,10 @@
                             <button type="button" id="runSave" class="btn btn-success">Save</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </form>*@
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 <div id="myModalSave" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -188,22 +188,22 @@
                         <label>Actual Time</label>
                         <input type="text" id="ActualTime" class="form-control" />
                     </div>
-                    
+
 
                     @*<div class="form-group">
-            <div class="checkbox">
-                <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
-            </div>
-        </div>*@
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
+                            </div>
+                        </div>*@
                     @*<div class="form-group" id="divEndDate" style="display:none">
-            <label>End</label>
-            <div class="input-group date" id="dtp2">
-                <input type="text" id="txtEnd" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>*@
+                            <label>End</label>
+                            <div class="input-group date" id="dtp2">
+                                <input type="text" id="txtEnd" class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>*@
                     <button type="button" id="runSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
@@ -220,7 +220,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <script>
-      
+
 
         $(document).ready(function () {
             var events = [];
@@ -377,7 +377,7 @@
                     //$('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
                     //$('#chkIsFullDay').change();
                     $('#ddThemeColor').val(selectedEvent.color);
-                    
+
                 }
                 $('#myModalSave').modal();
                     $('#myModal').modal('hide');
@@ -421,23 +421,43 @@
             function SaveEvent(data) {
 
                 AddAntiForgeryToken(data);
+                if (data.Id == "") {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Create", "Run")',
+                        data: data,
+                        success: function () {
 
+                            //Refresh the calender
+                            // $('#calender').fullCalendar().destroy();
+                            FetchEventAndRenderCalendar();
+                            $('#myModalSave').modal('hide');
+
+                        },
+                        error: function () {
+                            alert('Failed');
+                        }
+                    })
+
+                }
+                else {
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("Edit", "Run")',
                     data: data,
                     success: function () {
-       
+
                             //Refresh the calender
                            // $('#calender').fullCalendar().destroy();
                             FetchEventAndRenderCalendar();
                             $('#myModalSave').modal('hide');
-                        
+
                     },
                     error: function () {
                         alert('Failed');
                     }
                 })
+                    }
             }
 
              function AddAntiForgeryToken(data) {

@@ -9,7 +9,8 @@ namespace PlanMyRun.Models.ForecastModels
 {
     public class ForecastDayModel
     {
-        public string Date { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd}")]
+        public DateTime Date { get; set; }
         [Display(Name = "Sunrise")]
         [DisplayFormat(DataFormatString = "{0:hh\\:mm}")]
         public TimeSpan Sunrise_Time { get; set; }

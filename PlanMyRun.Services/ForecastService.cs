@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using PlanMyRun.Models.ForecastModels;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace PlanMyRun.Services
                 HttpResponseMessage response = await httpClient.GetAsync(weatherUri);
                 if (response.IsSuccessStatusCode)
                 {
-                    var model = JsonConvert.DeserializeObject<ForecastResultModel>(await response.Content.ReadAsStringAsync());
+                    var model = JsonConvert.DeserializeObject<ForecastResultModel>(await response.Content.ReadAsStringAsync(),new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
                     return model;
                 }
                 return null;

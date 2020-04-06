@@ -1,4 +1,5 @@
 ﻿using PlanMyRun.Data;
+using PlanMyRun.Models.ForecastModels;
 using PlanMyRun.Models.RunModels;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,74 @@ namespace PlanMyRun.Services
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context;
         private readonly string _zipCode;
+        private readonly bool _likesDark;
+        private readonly bool _likesHeat;
+        private readonly bool _likesMorning;
+        private readonly bool _likesRain;
 
-        public RunService(Guid userId, string zipCode)
+
+        public RunService(Guid userId, RunnerPreferences runner)
         {
             _userId = userId;
             _context = new ApplicationDbContext();
-            _zipCode = zipCode;
+            _zipCode = runner.Zipcode;
+            _likesDark = runner.LikesDark;
+            _likesHeat = runner.LikesHeat;
+            _likesMorning = runner.LikesMorning;
+            _likesRain = runner.LikesRain;
         }
 
+        public async Task<List<ForecastEvent>> GetAvailableRunTimes(ForecastDayModel forecastDay)
+        {
+            var listForecastEvents = new List<ForecastEvent>();
+            var morningUnavailable = new TimeSpan();
+            var nightUnavailable = new TimeSpan();
+            if (_likesDark == true)
+            {
+                morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(1));
+                nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(1));
+            }
+            else 
+            {
+                morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(.5));
+                nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(.5));
+            }
+
+            if(_likesMorning ==false)
+            {
+                morningUnavailable = new TimeSpan(11, 59, 00);
+            }
+
+            bool isHot = false;
+            
+            foreach (var item in forecastDay.TimeFrames)
+            {
+                if (item.FeelsLike_F>=89 && !isHot)
+                {
+                    var startHeat = item.Time;
+                    isHot = true;
+                }
+                else if(item.FeelsLike_F<89&& isHot)
+                {
+                    var endHeat = item.Time;
+                    isHot = false;
+                    var heatEvent = new ForecastEvent()
+                    {
+                       // StartTime = DateTime.Parse(forecastDay.Date).Add(startHeat),
+                       // StartTime = StartTime.Add(startHeat),
+                        //StartTime = forecastDay.Date.Add(startHeat),
+
+                    };
+                }
+
+            }
+
+            return listForecastEvents;
+
+
+
+
+        }
         public async Task<bool> CreateRunAsync(RunCreate model)
         {
             var entity =
@@ -31,7 +92,7 @@ namespace PlanMyRun.Services
                     RacePlanId = model.RacePlanId,
                     PlannedDistance = model.PlannedDistance,
                     EstimatedTime = model.EstimatedTime,
-                    ScheduledDateTime = model.ScheduledDate,
+                    ScheduledDateTime = model.ScheduleDateTime,
                     Description = model.Description,
                     LocationId = model.LocationId
                 };

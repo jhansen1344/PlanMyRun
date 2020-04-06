@@ -128,8 +128,16 @@ namespace PlanMyRun.MVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var user = UserManager.FindById(userId.ToString());
-            var zipCode = user.ZipCode;
-            var service = new RunService(userId,zipCode);
+            var runnerPreferences = new RunnerPreferences()
+            {
+                Zipcode = user.ZipCode,
+                LikesDark = user.LikesDark,
+                LikesHeat = user.LikesHeat,
+                LikesMorning = user.LikesMorning,
+                LikesRain = user.LikesRain
+            };
+
+            var service = new RunService(userId, runnerPreferences);
             return service;
         }
     }
