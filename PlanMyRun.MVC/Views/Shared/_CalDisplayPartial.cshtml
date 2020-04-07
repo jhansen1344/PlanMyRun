@@ -1,69 +1,4 @@
-﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
-
-@{
-    ViewBag.Title = "Details";
-}
-@*<%-- used for ajax in AddAntiForgeryToken() --%>*@
-<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
-
-<h2>Details</h2>
-
-<div>
-    <h4>RacePlanDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RaceName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RaceDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublic)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsPublic)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceLength)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RaceLength)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GoalTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GoalTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>
-
-<div id="calender"></div>
+﻿<div id="calender"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -141,7 +76,7 @@
                         right: 'month,basicWeek,basicDay,agenda'
                     },
                     eventLimit: true,
-                    eventColor: '#2274A5',
+                    eventColor: '#378006',
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
                         $('#myModal #eventTitle').text(calEvent.title);
@@ -163,6 +98,8 @@
                 })
             }
 
+
+
              function AddAntiForgeryToken(data) {
               data.__RequestVerificationToken = $('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val();
             return data;
@@ -170,10 +107,3 @@
         })
     </script>
 }
-
-
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
