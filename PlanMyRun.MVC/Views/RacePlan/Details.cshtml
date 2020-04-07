@@ -229,7 +229,20 @@
             function FetchEventAndRenderCalendar() {
                 $.ajax({
                     type: "GET",
-                    url: "/Run/GetRunsInPlan/" +@Model.Id,
+                    url: "/Forecast/GetForecastEvents",
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            events.push({
+                                title: v.Description,
+                                eventId:v.Id,
+                                description: v.Description,
+                                start: moment(v.StartTime),
+                                end: v.EndTime != null ? moment(v.EndTime) : null,
+                            });
+                        })
+
+                        GenerateCalender(events);
+                    @*url: "/Run/GetRunsInPlan/" +@Model.Id,
                     success: function (data) {
                         $.each(data, function (i, v) {
                             events.push({
@@ -251,7 +264,7 @@
                             });
                         })
 
-                        GenerateCalender(events);
+                        GenerateCalender(events);*@
                     },
                     error: function (error) {
                         alert('failed');

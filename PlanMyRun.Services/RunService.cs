@@ -108,33 +108,42 @@ namespace PlanMyRun.Services
             return runList.ToList();
         }
 
-        public async Task<WeeklyRunForecastList> GetRunsWithForecastAsync()
+        public async Task<List<DailyRunForecast>> GetRunsWithForecastAsync()
         {
             var forecastService = CreateForecastService();
-            var model = new WeeklyRunForecastList()
-            {
-                WeeklyForecast = await forecastService.GetForecastAsync(),
-            };
+            var weeklyForecast = await forecastService.GetForecastAsync();
             var entityList = await _context.Runs.ToListAsync();
-            var runList = entityList
-                .Where(e => e.RacePlan.UserId == _userId.ToString() && DateTime.Compare(e.ScheduledDateTime, DateTime.Now.AddDays(7)) <= 0)
-                .Select(
-                    e =>
-                    new RunDetail()
+            List<DailyRunForecast> dailyRunForecasts = new List<DailyRunForecast>();
+            foreach (var item in weeklyForecast.Days)
+            {
+                var model = new DailyRunForecast()
+                {
+                    Date = item.Date,
+                    DaysForecast = item
+                };
+                var run = entityList.SingleOrDefault(e => e.RacePlan.UserId == _userId.ToString() && e.ScheduledDateTime.Date== item.Date.Date);
+                if(run!=null)
+                {
+                    model.DaysRun = new RunDetail()
                     {
-                        Id = e.Id,
-                        RacePlanId = e.RacePlanId,
-                        RacePlanName = e.RacePlan.RaceName,
-                        PlannedDistance = e.PlannedDistance,
-                        EstimatedTime = e.EstimatedTime,
-                        ScheduleDateTime = e.ScheduledDateTime,
-                        LocationId = e.LocationId,
-                        ActualDistance = e.ActualDistance,
-                        ActualTime = e.ActualTime,
-                        Description = e.Description
-                    });
-            model.WeeklyRuns = runList.ToList();
-            return model;
+                        Id = run.Id,
+                        RacePlanId = run.RacePlanId,
+                        RacePlanName = run.RacePlan.RaceName,
+                        PlannedDistance = run.PlannedDistance,
+                        EstimatedTime = run.EstimatedTime,
+                        ScheduleDateTime = run.ScheduledDateTime,
+                        LocationId = run.LocationId,
+                        ActualDistance = run.ActualDistance,
+                        ActualTime = run.ActualTime,
+                        Description = run.Description
+
+                    };
+                }
+                    
+                dailyRunForecasts.Add(model);
+            }
+
+            return dailyRunForecasts;
 
         }
 

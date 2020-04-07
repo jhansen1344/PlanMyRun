@@ -38,7 +38,9 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateForecastService();
             var model = await service.GetAvailableRunTimes();
-            return View(model);
+            var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return jsonResult;
+           // return View(model);
         }
 
         private ForecastService CreateForecastService()

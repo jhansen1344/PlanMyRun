@@ -1,23 +1,43 @@
-﻿@model PlanMyRun.Models.RunModels.WeeklyRunForecastList
+﻿@model IEnumerable<PlanMyRun.Models.RunModels.DailyRunForecast>
 
 @{
     ViewBag.Title = "GetRunsWithForecast";
 }
 
-<h2>Dashboard</h2>
-<hr />
-<div class="container">
-    <div class="row">
-        @Html.Partial("_ForecastDayPartial", Model.WeeklyForecast.Days)
-    </div>
-</div>
+<h2>GetRunsWithForecast</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
 
-<h2>Upcoming Runs</h2>
-<hr />
-<div class="container">
-    <div class="row">
-        @Html.Partial("_RunDetailList", Model.WeeklyRuns)
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date)
+    </td>
+    <td>
+        @Html.Partial("_ForecastDayPartial", item.DaysForecast)
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+    <td>
+        @if(item.DaysRun.Id!=0)
+        { 
+        @Html.Partial("_RunDetailList", item.DaysRun)
+        }
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>
+}
 
-    </div>
-</div>
+</table>

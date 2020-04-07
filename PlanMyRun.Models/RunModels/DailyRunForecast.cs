@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace PlanMyRun.Models.RunModels
 {
-    public class WeeklyRunForecastList
+    public class DailyRunForecast
     {
-        public List<RunDetail> WeeklyRuns { get; set; }
-        public ForecastResultModel WeeklyForecast { get; set; }
+        public DateTime Date { get; set; }
+        public RunDetail DaysRun { get; set; } = new RunDetail();
+        public ForecastDayModel DaysForecast { get; set; }
     }
 }

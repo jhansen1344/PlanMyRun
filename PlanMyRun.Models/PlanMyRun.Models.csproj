@@ -72,7 +72,7 @@
     <Compile Include="RunModels\RunEdit.cs" />
     <Compile Include="RunModels\RunListItem.cs" />
     <Compile Include="RunModels\RunnerPreferences.cs" />
-    <Compile Include="RunModels\WeeklyRunForecastList.cs" />
+    <Compile Include="RunModels\DailyRunForecast.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

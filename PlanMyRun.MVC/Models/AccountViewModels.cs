@@ -92,7 +92,7 @@ namespace PlanMyRun.MVC.Models
         public bool LikesRain { get; set; }
         [Display(Name = "Prefer to run in the morning.")]
         public bool LikesMorning { get; set; }
-        [Display(Name = "Ok with running in the dark.")]
+        [Display(Name = "Ok with starting or ending in the dark.")]
         public bool LikesDark { get; set; }
     }
 

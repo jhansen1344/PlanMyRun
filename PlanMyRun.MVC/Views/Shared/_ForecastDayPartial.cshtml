@@ -1,20 +1,19 @@
-﻿@model IEnumerable<PlanMyRun.Models.ForecastModels.ForecastDayModel>
+﻿@model PlanMyRun.Models.ForecastModels.ForecastDayModel
 
-@foreach (var item in Model)
-{
-    if (item.Prob_Precip_Pct >= 70)
+
+    @if (Model.Prob_Precip_Pct >= 70)
     {
         <div class="card bg-danger">
-            <div class="card-header">@Html.DisplayFor(modelItem => item.Date)</div>
+            <div class="card-header">@Html.DisplayFor(model => model.Date)</div>
             <div class="card-body">
                 <ul>
-                    <li>@Html.DisplayFor(modelItem => item.Temp_Max_F) | @Html.DisplayFor(modelItem => item.Temp_Min_F)</li>
-                    <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(modelItem => item.Prob_Precip_Pct)%</li>
-                    <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(modelItem => item.Sunrise_Time)</li>
-                    <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(modelItem => item.Sunset_Time)</li>
+                    <li>@Html.DisplayFor(model => model.Temp_Max_F) | @Html.DisplayFor(model => model.Temp_Min_F)</li>
+                    <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(model => model.Prob_Precip_Pct)%</li>
+                    <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(model => model.Sunrise_Time)</li>
+                    <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(model => model.Sunset_Time)</li>
                 </ul>
 
-                @Html.ActionLink("Daily Details", "Details", item.TimeFrames)
+                @Html.ActionLink("Daily Details", "Details", Model.TimeFrames)
 
 
             </div>
@@ -24,20 +23,20 @@
     {
         <div class="card" >
 
-            <div class="card-header">@Html.DisplayFor(modelItem => item.Date)</div>
+            <div class="card-header">@Html.DisplayFor(model => model.Date)</div>
             <div class="card-body">
                 <ul>
-                    <li>@Html.DisplayFor(modelItem => item.Temp_Max_F) | @Html.DisplayFor(modelItem => item.Temp_Min_F)</li>
-                    <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(modelItem => item.Prob_Precip_Pct)%</li>
-                    <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(modelItem => item.Sunrise_Time)</li>
-                    <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(modelItem => item.Sunset_Time)</li>
+                    <li>@Html.DisplayFor(model => model.Temp_Max_F) | @Html.DisplayFor(model => model.Temp_Min_F)</li>
+                    <li>@Html.DisplayNameFor(model => model.Prob_Precip_Pct): @Html.DisplayFor(model => model.Prob_Precip_Pct)%</li>
+                    <li> @Html.DisplayNameFor(model => model.Sunrise_Time):  @Html.DisplayFor(model => model.Sunrise_Time)</li>
+                    <li> @Html.DisplayNameFor(model => model.Sunset_Time):  @Html.DisplayFor(model => model.Sunset_Time)</li>
                 </ul>
 
-                @Html.ActionLink("Daily Details", "ForecastHourlyView", item.TimeFrames)
+                @Html.ActionLink("Daily Details", "ForecastHourlyView", Model.TimeFrames)
 
 
             </div>
         </div>
     }
-}
+
 
