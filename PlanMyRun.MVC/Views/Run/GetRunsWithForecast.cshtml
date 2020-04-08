@@ -21,11 +21,17 @@
 @foreach (var item in Model) {
 
     <td>
+        <div>
+
         @Html.Partial("_ForecastDayPartial", item.DaysForecast)
+        </div>
+        <div>
+
         @if (item.DaysRun.Id != 0)
         {
             @Html.Partial("_RunDetailList", item.DaysRun)
         }
+        </div>
     </td>
     <td>
         @*@if(item.DaysRun.Id!=0)

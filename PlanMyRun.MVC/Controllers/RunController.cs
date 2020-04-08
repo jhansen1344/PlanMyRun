@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace PlanMyRun.MVC.Controllers
 {
+    [Authorize]
     public class RunController : Controller
     {
         internal ApplicationUserManager _userManager;
