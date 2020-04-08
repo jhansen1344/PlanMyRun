@@ -50,8 +50,13 @@ footer {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 116px;
+    padding-top: 100px;
 }
+
+body, wrapper{
+    min-height:100vh;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -63,6 +68,7 @@ footer {
 .bg-danger {
     background-color: #EA4E18;
 }
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
