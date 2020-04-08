@@ -16,31 +16,30 @@
         </th>
         <th></th>
     </tr>
-
-<tr>
-@foreach (var item in Model) {
-
-    <td>
-        <div>
-
-        @Html.Partial("_ForecastDayPartial", item.DaysForecast)
-        </div>
-        <div>
-
-        @if (item.DaysRun.Id != 0)
-        {
-            @Html.Partial("_RunDetailList", item.DaysRun)
-        }
-        </div>
-    </td>
-    <td>
-        @*@if(item.DaysRun.Id!=0)
-        { 
-        @Html.Partial("_RunDetailList", item.DaysRun)
-        }*@
-
-    </td>
-}
-</tr>
-
 </table>
+<div class="container-fluid">
+    <div class="row">
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="padding">
+
+                    @Html.Partial("_ForecastDayPartial", item.DaysForecast)
+                </div>
+                <div class="padding">
+
+                    @if (item.DaysRun.Id != 0)
+                    {
+                        @Html.Partial("_RunDetailList", item.DaysRun)
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+
