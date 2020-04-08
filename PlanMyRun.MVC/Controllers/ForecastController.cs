@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PlanMyRun.Models.ForecastModels;
 using PlanMyRun.Models.RunModels;
 using PlanMyRun.Services;
 using System;
@@ -41,6 +42,11 @@ namespace PlanMyRun.MVC.Controllers
             var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             return jsonResult;
            // return View(model);
+        }
+
+        public ActionResult Details(ForecastHourlyModel model)
+        {
+            return View(model);
         }
 
         private ForecastService CreateForecastService()

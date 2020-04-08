@@ -17,27 +17,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
 <tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
+@foreach (var item in Model) {
+
     <td>
         @Html.Partial("_ForecastDayPartial", item.DaysForecast)
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        @if (item.DaysRun.Id != 0)
+        {
+            @Html.Partial("_RunDetailList", item.DaysRun)
+        }
     </td>
     <td>
-        @if(item.DaysRun.Id!=0)
+        @*@if(item.DaysRun.Id!=0)
         { 
         @Html.Partial("_RunDetailList", item.DaysRun)
-        }
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        }*@
+
     </td>
-</tr>
 }
+</tr>
 
 </table>

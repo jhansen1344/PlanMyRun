@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PlanMyRun.Models.ForecastModels.ForecastHourlyModel>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ForecastHourlyModel</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wx_Desc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wx_Desc_Short)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wx_Icon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temp_F)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeelsLike_F)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prob_Precip_Pct)
+            </th>
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in model)
+        {*@
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wx_Desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wx_Desc_Short)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wx_Icon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temp_F)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeelsLike_F)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prob_Precip_Pct)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+            @*//}*@
+
+    </table>
+    </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

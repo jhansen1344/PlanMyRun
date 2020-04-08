@@ -11,14 +11,14 @@
 
 
 <body>
-    
+
     <nav class="navbar navbar-expand-md navbar-light fixed-top">
         <div class="container">
-        <div class="navbar-brand" id="logo">
-            <a href="index.html">
-                <img src="~/Content/assets/PMR_logo100_t.png" alt="logo">
-            </a>
-        </div>
+            <div class="navbar-brand" id="logo">
+                <a href="index.html">
+                    <img src="~/Content/assets/PMR_logo100_t.png" alt="logo">
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,9 +26,11 @@
 
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</li>
-                    @if (Request.IsAuthenticated) { 
+                    @if (Request.IsAuthenticated)
+                    {
                         <li class="nav-item">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -42,12 +44,12 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-        <footer class="container-fluid">
-            <div>
+    <footer class="container-fluid">
+        <div>
 
             &copy; @DateTime.Now.Year - PlanMyRun
-            </div>
-        </footer>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -479,8 +479,8 @@
     <Content Include="Views\Shared\_RunDetailList.cshtml" />
     <Content Include="Views\Forecast\ForecastHourlyView.cshtml" />
     <Content Include="Views\Forecast\GetForecastEvents.cshtml" />
-    <Content Include="Views\Shared\_CalendarFull.cshtml" />
-    <Content Include="Views\Shared\_CalDisplayPartial.cshtml" />
+    <Content Include="Views\Shared\CalendarFull.cshtml" />
+    <Content Include="Views\Forecast\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
