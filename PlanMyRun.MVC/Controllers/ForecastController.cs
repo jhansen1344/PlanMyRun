@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace PlanMyRun.MVC.Controllers
 {
+    [Authorize]
     public class ForecastController : Controller
     {
         internal ApplicationUserManager _userManager;
