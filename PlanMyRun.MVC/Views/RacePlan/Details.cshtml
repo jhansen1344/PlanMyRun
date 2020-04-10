@@ -452,7 +452,7 @@
                 // call function for submit data to the server
             })
             $('#btnEdit').click(function () {
-                //Open modal dialog for edit event
+                //Open modal dialog for edit events
                 selectedEvent
                 openAddEditForm();
             })
@@ -460,12 +460,12 @@
                 if (selectedEvent != null && confirm('Are you sure?')) {
                     $.ajax({
                         type: "POST",
-                        url: "/Run/Delete/"+ selectedEvent.eventId,
-                       data: AddAntiForgeryToken({ id: selectedEvent.eventId }),
+                        url: "/Run/Delete/"+ selectedEvent.event.id,
+                       data: AddAntiForgeryToken({ id: selectedEvent.event.id }),
                         success: function () {
                                 //Refresh the calender
                                // $('#calender').fullCalendar('destroy');
-                                FetchEventAndRenderCalendar();
+                               
                                 $('#myModal').modal('hide');
 
                         },
