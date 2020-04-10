@@ -400,11 +400,11 @@
                     $('#Description').val(selectedEvent.event.Description);
                     $('#PlannedDistance').val(selectedEvent.event.extendedProps.plannedDistance);
                      $('#EstimatedTime').val(selectedEvent.event.extendedProps.estimatedTime);
-                    $('#ScheduleDateTime').val(moment(selectedEvent.start).format('MM/DD/YYYY h:mm A'));
+                    $('#ScheduleDateTime').val(moment(selectedEvent.event.start).format('MM/DD/YYYY h:mm A'));
                     $('#LocationId').val(selectedEvent.event.extendedProps.locationId);
                     $('#ActualDistance').val(selectedEvent.event.extendedProps.actualDistance);
                     $('#ActualTime').val(selectedEvent.event.extendedProps.actualTime);
-                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD/MM/YYYY HH:mm A') : '');
+                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.event.end).format('DD/MM/YYYY HH:mm A') : '');
 
                     //$('#txtSubject').val(selectedEvent.title);
                     //$('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
