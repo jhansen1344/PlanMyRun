@@ -83,9 +83,9 @@ namespace PlanMyRun.MVC.Models
         [Display(Name ="Zip Code")]
         [DataType(DataType.PostalCode)]
         public string ZipCode { get; set; }
-
+        [Required]
         [Display(Name = "User's average pace.")]
-        public double? Pace { get; set; }
+        public double Pace { get; set; }
         [Display(Name = "Prefer to run in the heat of the day.")]
         public bool LikesHeat { get; set; }
         [Display(Name = "Ok with a few sprinkles.")]

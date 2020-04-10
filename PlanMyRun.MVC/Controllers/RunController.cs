@@ -130,8 +130,9 @@ namespace PlanMyRun.MVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var user = UserManager.FindById(userId.ToString());
             string zipCode = user.ZipCode;
+            var userPace = user.Pace;
             
-            var service = new RunService(userId, zipCode);
+            var service = new RunService(userId, zipCode,userPace);
             return service;
         }
     }

@@ -21,7 +21,7 @@ namespace PlanMyRun.Data
             return userIdentity;
         }
 
-        public double? Pace { get; set; }
+        public double Pace { get; set; }
         public string ZipCode { get; set; }
 
         public bool LikesHeat { get; set; }

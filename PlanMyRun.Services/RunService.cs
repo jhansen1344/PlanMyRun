@@ -16,14 +16,16 @@ namespace PlanMyRun.Services
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context;
         private readonly string _zipCode;
+        private readonly double _userPace;
         
 
 
-        public RunService(Guid userId, string zipCode)
+        public RunService(Guid userId, string zipCode, double userPace)
         {
             _userId = userId;
             _context = new ApplicationDbContext();
             _zipCode = zipCode;
+            _userPace = userPace;
         }
 
         public async Task<bool> CreateRunAsync(RunCreate model)
@@ -33,7 +35,7 @@ namespace PlanMyRun.Services
                 {
                     RacePlanId = model.RacePlanId,
                     PlannedDistance = model.PlannedDistance,
-                    EstimatedTime = model.EstimatedTime,
+                    EstimatedTime = TimeSpan.FromMinutes(_userPace*model.PlannedDistance),
                     ScheduledDateTime = model.ScheduleDateTime,
                     Description = model.Description,
                     LocationId = model.LocationId
