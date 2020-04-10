@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PlanMyRun.Models.RunModels;
 using PlanMyRun.Services;
 using System;
@@ -10,8 +11,21 @@ using System.Web.Mvc;
 
 namespace PlanMyRun.MVC.Controllers
 {
+    [Authorize]
     public class RunController : Controller
     {
+        internal ApplicationUserManager _userManager;
+        internal ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Run
         public async Task<ActionResult> Index()
         {
@@ -20,14 +34,29 @@ namespace PlanMyRun.MVC.Controllers
             return View(model);
         }
 
+        public async Task<JsonResult> GetRunsInPlan(int id)
+        {
+            var service = CreateRunService();
+            var model = await service.GetRunsInPlanAsync(id);
+            var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return jsonResult;
+        }
+
+        public async Task<ActionResult> GetRunsWithForecast()
+        {
+            var service = CreateRunService();
+            var model = await service.GetRunsWithForecastAsync();
+            return View(model);
+        }
+
         public ActionResult Create()
         {
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create (RunCreate model)
+        public async Task<ActionResult> Create(RunCreate model)
         {
             if (!ModelState.IsValid)
             {
@@ -54,15 +83,16 @@ namespace PlanMyRun.MVC.Controllers
             var model = new RunEdit
             {
                 Id = detail.Id,
-                RacePlanId=detail.RacePlanId,
-                PlannedDistance=detail.PlannedDistance,
-                EstimatedTime=detail.EstimatedTime,
-                ScheduleDateTime=detail.ScheduleDateTime,
-                LocationId=detail.LocationId,
-                ActualDistance=detail.ActualDistance,
-                ActualTime=detail.ActualTime
+                RacePlanId = detail.RacePlanId,
+                PlannedDistance = detail.PlannedDistance,
+                EstimatedTime = detail.EstimatedTime,
+                ScheduleDateTime = detail.ScheduleDateTime.ToString(),
+                LocationId = detail.LocationId,
+                ActualDistance = detail.ActualDistance,
+                ActualTime = detail.ActualTime,
+                Description = detail.Description
             };
-            return View(model);
+            return PartialView("_EditPartial", model);
         }
 
         [HttpPost]
@@ -98,7 +128,10 @@ namespace PlanMyRun.MVC.Controllers
         private RunService CreateRunService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new RunService(userId);
+            var user = UserManager.FindById(userId.ToString());
+            string zipCode = user.ZipCode;
+            
+            var service = new RunService(userId, zipCode);
             return service;
         }
     }

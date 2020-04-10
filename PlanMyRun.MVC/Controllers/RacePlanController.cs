@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace PlanMyRun.MVC.Controllers
 {
+    [Authorize]
     public class RacePlanController : Controller
     {
         // GET: RacePlan

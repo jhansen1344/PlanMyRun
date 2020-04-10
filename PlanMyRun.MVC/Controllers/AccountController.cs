@@ -59,6 +59,7 @@ namespace PlanMyRun.MVC.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -156,6 +157,7 @@ namespace PlanMyRun.MVC.Controllers
                 { 
                     UserName = model.Email, 
                     Email = model.Email,
+                    ZipCode=model.ZipCode,
                     Pace=model.Pace,
                     LikesDark=model.LikesDark,
                     LikesHeat=model.LikesHeat,
@@ -412,6 +414,69 @@ namespace PlanMyRun.MVC.Controllers
         {
             return View();
         }
+
+        public async Task<ActionResult> Update()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+                return View(user);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>Update(ApplicationUser model)
+        {
+            var user = await UserManager.FindByIdAsync(model.Id);
+            if (user != null)
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                user.Pace = model.Pace;
+                user.ZipCode = model.ZipCode;
+                user.LikesDark = model.LikesDark;
+                user.LikesHeat = model.LikesHeat;
+                user.LikesMorning = model.LikesMorning;
+                user.LikesRain = model.LikesRain;
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+                else
+                    ModelState.AddModelError("", "User could not be updated");
+                return View(user);
+            }
+            else
+                ModelState.AddModelError("", "UserNotFound");
+            return View(user);
+        }
+
+        public async Task<ActionResult> Delete()
+        {   
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+                return View(user);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<ActionResult> DeleteUser()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                IdentityResult result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+                else
+                    ModelState.AddModelError("", "User could not be deleted");
+                return View(user);
+            }
+            else
+                ModelState.AddModelError("", "UserNotFound");
+                return View(user);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForecastModels\ForecastDayModel.cs" />
+    <Compile Include="ForecastModels\ForecastEvent.cs" />
     <Compile Include="ForecastModels\ForecastHourlyModel.cs" />
     <Compile Include="ForecastModels\ForecastResultModel.cs" />
     <Compile Include="LocationModels\LocationCreate.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="RunModels\RunDetail.cs" />
     <Compile Include="RunModels\RunEdit.cs" />
     <Compile Include="RunModels\RunListItem.cs" />
+    <Compile Include="RunModels\RunnerPreferences.cs" />
+    <Compile Include="RunModels\DailyRunForecast.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

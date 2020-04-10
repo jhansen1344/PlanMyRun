@@ -18,12 +18,11 @@ namespace PlanMyRun.Models.RunModels
         public double PlannedDistance { get; set; }
         [Required]
         [Display(Name = "Estimated Time to Complete.")]
-        [DataType(DataType.Time, ErrorMessage = ("Please enter a valid time"))]
         public TimeSpan EstimatedTime { get; set; }
         [Required]
         [Display(Name = "Date for Run")]
         [DataType(DataType.Date, ErrorMessage = ("Please enter a valid date"))]
-        public DateTimeOffset ScheduledDate { get; set; }
+        public DateTime ScheduleDateTime { get; set; }
         [Display(Name = "Notes about this Run:")]
         [MaxLength(1000, ErrorMessage = "Please enter a shorter note")]
         public string Description { get; set; }

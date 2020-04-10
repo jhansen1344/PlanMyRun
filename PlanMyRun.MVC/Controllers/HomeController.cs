@@ -10,7 +10,7 @@ namespace PlanMyRun.MVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("GetRunsWithForecast", "Run");
         }
 
         public ActionResult About()

@@ -19,7 +19,7 @@ namespace PlanMyRun.Data
         [Required]
         public string RaceName { get; set; }
         [Required]
-        public DateTimeOffset RaceDate { get; set;}
+        public DateTime RaceDate { get; set;}
         [Required]
         public bool IsPublic { get; set; }
         public double? RaceLength { get; set; }

@@ -1,8 +1,10 @@
 ﻿using PlanMyRun.Data;
+using PlanMyRun.Models.ForecastModels;
 using PlanMyRun.Models.RunModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +15,15 @@ namespace PlanMyRun.Services
     {
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context;
-        public RunService(Guid userId)
+        private readonly string _zipCode;
+        
+
+
+        public RunService(Guid userId, string zipCode)
         {
             _userId = userId;
             _context = new ApplicationDbContext();
+            _zipCode = zipCode;
         }
 
         public async Task<bool> CreateRunAsync(RunCreate model)
@@ -24,12 +31,12 @@ namespace PlanMyRun.Services
             var entity =
                 new Run()
                 {
-                    RacePlanId=model.RacePlanId,
-                    PlannedDistance=model.PlannedDistance,
-                    EstimatedTime=model.EstimatedTime,
-                    ScheduledDateTime=model.ScheduledDate,
-                    Description=model.Description,
-                    LocationId=model.LocationId
+                    RacePlanId = model.RacePlanId,
+                    PlannedDistance = model.PlannedDistance,
+                    EstimatedTime = model.EstimatedTime,
+                    ScheduledDateTime = model.ScheduleDateTime,
+                    Description = model.Description,
+                    LocationId = model.LocationId
                 };
             _context.Runs.Add(entity);
             return await _context.SaveChangesAsync() == 1;
@@ -49,7 +56,7 @@ namespace PlanMyRun.Services
                             PlannedDistance = e.PlannedDistance,
                             EstimatedTime = e.EstimatedTime,
                             LocationId = e.LocationId,
-                            ScheduledDateTime=e.ScheduledDateTime,
+                            ScheduledDateTime = e.ScheduledDateTime,
                             ActualDistance = e.ActualDistance,
                             ActualTime = e.ActualTime
                         }
@@ -72,26 +79,95 @@ namespace PlanMyRun.Services
                 ScheduleDateTime = entity.ScheduledDateTime,
                 LocationId = entity.LocationId,
                 ActualDistance = entity.ActualDistance,
-                ActualTime = entity.ActualTime
+                ActualTime = entity.ActualTime,
+                Description = entity.Description
             };
             return model;
         }
+
+        public async Task<List<RunDetail>> GetRunsInPlanAsync(int id)
+        {
+            var entityList = await _context.Runs.ToListAsync();
+            var runList = entityList
+                .Where(e => e.RacePlan.UserId == _userId.ToString() && e.RacePlanId == id)
+                .Select(
+                    e =>
+                    new RunDetail()
+                    {
+                        Id = e.Id,
+                        RacePlanId = e.RacePlanId,
+                        RacePlanName = e.RacePlan.RaceName,
+                        PlannedDistance = e.PlannedDistance,
+                        EstimatedTime = e.EstimatedTime,
+                        ScheduleDateTime = e.ScheduledDateTime,
+                        End = e.ScheduledDateTime.AddHours(2),
+                        LocationId = e.LocationId,
+                        ActualDistance = e.ActualDistance,
+                        ActualTime = e.ActualTime,
+                        Description = e.Description
+                    });
+            return runList.ToList();
+        }
+
+        public async Task<List<DailyRunForecast>> GetRunsWithForecastAsync()
+        {
+            var forecastService = CreateForecastService();
+            var weeklyForecast = await forecastService.GetForecastAsync();
+            var entityList = await _context.Runs.ToListAsync();
+            List<DailyRunForecast> dailyRunForecasts = new List<DailyRunForecast>();
+            foreach (var item in weeklyForecast.Days)
+            {
+                var model = new DailyRunForecast()
+                {
+                    Date = item.Date,
+                    DaysForecast = item
+                };
+                var run = entityList.SingleOrDefault(e => e.RacePlan.UserId == _userId.ToString() && e.ScheduledDateTime.Date== item.Date.Date);
+                if(run!=null)
+                {
+                    model.DaysRun = new RunDetail()
+                    {
+                        Id = run.Id,
+                        RacePlanId = run.RacePlanId,
+                        RacePlanName = run.RacePlan.RaceName,
+                        PlannedDistance = run.PlannedDistance,
+                        EstimatedTime = run.EstimatedTime,
+                        ScheduleDateTime = run.ScheduledDateTime,
+                        LocationId = run.LocationId,
+                        ActualDistance = run.ActualDistance,
+                        ActualTime = run.ActualTime,
+                        Description = run.Description
+
+                    };
+                }
+                    
+                dailyRunForecasts.Add(model);
+            }
+
+            return dailyRunForecasts;
+
+        }
+
+
+
 
         public async Task<bool> EditRunAsync(RunEdit model)
         {
             var entity = await
                 _context
                     .Runs
-                    .SingleOrDefaultAsync(e => e.Id==model.Id && e.RacePlan.UserId == _userId.ToString());
+                    .SingleOrDefaultAsync(e => e.Id == model.Id && e.RacePlan.UserId == _userId.ToString());
             entity.RacePlanId = model.RacePlanId;
             entity.PlannedDistance = model.PlannedDistance;
             entity.EstimatedTime = model.EstimatedTime;
-            entity.ScheduledDateTime = model.ScheduleDateTime;
+            entity.ScheduledDateTime = DateTime.Parse(model.ScheduleDateTime);
+            //entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
             entity.LocationId = model.LocationId;
             entity.ActualDistance = model.ActualDistance;
             entity.ActualTime = model.ActualTime;
-
+            entity.Description = model.Description;
             return await _context.SaveChangesAsync() == 1;
+
         }
 
         public async Task<bool> DeleteRunAsync(int id)
@@ -104,5 +180,14 @@ namespace PlanMyRun.Services
             return await _context.SaveChangesAsync() == 1;
 
         }
+
+
+
+        private ForecastService CreateForecastService()
+        {
+            var service = new ForecastService(_userId, _zipCode);
+            return service;
+        }
+
     }
 }

@@ -1,13 +1,62 @@
-﻿body {
+﻿/* This is a single-line comment
+    Grey: #595758
+    BLue: #2274A5
+    Cream: #D6F9DD
+    Black: #00394A
+    Orange: #EA4E18
+  
+*/
+
+body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 0;
+    background-color: #D6F9DD;
+    color: #00394A;
+}
+
+footer {
+    background-color: #00394A;
+    height: 60px;
+    color: #D6F9DD;
+    padding-top:1em;
+    padding-left:5em;
+    /*height: 4em;*/
+    flex-shrink: 0;
+
+}
+
+.btn {
+    background-color: #2274A5;
+}
+
+.padding{
+    padding-top: 1em;
+    padding-bottom: 1em
+}
+.navbar {
+    background-color: #00394A;
+    color: #D6F9DD;
+}
+
+.navbar-brand{
+    padding:0;
+}
+
+.nav-item{
+    margin-top:50px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 100px;
 }
+
+body, wrapper{
+    min-height:100vh;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -16,9 +65,20 @@
     white-space: normal;
 }
 
+.bg-danger {
+    background-color: #EA4E18;
+}
+
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
