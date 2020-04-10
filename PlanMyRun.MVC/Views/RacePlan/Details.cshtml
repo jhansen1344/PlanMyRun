@@ -151,7 +151,6 @@
                     })
                              },
                  
-                timeZone: 'UTC',
                 defaultView: 'dayGridMonth',
                 header: {
                     left: 'prev, next today',
@@ -163,9 +162,9 @@
                 eventClick: function (info) {
                             $('#myModal #eventTitle').text(info.event.title);
                             var $description = $('<div/>');
-                            $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY HH:mm a")));
+                            $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY h:mm a")));
                             if (info.event.end != null) {
-                                $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY HH:mm a")));
+                                $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
                             }
                             $description.append($('<p/>').html('<b>Description:</b>' + info.event.description));
                             $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
@@ -179,7 +178,7 @@
                         },
             });
             calendar.render();
-           // calendar.addEventSource(GetRunsInPlan())
+
         });
 
             @*function GetRunsInPlan() {
@@ -280,7 +279,7 @@
                         eventClick: function (calEvent, jsEvent, view) {
                             $('#myModal #eventTitle').text(calEvent.title);
                             var $description = $('<div/>');
-                            $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                            $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY H:mm a")));
                             if (calEvent.end != null) {
                                 $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                             }
