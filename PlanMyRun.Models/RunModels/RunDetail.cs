@@ -20,6 +20,7 @@ namespace PlanMyRun.Models.RunModels
         public TimeSpan EstimatedTime { get; set; }
         [Display(Name = "Date for Run")]
         public DateTime ScheduleDateTime { get; set; }
+        public DateTime End { get; set; }
         [Display(Name = "Location Id")]
         public int? LocationId { get; set; }
         public double? ActualDistance { get; set; }

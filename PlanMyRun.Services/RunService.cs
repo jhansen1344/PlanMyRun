@@ -100,6 +100,7 @@ namespace PlanMyRun.Services
                         PlannedDistance = e.PlannedDistance,
                         EstimatedTime = e.EstimatedTime,
                         ScheduleDateTime = e.ScheduledDateTime,
+                        End = e.ScheduledDateTime.AddHours(2),
                         LocationId = e.LocationId,
                         ActualDistance = e.ActualDistance,
                         ActualTime = e.ActualTime,
