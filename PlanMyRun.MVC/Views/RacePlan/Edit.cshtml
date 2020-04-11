@@ -188,9 +188,14 @@
     <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
     <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
     <script>
+        var calendar;
         $(document).ready(function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            RenderCalendar();
+
+        });
+        function RenderCalendar() {
+        var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['interaction', 'dayGrid', 'timeGrid','moment', 'bootstrap'],
                 themeSystem: 'bootstrap',
                 contentHeight: 400,
@@ -209,7 +214,7 @@
                                     description: v.Description,
                                     start: moment(v.ScheduleDateTime).format(),
                                     end: v.End != null ? moment(v.End).format() : null,
-                                  extendedProps: {
+                                    extendedProps: {
                                       raceName: v.RacePlanName,
                                       plannedDistance: v.PlannedDistance,
                                       raceName: v.RacePlanName,
@@ -240,7 +245,7 @@
                  eventLimit: true,
                         eventColor: '#2274A5',
                 eventClick: function (info) {
-                    selectedEvent = info;
+                    selectedEvent = info.event;
                     $('#myModal #eventTitle').text(info.event.title);
                             var $description = $('<div/>');
                             $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY h:mm a")));
@@ -279,28 +284,34 @@
 
                     select: function (start, end) {
                         selectedEvent = {
-                            eventID: 0,
+                            id: 0,
                             title: '',
-                            description: '',
-                            start: start,
-                            end: end,
-                            allDay: false,
-                            color: ''
+                            
+                            start: moment(start.start).format("DD-MMM-YYYY h:mm a"),
+                            end: moment(start.end).format("DD-MMM-YYYY h:mm a"),
+                            extendedProps: {
+                                description: '',
+                                plannedDistance: '',
+                                estimatedTime: '',
+                                locationId: '',
+                                actualDistance: '',
+                                actualTime: ''
+
+                            }
                         };
+                        selectedEvent = selectedEvent;
                         openAddEditForm();
                        // calendar.render();
-                       // calendar.unselect();
+                      // calendar.unselect();
                         //$('#calendar').fullCalendar('unselect');
                     },
             });
             calendar.render();
-
-        });
-
+        };
                 function SaveEvent(data) {
 
                 AddAntiForgeryToken(data);
-                if (data.Id == ""||data.Id=="1") {
+                if (data.Id == ""||data.Id=="1"||data.Id=="0") {
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("Create", "Run")',
@@ -310,7 +321,8 @@
                             //Refresh the calender
                             // $('#calender').fullCalendar().destroy();
                             $('#myModalSave').modal('hide');
-
+                            //selectedEvent = null;
+                            calendar.refetchEvents();
                         },
                         error: function () {
                             alert('Failed');
@@ -327,7 +339,10 @@
 
                             //Refresh the calender
                            // $('#calender').fullCalendar().destroy();
-                            $('#myModalSave').modal('hide');
+                        $('#myModalSave').modal('hide');
+                        //selectedEvent = null;
+                        calendar.refetchEvents();
+
 
                     },
                     error: function () {
@@ -343,22 +358,23 @@
         };
 
         function openAddEditForm() {
-                if (selectedEvent != null && selectedEvent.title!='') {
-                    $('#Id').val(selectedEvent.event.id);
+                if (selectedEvent != null) {
+                    $('#Id').val(selectedEvent.id);
                     $('#RacePlanId').val(@Model.Id);
-                    $('#RunDescription').val(selectedEvent.event.Description);
-                    $('#PlannedDistance').val(selectedEvent.event.extendedProps.plannedDistance);
-                     $('#EstimatedTime').val(selectedEvent.event.extendedProps.estimatedTime);
-                    $('#ScheduleDateTime').val(moment(selectedEvent.event.start).format('MM/DD/YYYY h:mm A'));
-                    $('#LocationId').val(selectedEvent.event.extendedProps.locationId);
-                    $('#ActualDistance').val(selectedEvent.event.extendedProps.actualDistance);
-                    $('#ActualTime').val(selectedEvent.event.extendedProps.actualTime);
-                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.event.end).format('DD/MM/YYYY HH:mm A') : '');
+                    $('#RunDescription').val(selectedEvent.extendedProps.description);
+                    $('#PlannedDistance').val(selectedEvent.extendedProps.plannedDistance);
+                     $('#EstimatedTime').val(selectedEvent.extendedProps.estimatedTime);
+                    $('#ScheduleDateTime').val(moment(selectedEvent.start).format('MM/DD/YYYY h:mm A'));
+                    $('#LocationId').val(selectedEvent.extendedProps.locationId);
+                    $('#ActualDistance').val(selectedEvent.extendedProps.actualDistance);
+                    $('#ActualTime').val(selectedEvent.extendedProps.actualTime);
+                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD/MM/YYYY HH:mm A') : '');
 
 
                    // $('#ddThemeColor').val(selectedEvent.color);
 
-                }
+            }
+            //selectedEvent = null;
                 $('#myModalSave').modal();
                     $('#myModal').modal('hide');
                // $('#runCreateModal').modal();
@@ -388,19 +404,18 @@
             })
             $('#btnEdit').click(function () {
                 //Open modal dialog for edit events
-                selectedEvent
                 openAddEditForm();
             })
             $('#btnDelete').click(function () {
                 if (selectedEvent != null && confirm('Are you sure?')) {
                     $.ajax({
                         type: "POST",
-                        url: "/Run/Delete/"+ selectedEvent.event.id,
-                       data: AddAntiForgeryToken({ id: selectedEvent.event.id }),
+                        url: "/Run/Delete/"+ selectedEvent.id,
+                       data: AddAntiForgeryToken({ id: selectedEvent.id }),
                         success: function () {
                                 //Refresh the calender
                                // $('#calender').fullCalendar('destroy');
-
+                                calendar.refetchEvents();
                                 $('#myModal').modal('hide');
 
                         },
