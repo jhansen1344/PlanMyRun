@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
@@ -21,7 +22,7 @@ namespace PlanMyRun.Data
             return userIdentity;
         }
 
-        public double Pace { get; set; }
+        public TimeSpan Pace { get; set; }
         public string ZipCode { get; set; }
 
         public bool LikesHeat { get; set; }

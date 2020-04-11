@@ -17,11 +17,11 @@ namespace PlanMyRun.Services
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context;
         private readonly string _zipCode;
-        private readonly double _userPace;
+        private readonly TimeSpan _userPace;
         
 
 
-        public RunService(Guid userId, string zipCode, double userPace)
+        public RunService(Guid userId, string zipCode, TimeSpan userPace)
         {
             _userId = userId;
             _context = new ApplicationDbContext();
@@ -36,7 +36,7 @@ namespace PlanMyRun.Services
                 {
                     RacePlanId = model.RacePlanId,
                     PlannedDistance = model.PlannedDistance,
-                    EstimatedTime = TimeSpan.FromMinutes(_userPace*model.PlannedDistance),
+                    EstimatedTime = TimeSpan.FromMinutes(_userPace.TotalMinutes*model.PlannedDistance),
                     ScheduledDateTime = model.ScheduleDateTime,
                     Description = model.Description,
                     LocationId = model.LocationId
@@ -103,7 +103,7 @@ namespace PlanMyRun.Services
                         PlannedDistance = e.PlannedDistance,
                         EstimatedTime = e.EstimatedTime,
                         ScheduleDateTime = e.ScheduledDateTime,
-                        End = e.ScheduledDateTime.AddHours(2),
+                        End = e.ScheduledDateTime.AddHours(e.EstimatedTime.TotalHours),
                         LocationId = e.LocationId,
                         ActualDistance = e.ActualDistance,
                         ActualTime = e.ActualTime,
@@ -127,7 +127,7 @@ namespace PlanMyRun.Services
                         PlannedDistance = e.PlannedDistance,
                         EstimatedTime = e.EstimatedTime,
                         ScheduleDateTime = e.ScheduledDateTime,
-                        End = e.ScheduledDateTime.AddHours(1),
+                        End = e.ScheduledDateTime.AddHours(e.EstimatedTime.TotalHours),
                         LocationId = e.LocationId,
                         ActualDistance = e.ActualDistance,
                         ActualTime = e.ActualTime,
@@ -185,9 +185,8 @@ namespace PlanMyRun.Services
                     .SingleOrDefaultAsync(e => e.Id == model.Id && e.RacePlan.UserId == _userId.ToString());
             entity.RacePlanId = model.RacePlanId;
             entity.PlannedDistance = model.PlannedDistance;
-            entity.EstimatedTime = model.EstimatedTime;
+            entity.EstimatedTime = TimeSpan.FromMinutes(_userPace.TotalMinutes * model.PlannedDistance);
             entity.ScheduledDateTime = DateTime.Parse(model.ScheduleDateTime);
-            //entity.ScheduledDateTime = DateTime.ParseExact(model.ScheduleDateTime, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
             entity.LocationId = model.LocationId;
             entity.ActualDistance = model.ActualDistance;
             entity.ActualTime = model.ActualTime;

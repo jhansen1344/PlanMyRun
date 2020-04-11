@@ -365,7 +365,6 @@
     <Content Include="Views\Run\GetRunsInPlan.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
-    <Content Include="Views\Shared\_EditPartial.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -384,6 +383,7 @@
     <Content Include="Views\Forecast\GetForecastEvents.cshtml" />
     <Content Include="Views\Shared\CalendarFull.cshtml" />
     <Content Include="Views\Forecast\Details.cshtml" />
+    <Content Include="Views\Shared\_EditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

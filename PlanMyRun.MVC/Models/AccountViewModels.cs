@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlanMyRun.MVC.Models
@@ -85,7 +86,7 @@ namespace PlanMyRun.MVC.Models
         public string ZipCode { get; set; }
         [Required]
         [Display(Name = "User's average pace.")]
-        public double Pace { get; set; }
+        public TimeSpan Pace { get; set; }
         [Display(Name = "Prefer to run in the heat of the day.")]
         public bool LikesHeat { get; set; }
         [Display(Name = "Ok with a few sprinkles.")]

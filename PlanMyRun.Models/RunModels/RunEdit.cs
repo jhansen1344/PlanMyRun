@@ -14,8 +14,7 @@ namespace PlanMyRun.Models.RunModels
         public int RacePlanId { get; set; }
         [Display(Name = "Planned Distance for Run.")]
         public double PlannedDistance { get; set; }
-        [Display(Name = "Estimated Time to Complete.")]
-        public TimeSpan EstimatedTime { get; set; }
+
         [Display(Name = "Date for Run")]
         public string ScheduleDateTime { get; set; }
 

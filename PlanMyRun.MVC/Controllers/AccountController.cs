@@ -158,7 +158,7 @@ namespace PlanMyRun.MVC.Controllers
                     UserName = model.Email, 
                     Email = model.Email,
                     ZipCode=model.ZipCode,
-                    Pace=model.Pace,
+                   // Pace=model.Pace,
                     LikesDark=model.LikesDark,
                     LikesHeat=model.LikesHeat,
                     LikesMorning=model.LikesMorning,

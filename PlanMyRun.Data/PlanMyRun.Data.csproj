@@ -56,25 +56,9 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Migrations\202003281520049_InitialCreate.cs" />
-    <Compile Include="Migrations\202003281520049_InitialCreate.Designer.cs">
-      <DependentUpon>202003281520049_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003291831358_UpdatedLayers.cs" />
-    <Compile Include="Migrations\202003291831358_UpdatedLayers.Designer.cs">
-      <DependentUpon>202003291831358_UpdatedLayers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004011544077_AddedZipCode.cs" />
-    <Compile Include="Migrations\202004011544077_AddedZipCode.Designer.cs">
-      <DependentUpon>202004011544077_AddedZipCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004022224388_ChangedDateTime.cs" />
-    <Compile Include="Migrations\202004022224388_ChangedDateTime.Designer.cs">
-      <DependentUpon>202004022224388_ChangedDateTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004110002285_UpdatedPace.cs" />
-    <Compile Include="Migrations\202004110002285_UpdatedPace.Designer.cs">
-      <DependentUpon>202004110002285_UpdatedPace.cs</DependentUpon>
+    <Compile Include="Migrations\202004111751196_InitialMigration.cs" />
+    <Compile Include="Migrations\202004111751196_InitialMigration.Designer.cs">
+      <DependentUpon>202004111751196_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,20 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003281520049_InitialCreate.resx">
-      <DependentUpon>202003281520049_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003291831358_UpdatedLayers.resx">
-      <DependentUpon>202003291831358_UpdatedLayers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004011544077_AddedZipCode.resx">
-      <DependentUpon>202004011544077_AddedZipCode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004022224388_ChangedDateTime.resx">
-      <DependentUpon>202004022224388_ChangedDateTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004110002285_UpdatedPace.resx">
-      <DependentUpon>202004110002285_UpdatedPace.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004111751196_InitialMigration.resx">
+      <DependentUpon>202004111751196_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

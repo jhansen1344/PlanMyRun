@@ -3,7 +3,7 @@ namespace PlanMyRun.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,7 @@ namespace PlanMyRun.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false),
                         Name = c.String(nullable: false),
                         MaxDistance = c.Double(nullable: false),
                         HasLoops = c.Boolean(nullable: false),
@@ -31,7 +32,7 @@ namespace PlanMyRun.Data.Migrations
                         RacePlanId = c.Int(nullable: false),
                         PlannedDistance = c.Double(nullable: false),
                         EstimatedTime = c.Time(nullable: false, precision: 7),
-                        ScheduledDateTime = c.DateTimeOffset(nullable: false, precision: 7),
+                        ScheduledDateTime = c.DateTime(nullable: false),
                         Description = c.String(),
                         ActualTime = c.Time(precision: 7),
                         ActualDistance = c.Double(),
@@ -50,7 +51,7 @@ namespace PlanMyRun.Data.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(nullable: false, maxLength: 128),
                         RaceName = c.String(nullable: false),
-                        RaceDate = c.DateTimeOffset(nullable: false, precision: 7),
+                        RaceDate = c.DateTime(nullable: false),
                         IsPublic = c.Boolean(nullable: false),
                         RaceLength = c.Double(),
                         GoalTime = c.Time(precision: 7),
@@ -65,7 +66,8 @@ namespace PlanMyRun.Data.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Pace = c.Double(),
+                        Pace = c.Time(nullable: false, precision: 7),
+                        ZipCode = c.String(),
                         LikesHeat = c.Boolean(nullable: false),
                         LikesRain = c.Boolean(nullable: false),
                         LikesMorning = c.Boolean(nullable: false),

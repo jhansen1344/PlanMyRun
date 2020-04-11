@@ -95,7 +95,6 @@ namespace PlanMyRun.MVC.Controllers
                 Id = detail.Id,
                 RacePlanId = detail.RacePlanId,
                 PlannedDistance = detail.PlannedDistance,
-                EstimatedTime = detail.EstimatedTime,
                 ScheduleDateTime = detail.ScheduleDateTime.ToString(),
                 LocationId = detail.LocationId,
                 ActualDistance = detail.ActualDistance,
@@ -142,7 +141,7 @@ namespace PlanMyRun.MVC.Controllers
             string zipCode = user.ZipCode;
             var userPace = user.Pace;
             
-            var service = new RunService(userId, zipCode,userPace);
+          var service = new RunService(userId, zipCode,userPace);
             return service;
         }
     }
