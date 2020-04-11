@@ -16,7 +16,7 @@ body {
 
 footer {
     background-color: #00394A;
-    height: 60px;
+    height: 100px;
     color: #D6F9DD;
     padding-top:1em;
     padding-left:5em;
@@ -26,12 +26,22 @@ footer {
 }
 
 .btn {
-    background-color: #2274A5;
+    background-color: #00394A;
+    color: #D6F9DD;
 }
 
-.padding{
+btn-outline-secondary {
+    background-color: #595758;
+}
+
+.padding {
     padding-top: 1em;
     padding-bottom: 1em
+}
+
+.margin{
+    margin-top:.5em;
+    margin-bottom: .5em;
 }
 .navbar {
     background-color: #00394A;

@@ -12,17 +12,17 @@ namespace PlanMyRun.Models.RunModels
         public int Id { get; set; }
         [Display(Name = "Race Name")]
         public string RacePlanName { get; set; }
-        [Display(Name = "Planned Distance for Run.")]
+        [Display(Name = "Planned Distance for Run")]
         public double PlannedDistance { get; set; }
-        [Display(Name = "Estimated Time to Complete.")]
+        [Display(Name = "Estimated Time to Complete")]
         public TimeSpan EstimatedTime { get; set; }
         [Display(Name = "Date for Run")]
         public DateTime ScheduledDateTime { get; set; }
         [Display(Name = "Location of Run")]
         public int? LocationId { get; set; }
-        [Display(Name = "Actual Distance Ran.")]
+        [Display(Name = "Actual Distance Ran")]
         public double? ActualDistance { get; set; }
-        [Display(Name = "Actual Time To Complete.")]
+        [Display(Name = "Actual Time To Complete")]
         public TimeSpan? ActualTime { get; set; }
     }
 }

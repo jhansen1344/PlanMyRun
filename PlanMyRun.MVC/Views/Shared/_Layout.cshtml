@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -26,12 +26,12 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</button></li>
                         @if (Request.IsAuthenticated)
                         {
-                            <li class="nav-item">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</button></li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")
@@ -48,9 +48,16 @@
 
         </main>
         <footer>
-            <div class="container">
+            <div class="container-fluid">
+                <div class="row justify-content-around ">
+                    <p>&copy; @DateTime.Now.Year - PlanMyRun</p>
+                    <div class="align-middle">
+                        Forecast powered by :
+                        <img src="~/Content/assets/WeatherUnlockedLogo.png" alt="WeatherUnlockedAPI" />
+                    </div>
 
-                <p>&copy; @DateTime.Now.Year - PlanMyRun</p>
+                </div>
+               
             </div>
         </footer>
     </wrapper>
