@@ -42,6 +42,14 @@ namespace PlanMyRun.MVC.Controllers
             return jsonResult;
         }
 
+        public async Task<JsonResult> GetUnscheduledRuns()
+        {
+            var service = CreateRunService();
+            var model = await service.GetUnscheduledRunsAsync();
+            var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return jsonResult;
+        }
+
         public async Task<ActionResult> GetRunsWithForecast()
         {
             var service = CreateRunService();
@@ -49,9 +57,11 @@ namespace PlanMyRun.MVC.Controllers
             return View(model);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var service = CreateRunService();
+            var model = await service.GetCreateSelectListAsync();
+            return View(model);
         }
 
         [HttpPost]

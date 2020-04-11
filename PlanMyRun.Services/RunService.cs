@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace PlanMyRun.Services
 {
@@ -111,6 +112,29 @@ namespace PlanMyRun.Services
             return runList.ToList();
         }
 
+        public async Task<List<RunDetail>> GetUnscheduledRunsAsync()
+        {
+            var entityList = await _context.Runs.ToListAsync();
+            var runList = entityList
+                .Where(e => e.RacePlan.UserId == _userId.ToString() && DateTime.Compare(e.ScheduledDateTime.Date,DateTime.Now.AddDays(10))<1)
+                .Select(
+                    e =>
+                    new RunDetail()
+                    {
+                        Id = e.Id,
+                        RacePlanId = e.RacePlanId,
+                        RacePlanName = e.RacePlan.RaceName,
+                        PlannedDistance = e.PlannedDistance,
+                        EstimatedTime = e.EstimatedTime,
+                        ScheduleDateTime = e.ScheduledDateTime,
+                        End = e.ScheduledDateTime.AddHours(1),
+                        LocationId = e.LocationId,
+                        ActualDistance = e.ActualDistance,
+                        ActualTime = e.ActualTime,
+                        Description = e.Description
+                    });
+            return runList.ToList();
+        }
         public async Task<List<DailyRunForecast>> GetRunsWithForecastAsync()
         {
             var forecastService = CreateForecastService();
@@ -183,6 +207,15 @@ namespace PlanMyRun.Services
 
         }
 
+        public async Task<RunCreate> GetCreateSelectListAsync()
+        {
+            var runCreate = new RunCreate()
+            {
+                RacePlan = new SelectList(await _context.RacePlans.Where(e => e.UserId == _userId.ToString()).ToListAsync(), "Id", "RaceName"),
+                Locations = new SelectList(await _context.Locations.Where(e => e.UserId == _userId.ToString()).ToListAsync(), "Id", "Name")
+            };
+            return runCreate;
+        }
 
 
         private ForecastService CreateForecastService()

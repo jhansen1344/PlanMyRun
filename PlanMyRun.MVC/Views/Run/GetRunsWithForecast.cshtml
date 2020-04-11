@@ -99,7 +99,7 @@
                                     events:function ( fetchInfo, successCallback, failureCallback) {
                                         $.ajax({
                                             type: "GET",
-                                            url: "/Run/GetRunsInPlan/" +1,
+                                            url: "/Run/GetUnscheduledRuns/",
                                             success: function (data) {
                                                 var runs = [];
                                                 $.each(data, function (i, v) {
@@ -277,82 +277,7 @@
             return data;
         };
 
-        function openAddEditForm() {
-                if (selectedEvent != null && selectedEvent.title!='') {
-                    $('#Id').val(selectedEvent.event.id);
-                    $('#RacePlanId').val(1);
-                    $('#Description').val(selectedEvent.extendedProps.Description);
-                    $('#PlannedDistance').val(selectedEvent.event.extendedProps.plannedDistance);
-                     $('#EstimatedTime').val(selectedEvent.event.extendedProps.estimatedTime);
-                    $('#ScheduleDateTime').val(moment(selectedEvent.event.start).format('MM/DD/YYYY h:mm A'));
-                    $('#LocationId').val(selectedEvent.event.extendedProps.locationId);
-                    $('#ActualDistance').val(selectedEvent.event.extendedProps.actualDistance);
-                    $('#ActualTime').val(selectedEvent.event.extendedProps.actualTime);
-                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.event.end).format('DD/MM/YYYY HH:mm A') : '');
-
-
-                   // $('#ddThemeColor').val(selectedEvent.color);
-
-                }
-                $('#myModalSave').modal();
-                    $('#myModal').modal('hide');
-               // $('#runCreateModal').modal();
-                 //   $('#myModal').modal('hide');
-            }
-            $('#runSave').click(function () {
-
-                if ($('#ScheduleDateTime').val().trim() == "") {
-                    alert('Start date required');
-                    return;
-                }
-
-                else {
-                    var startDate = moment($('#ScheduleDateTime').val(), "MM/DD/YYYY HH:mm").toDate();
-                    var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm A").toDate();
-                    if (startDate > endDate) {
-                        alert('Invalid end date');
-                        return;
-                    }
-                }
-
-                var data = {
-                    Id: $('#Id').val(),
-                    RacePlanId: $('#RacePlanId').val(),
-                    PlannedDistance:$('#PlannedDistance').val(),
-                    EstimatedTime:$('#EstimatedTime').val(),
-                    LocationId:$('#LocationId').val(),
-                    ActualDistance:$('#ActualDistance').val(),
-                    ActualTime:$('#ActualTime').val(),
-                    ScheduleDateTime:$('#ScheduleDateTime').val(),
-
-                }
-                SaveEvent(data);
-                // call function for submit data to the server
-            })
-            $('#btnEdit').click(function () {
-                //Open modal dialog for edit events
-                //selectedEvent
-                openAddEditForm();
-            })
-            $('#btnDelete').click(function () {
-                if (selectedEvent != null && confirm('Are you sure?')) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Run/Delete/"+ selectedEvent.event.id,
-                       data: AddAntiForgeryToken({ id: selectedEvent.event.id }),
-                        success: function () {
-                                //Refresh the calender
-                               // $('#calender').fullCalendar('destroy');
-
-                                $('#myModal').modal('hide');
-
-                        },
-                        error: function () {
-                            alert('Failed');
-                        }
-                    })
-                }
-            })
+       
 
         </script>
     }
