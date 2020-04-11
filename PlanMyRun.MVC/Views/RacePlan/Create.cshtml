@@ -51,6 +51,15 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.GoalTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="well">
+                <div id="datetimepicker3" class="input-append">
+                    <input data-format="hh:mm:ss" type="text">
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                        </i>
+                    </span>
+                </div>
+            </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.GoalTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GoalTime, "", new { @class = "text-danger" })
@@ -79,4 +88,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker3').datetimepicker({
+      pickDate: false
+    });
+  });
+</script>
 }

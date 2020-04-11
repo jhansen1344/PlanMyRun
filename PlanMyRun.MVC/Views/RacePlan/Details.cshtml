@@ -67,7 +67,7 @@
 <div id="calendar"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -167,7 +167,7 @@
                             if (info.event.end != null) {
                                 $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
                             }
-                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.description));
+                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.extendedProps.description));
                             $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
                             $description.append($('<p/>').html('<b>Actual Distance:</b>' + info.event.extendedProps.actualDistance));
                             $description.append($('<p/>').html('<b>Actual Time:</b>' + info.event.extendedProps.actualTime));

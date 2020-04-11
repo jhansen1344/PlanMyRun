@@ -4,6 +4,9 @@
     ViewBag.Title = "GetRunsWithForecast";
 }
 
+@*<%-- used for ajax in AddAntiForgeryToken() --%>*@
+<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+
 <h2>GetRunsWithForecast</h2>
 
 <p>
@@ -42,20 +45,13 @@
     <div id="calendar"></div>
 
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"><span id="eventTitle"></span></h4>
                 </div>
                 <div class="modal-body">
-
-                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                        <span class="glyphicon glyphicon-remove"></span> Remove
-                    </button>
-                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
-                    </button>
                     <p id="pDetails"></p>
                 </div>
                 <div class="modal-footer">
@@ -164,13 +160,13 @@
                                     },
                                     color: '#EA4E18',
                                     textColor: 'black'
-                                    
+
                                 }
 
                 ],
 
 
-                defaultView: 'dayGridMonth',
+                defaultView: 'timeGridWeek',
                 header: {
                     left: 'prev, next today',
                     center: 'title',
@@ -186,7 +182,7 @@
                             if (info.event.end != null) {
                                 $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
                             }
-                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.description));
+                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.extendedProps.description));
                             $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
                             $description.append($('<p/>').html('<b>Actual Distance:</b>' + info.event.extendedProps.actualDistance));
                             $description.append($('<p/>').html('<b>Actual Time:</b>' + info.event.extendedProps.actualTime));
@@ -285,7 +281,7 @@
                 if (selectedEvent != null && selectedEvent.title!='') {
                     $('#Id').val(selectedEvent.event.id);
                     $('#RacePlanId').val(1);
-                    $('#Description').val(selectedEvent.event.Description);
+                    $('#Description').val(selectedEvent.extendedProps.Description);
                     $('#PlannedDistance').val(selectedEvent.event.extendedProps.plannedDistance);
                      $('#EstimatedTime').val(selectedEvent.event.extendedProps.estimatedTime);
                     $('#ScheduleDateTime').val(moment(selectedEvent.event.start).format('MM/DD/YYYY h:mm A'));
@@ -335,7 +331,7 @@
             })
             $('#btnEdit').click(function () {
                 //Open modal dialog for edit events
-                selectedEvent
+                //selectedEvent
                 openAddEditForm();
             })
             $('#btnDelete').click(function () {

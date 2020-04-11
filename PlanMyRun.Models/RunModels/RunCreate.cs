@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace PlanMyRun.Models.RunModels
 {
@@ -12,6 +13,7 @@ namespace PlanMyRun.Models.RunModels
         [Required]
         [Display(Name ="Add Run to Race Plan:")]
         public int RacePlanId { get; set; }
+        public IEnumerable<SelectListItem> RacePlan { get; set; }
         [Required]
         [Display(Name = "Planned Distance for Run.")]
         [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid number.")]
@@ -26,5 +28,6 @@ namespace PlanMyRun.Models.RunModels
         public string Description { get; set; }
         [Display(Name = "Location of Run")]
         public int? LocationId { get; set; }
+        public IEnumerable<SelectListItem> Locations { get; set; }
     }
 }
