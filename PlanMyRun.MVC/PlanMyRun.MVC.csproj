@@ -388,6 +388,8 @@
     <Content Include="Views\Shared\_EditPartial.cshtml" />
     <Content Include="Views\RacePlan\GetTemplates.cshtml" />
     <Content Include="Views\RacePlan\CreateFromTemplate.cshtml" />
+    <Content Include="Views\Shared\EditPlanRuns.cshtml" />
+    <Content Include="Views\Run\EditRunsInPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

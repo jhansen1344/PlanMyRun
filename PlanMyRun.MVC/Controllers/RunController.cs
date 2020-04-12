@@ -42,6 +42,15 @@ namespace PlanMyRun.MVC.Controllers
             return jsonResult;
         }
 
+        public ActionResult EditRunsInPlan(int id)
+        {
+            var model = new RunDetail()
+            {
+                Id = id
+            };
+            return View(model);
+        }
+
         public async Task<JsonResult> GetUnscheduledRuns()
         {
             var service = CreateRunService();

@@ -1,0 +1,454 @@
+﻿@model PlanMyRun.Models.RunModels.RunDetail
+
+@{
+    ViewBag.Title = "EditRunsInPlan";
+}
+
+@{
+    ViewBag.Title = "EditPlanRuns";
+}
+@*<%-- used for ajax in AddAntiForgeryToken() --%>*@
+<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+
+<h2>EditPlanRuns</h2>
+
+<h2>Runs</h2>
+
+<div id="calendar"></div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+
+                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span> Remove
+                </button>
+                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModalSave" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Save Event</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="Id" />
+                    <div class="form-group">
+                        <label>Race Plan Id</label>
+                        <input type="text" id="RacePlanId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="RunDescription" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Planned Distance</label>
+                        <input type="text" id="PlannedDistance" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Estimated Time</label>
+                        <input type="text" id="EstimatedTime" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Start</label>
+                        <div class="input-group date" id="dtp1">
+                            <input type="text" id="ScheduleDateTime" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Location Id</label>
+                        <input type="text" id="LocationId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Actual Distance</label>
+                        <input type="text" id="ActualDistance" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Actual Time</label>
+                        <input type="text" id="ActualTime" class="form-control" />
+                    </div>
+                    <button type="button" id="runSave" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*MainFunctionality css
+    DayGrid css
+    Time grid css*@
+<link href="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet" />
+<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+
+
+@section scripts{
+
+    @*Moment js
+        MainFunctionality js
+        Interaction js
+        daygrid js
+        timegrid js
+        bootstrap js
+        moment js*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/interaction@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
+    <script>
+        var calendar;
+        $(document).ready(function () {
+            RenderCalendar();
+
+        });
+        function RenderCalendar() {
+        var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid','moment', 'bootstrap'],
+                themeSystem: 'bootstrap',
+                contentHeight: 400,
+                events:
+                    function ( fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Run/GetRunsInPlan/" +@Model.Id,
+                        success: function (data) {
+                            var runs = [];
+                            $.each(data, function (i, v) {
+                              runs.push({
+
+                                    title: v.PlannedDistance + ' Mile Run',
+                                    id: v.Id,
+                                    description: v.Description,
+                                    start: moment(v.ScheduleDateTime).format(),
+                                    end: v.End != null ? moment(v.End).format() : null,
+                                    extendedProps: {
+                                      raceName: v.RacePlanName,
+                                      plannedDistance: v.PlannedDistance,
+                                      raceName: v.RacePlanName,
+                                      actualDistance: v.ActualDistance,
+                                      actualTime: v.ActualTime,
+                                      racePlanId: v.RacePlanId,
+                                      estimatedTime: v.EstimatedTime.TotalHours,
+                                      locationId: v.LocationId
+                                  }
+
+                                });
+                            })
+
+                            successCallback(runs);
+                        },
+                        error: function (error) {
+                            alert('Failed to retrieve runs for this plan.');
+                        }
+                    })
+                             },
+
+                defaultView: 'dayGridMonth',
+                header: {
+                    left: 'prev, next today',
+                    center: 'title',
+                    right: 'dayGridMonth, timeGridWeek, timeGridDay'
+                },
+                 eventLimit: true,
+                        eventColor: '#2274A5',
+                eventClick: function (info) {
+                    selectedEvent = info.event;
+                    $('#myModal #eventTitle').text(info.event.title);
+                            var $description = $('<div/>');
+                            $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY h:mm a")));
+                            if (info.event.end != null) {
+                                $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
+                            }
+                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.extendedProps.description));
+                            $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
+                            $description.append($('<p/>').html('<b>Actual Distance:</b>' + info.event.extendedProps.actualDistance));
+                            $description.append($('<p/>').html('<b>Actual Time:</b>' + info.event.extendedProps.actualTime));
+                            $description.append($('<p/>').html('<b>Planned Distance:</b>' + info.event.extendedProps.plannedDistance));
+                             $description.append($('<p/>').html('<b>Estimated Time:</b>' + info.event.extendedProps.estimatedTime));
+                            $('#myModal #pDetails').empty().html($description);
+
+                            $('#myModal').modal();
+                },
+                                editable: true,
+                eventDrop:function (info) {
+                        var data = {
+
+                            Id: info.event.id,
+                            RacePlanId: info.event.extendedProps.racePlanId,
+                            Description: info.event.extendedProps.Description,
+                            PlannedDistance: info.event.extendedProps.plannedDistance,
+                            EstimatedTime: info.event.extendedProps.estimatedTime,
+                            ScheduleDateTime: moment(info.event.start).format('MM/DD/YYYY HH:mm'),
+                            End: info.event.end != null ? moment(info.event.end).format('DD/MM/YYYY HH:mm A') : null,
+                            LocationId: info.event.extendedProps.locationId,
+                            ActualDistance: info.event.extendedProps.actualDistance,
+                            ActualTime: info.event.extendedProps.acutalTime,
+
+                        };
+                        SaveEvent(data);
+                },
+                selectable: true,
+
+                    select: function (start, end) {
+                        selectedEvent = {
+                            id: 0,
+                            title: '',
+
+                            start: moment(start.start).format("DD-MMM-YYYY h:mm a"),
+                            end: moment(start.end).format("DD-MMM-YYYY h:mm a"),
+                            extendedProps: {
+                                description: '',
+                                plannedDistance: '',
+                                estimatedTime: '',
+                                locationId: '',
+                                actualDistance: '',
+                                actualTime: ''
+
+                            }
+                        };
+                        selectedEvent = selectedEvent;
+                        openAddEditForm();
+                       // calendar.render();
+                      // calendar.unselect();
+                        //$('#calendar').fullCalendar('unselect');
+                    },
+            });
+            calendar.render();
+        };
+                function SaveEvent(data) {
+
+                AddAntiForgeryToken(data);
+                if (data.Id == ""||data.Id=="1"||data.Id=="0") {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Create", "Run")',
+                        data: data,
+                        success: function () {
+
+                            //Refresh the calender
+                            // $('#calender').fullCalendar().destroy();
+                            $('#myModalSave').modal('hide');
+                            //selectedEvent = null;
+                            calendar.refetchEvents();
+                        },
+                        error: function () {
+                            alert('Failed');
+                        }
+                    })
+
+                }
+                else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Edit", "Run")',
+                    data: data,
+                    success: function () {
+
+                            //Refresh the calender
+                           // $('#calender').fullCalendar().destroy();
+                        $('#myModalSave').modal('hide');
+                        //selectedEvent = null;
+                        calendar.refetchEvents();
+
+
+                    },
+                    error: function () {
+                        alert('Failed');
+                    }
+                })
+                    }
+            }
+
+             function AddAntiForgeryToken(data) {
+              data.__RequestVerificationToken = $('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val();
+            return data;
+        };
+
+        function openAddEditForm() {
+                if (selectedEvent != null) {
+                    $('#Id').val(selectedEvent.id);
+                    $('#RacePlanId').val(@Model.Id);
+                    $('#RunDescription').val(selectedEvent.extendedProps.description);
+                    $('#PlannedDistance').val(selectedEvent.extendedProps.plannedDistance);
+                     $('#EstimatedTime').val(selectedEvent.extendedProps.estimatedTime);
+                    $('#ScheduleDateTime').val(moment(selectedEvent.start).format('MM/DD/YYYY h:mm A'));
+                    $('#LocationId').val(selectedEvent.extendedProps.locationId);
+                    $('#ActualDistance').val(selectedEvent.extendedProps.actualDistance);
+                    $('#ActualTime').val(selectedEvent.extendedProps.actualTime);
+                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD/MM/YYYY HH:mm A') : '');
+
+
+                   // $('#ddThemeColor').val(selectedEvent.color);
+
+            }
+            //selectedEvent = null;
+                $('#myModalSave').modal();
+                    $('#myModal').modal('hide');
+               // $('#runCreateModal').modal();
+                 //   $('#myModal').modal('hide');
+            }
+            $('#runSave').click(function () {
+
+                if ($('#ScheduleDateTime').val().trim() == "") {
+                    alert('Start date required');
+                    return;
+                }
+
+                var data = {
+                    Id: $('#Id').val(),
+                    RacePlanId: $('#RacePlanId').val(),
+                    PlannedDistance:$('#PlannedDistance').val(),
+                    EstimatedTime:$('#EstimatedTime').val(),
+                    LocationId:$('#LocationId').val(),
+                    ActualDistance:$('#ActualDistance').val(),
+                    ActualTime:$('#ActualTime').val(),
+                    ScheduleDateTime: $('#ScheduleDateTime').val(),
+                    Description: $('#RunDescription').val()
+
+                }
+                SaveEvent(data);
+                // call function for submit data to the server
+            })
+            $('#btnEdit').click(function () {
+                //Open modal dialog for edit events
+                openAddEditForm();
+            })
+            $('#btnDelete').click(function () {
+                if (selectedEvent != null && confirm('Are you sure?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Run/Delete/"+ selectedEvent.id,
+                       data: AddAntiForgeryToken({ id: selectedEvent.id }),
+                        success: function () {
+                                //Refresh the calender
+                               // $('#calender').fullCalendar('destroy');
+                                calendar.refetchEvents();
+                                $('#myModal').modal('hide');
+
+                        },
+                        error: function () {
+                            alert('Failed');
+                        }
+                    })
+                }
+            })
+
+    </script>
+}
+<h2>EditRunsInPlan</h2>
+
+<div>
+    <h4>RunDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
