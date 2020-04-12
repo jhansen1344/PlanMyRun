@@ -10,6 +10,9 @@
 
 <div>
     <h4>RacePlanDetail</h4>
+
+        @Html.ActionLink("Use as Template", "CreateFromTemplate", new { id = Model.Id })
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -191,8 +194,10 @@
     <p>
         @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-info fa fa-pencil" })
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        
         @*@Html.ActionLink(< i class="fa fa-pencil" aria-hidden="true"></i>, "Edit", new { id = Model.Id
             }) |*@
         @Html.ActionLink("Back to List", "Index")
+       
     </p>
     }

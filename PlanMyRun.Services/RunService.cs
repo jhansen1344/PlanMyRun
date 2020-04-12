@@ -174,9 +174,6 @@ namespace PlanMyRun.Services
 
         }
 
-
-
-
         public async Task<bool> EditRunAsync(RunEdit model)
         {
             var entity = await

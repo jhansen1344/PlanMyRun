@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PlanMyRun.Models.RacePlanModels;
 using PlanMyRun.Services;
 using System;
@@ -13,12 +14,51 @@ namespace PlanMyRun.MVC.Controllers
     [Authorize]
     public class RacePlanController : Controller
     {
+        internal ApplicationUserManager _userManager;
+        internal ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: RacePlan
         public async Task<ActionResult> Index()
         {
             RacePlanService service = CreateRacePlanService();
             var model = await service.GetRacePlansAsync();
 
+            return View(model);
+        }
+
+        //Get: Templates
+        public async Task<ActionResult> GetTemplates()
+        {
+            var service = CreateRacePlanService();
+            var model = await service.GetTemplates();
+            return View(model);
+        }
+
+        public ActionResult CreateFromTemplate(int id)
+        {
+            var model = new RacePlanTemplate()
+            {
+                ExistingPlanId = id
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateFromTemplate(RacePlanTemplate model)
+        {
+            var service = CreateRacePlanService();
+            if (await service.CreateFromTemplateAsync(model))
+                return RedirectToAction("Index");
+            ModelState.AddModelError("", "Plan could not be created.");
             return View(model);
         }
 
@@ -98,7 +138,11 @@ namespace PlanMyRun.MVC.Controllers
         private RacePlanService CreateRacePlanService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new RacePlanService(userId);
+            var user = UserManager.FindById(userId.ToString());
+            string zipCode = user.ZipCode;
+            var userPace = user.Pace;
+
+            var service = new RacePlanService(userId, zipCode, userPace);
             return service;
         }
 
