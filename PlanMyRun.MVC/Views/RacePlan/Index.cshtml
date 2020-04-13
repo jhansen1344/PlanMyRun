@@ -7,32 +7,34 @@
 <h2>My Plans</h2>
 
 <p>
-    @Html.ActionLink("Create New Plan", "Create")
+<p>
+    <a href="@Url.Action("Create","RacePlan")" title="Add"><img alt="Add" src="@Url.Content("~/Content/assets/plus-square.svg")" /></a>
+</p>
 </p>
 
 
-@foreach (var item in Model) {
-<div class="card margin">
-    <div class="card-header">@Html.DisplayFor(modelItem => item.RaceName)</div>
-    <div class="card-body">
-        <ul>
+@foreach (var item in Model)
+{
+    <div class="card margin">
+        <div class="card-header">@Html.DisplayFor(modelItem => item.RaceName)</div>
+        <div class="row justify-content-around">
+            <a href="@Url.Action("Edit","RacePlan", new { id = item.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+            <a href="@Url.Action("Details","RacePlan", new { id = item.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
+            <a href="@Url.Action("Delete","RacePlan", new { id = item.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+        </div>
+        <div class="card-body">
+            <ul>
 
-            <li>@Html.DisplayNameFor(model => model.RaceLength): @Html.DisplayFor(modelItem => item.RaceLength)</li>
-            <li> @Html.DisplayNameFor(model => model.GoalTime):  @Html.DisplayFor(modelItem => item.GoalTime)</li>
-            <li> @Html.DisplayNameFor(model => model.RaceDate):  @Html.DisplayFor(modelItem => item.RaceDate)</li>
-            <li>@Html.DisplayNameFor(model => model.IsPublic): @Html.DisplayFor(modelItem => item.IsPublic)</li>
-            <li>@Html.DisplayNameFor(model => model.NumberOfRuns): @Html.DisplayFor(modelItem => item.NumberOfRuns)</li>
-        </ul>
-
-        <ul>
-            <li>@Html.ActionLink("Update Plan", "Edit", new { id = item.Id }) </li>
-            <li>@Html.ActionLink("Plan Details", "Details", new { id = item.Id })</li>
-            <li>@Html.ActionLink("Delete Plan", "Delete", new { id = item.Id })</li>
-        </ul>
+                <li>@Html.DisplayNameFor(model => model.RaceLength): @Html.DisplayFor(modelItem => item.RaceLength)</li>
+                <li> @Html.DisplayNameFor(model => model.GoalTime):  @Html.DisplayFor(modelItem => item.GoalTime)</li>
+                <li> @Html.DisplayNameFor(model => model.RaceDate):  @Html.DisplayFor(modelItem => item.RaceDate)</li>
+                <li>@Html.DisplayNameFor(model => model.IsPublic): @Html.DisplayFor(modelItem => item.IsPublic)</li>
+                <li>@Html.DisplayNameFor(model => model.NumberOfRuns): @Html.DisplayFor(modelItem => item.NumberOfRuns)</li>
+            </ul>
+        </div>
     </div>
-</div>
-    
-  
+
+
 }
 
 
