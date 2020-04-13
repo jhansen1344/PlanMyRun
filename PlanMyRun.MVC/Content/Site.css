@@ -27,14 +27,20 @@ footer {
 .btn {
     background-color: #00394A;
     color: #D6F9DD;
+    transition-duration: 0.25s;
 }
 
 .btn-sm{
     padding:0;
 }
 
-.btn-outline-secondary {
-    background-color: #595758;
+.btn:hover {
+    background-color: #EA4E18;
+    color: #D6F9DD;
+}
+
+.nav-link {
+    color: #D6F9DD;
 }
 
 .padding {
@@ -103,4 +109,5 @@ ul {
 
 .card {
     background-color: #D6F9DD;
+    color: #00394A;
 }
