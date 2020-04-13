@@ -82,7 +82,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index","Run")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
 </div>
 
 @section Scripts {

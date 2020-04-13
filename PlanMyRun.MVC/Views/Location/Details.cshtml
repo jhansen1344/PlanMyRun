@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit","Location", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+    <a href="@Url.Action("Index","Location")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
 </p>

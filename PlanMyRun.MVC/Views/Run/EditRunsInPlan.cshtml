@@ -10,6 +10,98 @@
 @*<%-- used for ajax in AddAntiForgeryToken() --%>*@
 <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
 
+<h2>EditRunsInPlan</h2>
+
+<div>
+    <h4>RunDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RacePlanName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RacePlanName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Details","RacePlan",new { id = Model.Id })" title="Back to Plan"><img alt="Back to Plan" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+</p>
+
 <h2>EditPlanRuns</h2>
 
 <h2>Runs</h2>
@@ -52,9 +144,9 @@
                     <input type="hidden" id="Id" />
                     <input type="hidden" id="RacePlanId" />
                     @*<div class="form-group">
-            <label>Race Plan Id</label>
-            <input type="text" id="RacePlanId" class="form-control" />
-        </div>*@
+                            <label>Race Plan Id</label>
+                            <input type="text" id="RacePlanId" class="form-control" />
+                        </div>*@
                     <div class="form-group">
                         <label>Planned Distance</label>
                         <input type="text" id="PlannedDistance" class="form-control" />
@@ -73,9 +165,9 @@
                         </div>
                     </div>
                     @*<div class="form-group">
-                        <label>Estimated Time</label>
-                        <input type="text" id="EstimatedTime" class="form-control" />
-                    </div>*@
+                            <label>Estimated Time</label>
+                            <input type="text" id="EstimatedTime" class="form-control" />
+                        </div>*@
 
                     <div class="form-group">
                         <label>Location Id</label>
@@ -385,95 +477,4 @@
 
     </script>
 }
-<h2>EditRunsInPlan</h2>
 
-<div>
-    <h4>RunDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlannedDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlannedDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduleDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ScheduleDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.End)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.End)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -1,0 +1,72 @@
+﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RacePlanDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPublic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a href="@Url.Action("Index","RacePlan")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+        </div>
+    }
+</div>

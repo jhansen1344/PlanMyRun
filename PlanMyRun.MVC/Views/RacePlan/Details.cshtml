@@ -215,16 +215,12 @@
 
 
     <p>
+        <a href="@Url.Action("Edit","RacePlan", new { id = Model.Id })" title="Edit Plan"><img alt="Edit Plan Details" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Details</a>
+        <a href="@Url.Action("EditRunsInPlan","Run", new { id = Model.Id })" title="Edit Runs"><img alt="Edit Plan Runs" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Runs</a>
 
-        @Html.ActionLink("Edit Plan Details", "Edit", new { id = Model.Id })
-
-        @Html.ActionLink("Edit Plan Runs", "EditRunsInPlan", "Run",new {id=Model.Id},null)
-
-        @*//, new { id = Model.Id })*@
-
-        @*@Html.ActionLink(< i class="fa fa-pencil" aria-hidden="true"></i>, "Edit", new { id = Model.Id
-        }) |*@
-        @Html.ActionLink("Back to List", "Index")
+        <div>
+            <a href="@Url.Action("Index","RacePlan")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+        </div>
 
     </p>
     }
