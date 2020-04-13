@@ -36,11 +36,25 @@
     <div class="card-body">
         <ul>
 
-            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime)</li>
+            @if (Model.Description != null)
+            {
+                <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </li>
+            }
+            else
+            {
+                <li>@Html.DisplayNameFor(model => model.Description): N/A </li>
+            }
             <li> @Html.DisplayNameFor(model => model.ScheduleDateTime): @Html.DisplayFor(model => model.ScheduleDateTime)</li>
-            <li> @Html.DisplayNameFor(model => model.LocationId): @Html.DisplayFor(model => model.LocationId)</li>
+            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime)</li>
+            @if (Model.LocationId != null)
+            {
+                <li> @Html.DisplayNameFor(model => model.LocationId): @Html.DisplayFor(model => model.LocationId)</li>
+            }
+            else
+            {
+                <li> @Html.DisplayNameFor(model => model.LocationId):N/A</li>
+            }
             <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime) </li>
-            <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </li>
             @if (Model.ActualDistance != null)
             {
                 <li> @Html.DisplayNameFor(model => model.ActualDistance): @Html.DisplayFor(model => model.ActualDistance)</li>

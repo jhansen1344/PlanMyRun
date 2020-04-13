@@ -166,16 +166,39 @@
                 eventClick: function (info) {
                             $('#myModal #eventTitle').text(info.event.title);
                             var $description = $('<div/>');
+                    if (info.event.extendedProps.description) {
+                        $description.append($('<p/>').html('<b>Description:</b>' + info.event.extendedProps.description));
+                    }
+                    else {
+                        $description.append($('<p/>').html('<b>Description :N/A</b>'));
+                    }
+                            //$description.append($('<p/>').html('<b>Planned Distance:</b>' + info.event.extendedProps.plannedDistance));
                             $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY h:mm a")));
                             if (info.event.end != null) {
                                 $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
                             }
-                            $description.append($('<p/>').html('<b>Description:</b>' + info.event.extendedProps.description));
-                            $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
-                            $description.append($('<p/>').html('<b>Actual Distance:</b>' + info.event.extendedProps.actualDistance));
-                            $description.append($('<p/>').html('<b>Actual Time:</b>' + info.event.extendedProps.actualTime));
-                            $description.append($('<p/>').html('<b>Planned Distance:</b>' + info.event.extendedProps.plannedDistance));
-                             $description.append($('<p/>').html('<b>Estimated Time:</b>' + info.event.extendedProps.estimatedTime));
+                    if (info.event.extendedProps.locationId != null) {
+                        $description.append($('<p/>').html('<b>Location Id :</b>' + info.event.extendedProps.locationId));
+                    }
+                    else
+                    {
+                         $description.append($('<p/>').html('<b>Location Id : N/A</b>'));
+                    }
+                    $description.append($('<p/>').html('<b>Estimated Time in Hours:</b>' + info.event.extendedProps.estimatedTime));
+                    if (info.event.extendedProps.actualDistance != null) {
+                        $description.append($('<p/>').html('<b>Actual Distance :</b>' + info.event.extendedProps.actualDistance));
+                    }
+                    else
+                    {
+                         $description.append($('<p/>').html('<b>Actual Distance : 00.00</b>'));
+                    }
+                    if (info.event.extendedProps.actualTime != null) {
+                        $description.append($('<p/>').html('<b>Actual Time :</b>' + info.event.extendedProps.actualTime));
+                    }
+                    else
+                    {
+                         $description.append($('<p/>').html('<b>Actual Time : 00:00:00' ));
+                    }
                             $('#myModal #pDetails').empty().html($description);
 
                             $('#myModal').modal();
