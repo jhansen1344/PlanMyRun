@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace PlanMyRun.Models.RunModels
 {
@@ -12,6 +13,7 @@ namespace PlanMyRun.Models.RunModels
         public int Id { get; set; }
         [Display(Name = "Race Id")]
         public int RacePlanId { get; set; }
+        public IEnumerable<SelectListItem> RacePlan { get; set; }
         [Display(Name = "Planned Distance for Run.")]
         public double PlannedDistance { get; set; }
 
@@ -20,6 +22,7 @@ namespace PlanMyRun.Models.RunModels
 
         [Display(Name = "Location Id")]
         public int? LocationId { get; set; }
+        public IEnumerable<SelectListItem> Locations { get; set; }
         [Display(Name = "Location of Run")]
         public double? ActualDistance { get; set; }
         [Display(Name = "Actual Time To Complete.")]

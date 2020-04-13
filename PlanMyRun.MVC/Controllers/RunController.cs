@@ -99,6 +99,7 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateRunService();
             var detail = await service.GetRunByIdAsync(id);
+            var listModel = await service.GetCreateSelectListAsync();
             var model = new RunEdit
             {
                 Id = detail.Id,
@@ -108,9 +109,11 @@ namespace PlanMyRun.MVC.Controllers
                 LocationId = detail.LocationId,
                 ActualDistance = detail.ActualDistance,
                 ActualTime = detail.ActualTime,
-                Description = detail.Description
+                Description = detail.Description,
+                RacePlan=listModel.RacePlan,
+                Locations=listModel.Locations
             };
-            return PartialView("_EditPartial", model);
+            return View(model);
         }
 
         [HttpPost]

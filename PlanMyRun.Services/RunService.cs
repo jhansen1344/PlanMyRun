@@ -213,7 +213,6 @@ namespace PlanMyRun.Services
             return runCreate;
         }
 
-
         private ForecastService CreateForecastService()
         {
             var service = new ForecastService(_userId, _zipCode);

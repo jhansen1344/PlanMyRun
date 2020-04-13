@@ -178,7 +178,8 @@
                 },
                  eventLimit: true,
                         eventColor: '#2274A5',
-               eventClick: function (info) {
+                eventClick: function (info) {
+                   selectedEvent = info.event;
                             $('#myModal #eventTitle').text(info.event.title);
                             var $description = $('<div/>');
                     if (info.event.extendedProps.description) {
