@@ -381,17 +381,17 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_RunCreate.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\_RunCreate.cshtml" />
     <Content Include="Views\Shared\_ForecastDayPartial.cshtml" />
     <Content Include="Views\Run\GetRunsWithForecast.cshtml" />
     <Content Include="Views\Shared\_RunDetailList.cshtml" />
     <Content Include="Views\Forecast\ForecastHourlyView.cshtml" />
     <Content Include="Views\Forecast\GetForecastEvents.cshtml" />
-    <Content Include="Views\Shared\CalendarFull.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\CalendarFull.cshtml" />
     <Content Include="Views\Forecast\Details.cshtml" />
     <Content Include="Views\RacePlan\GetTemplates.cshtml" />
     <Content Include="Views\RacePlan\CreateFromTemplate.cshtml" />
-    <Content Include="Views\Shared\EditPlanRuns.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\EditPlanRuns.cshtml" />
     <Content Include="Views\Run\EditRunsInPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>

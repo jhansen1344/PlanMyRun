@@ -18,9 +18,12 @@
 
             <div class="card margin">
                 <div class="card-header"><h5>@Html.DisplayFor(modelItem => item.PlannedDistance) Mile Run For @Html.DisplayFor(modelItem => item.RacePlanName)</h5> <h6>@Html.DisplayFor(modelItem => item.ScheduledDateTime)</h6></div>
-                <a href="@Url.Action("Edit","Run", new { id = item.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
-                <a href="@Url.Action("Details","Run", new { id = item.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
-                <a href="@Url.Action("Delete","Run", new { id = item.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+                <div class="row">
+                    <a href="@Url.Action("Edit","Run", new { id = item.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+                    <a href="@Url.Action("Details","Run", new { id = item.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
+                    <a href="@Url.Action("Delete","Run", new { id = item.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+                </div>
+                
                 <div class="card-body">
                     <ul>
 
