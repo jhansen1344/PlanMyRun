@@ -36,8 +36,11 @@ namespace PlanMyRun.MVC.Controllers
             }
             var service = CreateLocationService();
             if (await service.CreateLocationAsync(model))
+            {
+                TempData["SaveResult"] = "Location successfully created.";
                 return RedirectToAction("Index");
-            ModelState.AddModelError("", "Run could not be created.");
+            }
+            ModelState.AddModelError("", "Location could not be created.");
             return View(model);
         }
 
@@ -70,7 +73,10 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateLocationService();
             if (await service.EditLocationAsync(model))
+            {
+                TempData["SaveResult"] = "Location successfully updated.";
                 return RedirectToAction("Index");
+            }
             ModelState.AddModelError("", "Location information could not be updated.");
             return View(model);
         }
@@ -90,6 +96,7 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateLocationService();
             await service.DeleteLocationAsync(id);
+            TempData["SaveResult"] = "Location successfully deleted.";
             return RedirectToAction("Index");
         }
 

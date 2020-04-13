@@ -10,9 +10,8 @@
 body {
     padding-top: 50px;
     padding-bottom: 0;
-    background-color: #D6F9DD;
+    background-color: #595758;
     color: #00394A;
-
 }
 
 footer {
@@ -96,4 +95,8 @@ ul {
 
 .modal-header{
     display:inline;
+}
+
+.card {
+    background-color: #D6F9DD;
 }

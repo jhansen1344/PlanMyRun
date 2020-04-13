@@ -191,6 +191,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\box-arrow-left.svg" />
     <Content Include="Content\assets\info-square.svg" />
     <Content Include="Content\assets\pencil-square.svg" />
     <Content Include="Content\assets\plus-square.svg" />

@@ -83,7 +83,11 @@ namespace PlanMyRun.MVC.Controllers
             }
             var service = CreateRunService();
             if (await service.CreateRunAsync(model))
+            {
+                TempData["SaveResult"] = "Run created successfully.";
                 return RedirectToAction("Index");
+
+            }
             ModelState.AddModelError("", "Run could not be created.");
             return View(model);
         }
@@ -122,8 +126,11 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateRunService();
             if (await service.EditRunAsync(model))
+            {
+                TempData["SaveResult"] = "Run updated successfully.";
                 return RedirectToAction("Index");
-            ModelState.AddModelError("", "Plan could not be updated.");
+            }
+            ModelState.AddModelError("", "Run could not be updated.");
             return View(model);
         }
 
@@ -142,6 +149,7 @@ namespace PlanMyRun.MVC.Controllers
         {
             var service = CreateRunService();
             await service.DeleteRunAsync(id);
+            TempData["SaveResult"] = "Run successfully deleted.";
             return RedirectToAction("Index");
         }
 
