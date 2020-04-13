@@ -191,11 +191,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\info-square.svg" />
     <Content Include="Content\assets\pencil-square.svg" />
+    <Content Include="Content\assets\plus-square.svg" />
     <Content Include="Content\assets\PMR_logo.png" />
     <Content Include="Content\assets\PMR_logo100.png" />
     <Content Include="Content\assets\PMR_logo100_t.png" />
     <Content Include="Content\assets\PMR_logo75.png" />
+    <Content Include="Content\assets\trash.svg" />
     <Content Include="Content\assets\WeatherUnlockedLogo.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
