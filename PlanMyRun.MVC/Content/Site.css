@@ -29,7 +29,11 @@ footer {
     color: #D6F9DD;
 }
 
-btn-outline-secondary {
+.btn-sm{
+    padding:0;
+}
+
+.btn-outline-secondary {
     background-color: #595758;
 }
 

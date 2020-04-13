@@ -26,12 +26,12 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</button></li>
+                        <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</button></li>
                         @if (Request.IsAuthenticated)
                         {
-                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</button></li>
-                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</button></li>
-                            <li class="nav-item"><button class="btn btn-sm btn-outline-secondary" type="button">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</button></li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")
