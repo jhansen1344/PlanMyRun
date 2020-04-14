@@ -25,8 +25,6 @@
                                 @Html.LabelFor(model => model.RacePlanId, htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-12">
                                     @Html.DropDownListFor(model => model.RacePlanId, Model.RacePlan)
-                                    @*@Html.DropDownList("RacePlanId", null, htmlAttributes: new { @class = "form-control" })*@
-                                    @*@Html.DropDownListFor(model => model.RacePlanId, Model.RacePlan)*@
                                     @Html.ValidationMessageFor(model => model.RacePlanId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -58,7 +56,6 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-12">
-                                    @*@Html.DropDownList("LocationId", null, htmlAttributes: new { @class = "form-control" })*@
                                     @Html.DropDownListFor(model => model.LocationId, Model.Locations)
                                     @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                                 </div>

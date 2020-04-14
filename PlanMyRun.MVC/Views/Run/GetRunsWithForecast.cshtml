@@ -33,63 +33,63 @@
         }
     </div>
 </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-auto mb-4">
-                <div class="card margin">
-                    <div class="card-header text-center"><h2> Runs for this week</h2></div>
-                    <div class="card-body">
-                        <div id="calendar"></div>
-                    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div class="card-header text-center"><h2> Runs for this week</h2></div>
+                <div class="card-body">
+                    <div id="calendar"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p id="pDetails"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    @*MainFunctionality css
-        DayGrid css
-        Time grid css*@
-    <link href="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet" />
-    <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+@*MainFunctionality css
+    DayGrid css
+    Time grid css*@
+<link href="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet" />
+<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 
 
-    @section scripts{
+@section scripts{
 
-        @*Moment js
-            MainFunctionality js
-            Interaction js
-            daygrid js
-            timegrid js
-            bootstrap js
-            moment js*@
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/interaction@4.4.0/main.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
-        <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
-        <script>
+    @*Moment js
+        MainFunctionality js
+        Interaction js
+        daygrid js
+        timegrid js
+        bootstrap js
+        moment js*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/interaction@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
+    <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
+    <script>
         $(document).ready(function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -131,8 +131,8 @@
                                              }
                                         })
                                     },
-                                    color: '#2274A5',   // an option!
-                                    textColor: 'black' // an option!
+                                    color: '#2274A5',
+                                    textColor: 'black'
                                 },
                                 {
                                     events: function (fetchInfo, successCallback, failureCallback) {
@@ -149,7 +149,7 @@
                                                         start: moment(v.StartTime).format(),
                                                         end: v.EndTime != null ? moment(v.EndTime).format() : null,
                                                         editable:false
-                                                        //rendering: 'background'
+
                                                     });
                                                 })
 
@@ -185,7 +185,6 @@
                     else {
                         $description.append($('<p/>').html('<b>Description :N/A</b>'));
                     }
-                            //$description.append($('<p/>').html('<b>Planned Distance:</b>' + info.event.extendedProps.plannedDistance));
                             $description.append($('<p/>').html('<b>Start:</b>' + moment(info.event.start).format("DD-MMM-YYYY h:mm a")));
                             if (info.event.end != null) {
                                 $description.append($('<p/>').html('<b>End:</b>' + moment(info.event.end).format("DD-MMM-YYYY h:mm a")));
@@ -247,9 +246,7 @@
                             color: ''
                         };
                         openAddEditForm();
-                       // calendar.render();
-                       // calendar.unselect();
-                        //$('#calendar').fullCalendar('unselect');
+
                     },
             });
             calendar.render();
@@ -266,8 +263,6 @@
                         data: data,
                         success: function () {
 
-                            //Refresh the calender
-                            // $('#calender').fullCalendar().destroy();
                             $('#myModalSave').modal('hide');
 
                         },
@@ -284,8 +279,6 @@
                     data: data,
                     success: function () {
 
-                            //Refresh the calender
-                           // $('#calender').fullCalendar().destroy();
                             $('#myModalSave').modal('hide');
 
                     },
@@ -301,13 +294,9 @@
             return data;
         };
 
-       
+    </script>
+}
 
-        </script>
-    }
-
-
-</div>
 
 
 

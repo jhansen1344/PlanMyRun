@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "My Runs";
 }
-    <div class=" margin text-center">
-        <h2>
-            My Runs
-            <a href="@Url.Action("Create","Run")" title="Add"><img alt="Add" src="@Url.Content("~/Content/assets/plus-square.svg")" /></a>
+<div class=" margin text-center">
+    <h2>
+        My Runs
+        <a href="@Url.Action("Create","Run")" title="Add"><img alt="Add" src="@Url.Content("~/Content/assets/plus-square.svg")" /></a>
 
-        </h2>
-    </div>
+    </h2>
+</div>
 
 
 @foreach (var item in Model)
@@ -24,7 +24,7 @@
                     <a href="@Url.Action("Details","Run", new { id = item.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
                     <a href="@Url.Action("Delete","Run", new { id = item.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
                 </div>
-                
+
                 <div class="card-body">
                     <ul>
 
@@ -45,8 +45,6 @@
                         {
                             <li> @Html.DisplayNameFor(model => model.ActualDistance): --.--</li>
                         }
-
-
 
                     </ul>
 
