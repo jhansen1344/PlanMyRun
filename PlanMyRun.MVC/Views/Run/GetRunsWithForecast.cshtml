@@ -9,15 +9,6 @@
 
 <h2>GetRunsWithForecast</h2>
 
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-</table>
 <div class="container">
     <div>
 
@@ -40,6 +31,8 @@
 
         }
     </div>
+</div>
+<div class="container-fluid">
     <div id="calendar"></div>
 
     <div id="myModal" class="modal fade" role="dialog">
@@ -166,7 +159,7 @@
 
                 defaultView: 'timeGridWeek',
                 header: {
-                    left: 'prev, next today',
+                    left: 'prev, next, today',
                     center: 'title',
                     right: 'dayGridMonth, timeGridWeek, timeGridDay'
                 },

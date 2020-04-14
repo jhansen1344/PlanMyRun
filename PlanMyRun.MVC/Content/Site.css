@@ -24,6 +24,18 @@ footer {
     flex-shrink: 0;
 }
 
+a img {
+    background-color: #D6F9DD;
+}
+
+.navbar-brand {
+    background-color: #2274A5;
+}
+
+h2 {
+    color: #D6F9DD;
+    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+}
 .btn {
     background-color: #00394A;
     color: #D6F9DD;
