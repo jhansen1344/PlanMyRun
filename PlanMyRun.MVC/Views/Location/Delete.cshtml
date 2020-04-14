@@ -4,39 +4,39 @@
     ViewBag.Title = "Delete";
 }
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-auto mb-4">
-                <div class="card margin">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("Details","Location",new { id = Model.Id })" title="Back to Details"><img alt="Back To Details" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="card-body">
+
+                    <h3>Sure you want to delete?</h3>
                     <div>
-                        <a href="@Url.Action("Details","Location",new { id = Model.Id })" title="Back to Details"><img alt="Back To Details" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
-                    </div>
-                    <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
-                    <div class="card-body">
+                        <ul>
+                            <li> @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name) </li>
+                            <li> @Html.DisplayNameFor(model => model.MaxDistance): @Html.DisplayFor(model => model.MaxDistance) </li>
+                            <li>@Html.DisplayNameFor(model => model.HasLoops):  @Html.DisplayFor(model => model.HasLoops)</li>
+                            <li> @Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address) </li>
+                            <li> @Html.DisplayNameFor(model => model.PathType): @Html.DisplayFor(model => model.PathType) </li>
 
-                        <h3>Sure you want to delete?</h3>
-                        <div>
-                            <ul>
-                                <li> @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name) </li>
-                                <li> @Html.DisplayNameFor(model => model.MaxDistance): @Html.DisplayFor(model => model.MaxDistance) </li>
-                                <li>@Html.DisplayNameFor(model => model.HasLoops):  @Html.DisplayFor(model => model.HasLoops)</li>
-                                <li> @Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address) </li>
-                                <li> @Html.DisplayNameFor(model => model.PathType): @Html.DisplayFor(model => model.PathType) </li>
+                        </ul>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-                            </ul>
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-actions no-color text-center">
-                                    <input type="submit" value="Delete" class="btn btn-default" />
-                                </div>
-                            }
-                        </div>
-                        </div>
+                            <div class="form-actions no-color text-center">
+                                <input type="submit" value="Delete" class="btn btn-default" />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 

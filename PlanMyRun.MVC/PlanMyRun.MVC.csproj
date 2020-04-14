@@ -369,7 +369,7 @@
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Delete.cshtml" />
-    <Content Include="Views\Forecast\Index.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\Index.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -386,10 +386,10 @@
     <Content Include="Views\Shared\_ForecastDayPartial.cshtml" />
     <Content Include="Views\Run\GetRunsWithForecast.cshtml" />
     <Content Include="Views\Shared\_RunDetailList.cshtml" />
-    <Content Include="Views\Forecast\ForecastHourlyView.cshtml" />
-    <Content Include="Views\Forecast\GetForecastEvents.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\ForecastHourlyView.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\GetForecastEvents.cshtml" />
     <Content Include="Views\Shared\UnusedViews\CalendarFull.cshtml" />
-    <Content Include="Views\Forecast\Details.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\Details.cshtml" />
     <Content Include="Views\RacePlan\GetTemplates.cshtml" />
     <Content Include="Views\RacePlan\CreateFromTemplate.cshtml" />
     <Content Include="Views\Shared\UnusedViews\EditPlanRuns.cshtml" />
