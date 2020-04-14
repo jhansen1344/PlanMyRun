@@ -18,7 +18,7 @@ namespace PlanMyRun.Models.LocationModels
         public double MaxDistance { get; set; }
         [Display(Name = "Has Loops")]
         public bool HasLoops { get; set; }
-        [Display(Name = "Location Address")]
+        [Display(Name = "Location ZipCode")]
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]
         public string PathType { get; set; }

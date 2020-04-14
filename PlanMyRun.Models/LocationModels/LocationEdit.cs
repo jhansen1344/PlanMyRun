@@ -24,7 +24,7 @@ namespace PlanMyRun.Models.LocationModels
         public bool HasLoops { get; set; }
         [Required]
 
-        [Display(Name = "Location Address")]
+        [Display(Name = "Location ZipCode")]
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]

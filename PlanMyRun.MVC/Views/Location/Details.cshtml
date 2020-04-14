@@ -1,58 +1,75 @@
 ﻿@model PlanMyRun.Models.LocationModels.LocationDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Location Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("Index","Location")" title="Back to List"><img alt="Back To List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="row justify-content-around">
+                    <a href="@Url.Action("Edit","Location", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+                    <a href="@Url.Action("Delete","Location", new { id = Model.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+                </div>
+                <div class="card-body">
 
-<div>
-    <h4>LocationDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxDistance)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.MaxDistance)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxDistance)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.MaxDistance)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HasLoops)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.HasLoops)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HasLoops)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.HasLoops)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PathType)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PathType)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PathType)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.PathType)
+                        </dd>
 
-    </dl>
-</div>
-<p>
-    <a href="@Url.Action("Edit","Location", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
-    <a href="@Url.Action("Index","Location")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
-</p>
+                        <dt>
+                            # of Runs at this Location
+                        </dt>
+                        <dd>
+                           @Model.RunsAtLocation.Count()
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
