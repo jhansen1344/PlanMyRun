@@ -25,6 +25,7 @@ namespace PlanMyRun.Models.LocationModels
         [Required]
 
         [Display(Name = "Location ZipCode")]
+        [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]

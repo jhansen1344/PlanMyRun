@@ -22,7 +22,7 @@ namespace PlanMyRun.Models.LocationModels
         [Display(Name = "Has Loops")]
         public bool HasLoops { get; set; }
         [Required]
-        [DataType(DataType.PostalCode)]
+        [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
         [Display(Name = "Location ZipCode")]
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]

@@ -82,7 +82,7 @@ namespace PlanMyRun.MVC.Models
         public string ConfirmPassword { get; set; }
         [Required]
         [Display(Name ="Zip Code")]
-        [DataType(DataType.PostalCode)]
+        [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
         public string ZipCode { get; set; }
         [Required]
         [Display(Name = "User's average pace.")]
