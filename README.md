@@ -22,7 +22,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-<!-- AuctionExpress -->
+<!-- PlanMyRun -->
 <br />
 <p align="center">
 https://planmyrun.azurewebsites.net/
@@ -47,12 +47,6 @@ https://planmyrun.azurewebsites.net/
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-AuctionExpress is a .Net Entity Framework WebAPI utilizing an n-tier architecture built during the BlueBadge phase of the Jan.-April 2020 Full-time Software Development bootcamp at ElevenFifty Academy.
-
-Through the Api, registered users can post products for sale in an online auction format, as well as bid on currently open auctions.  Once the auctions are over, the products sellers can create transactions, simulating a third-party service that would handle credit card transactions.
-
-The repo also includes a simple front-end built using razor pages to access and demonstrate the api end-points.
-
 
 ### Built With
 
@@ -76,7 +70,7 @@ To get a local copy up and running follow these simple steps.
  
 1. Clone the repo
 ```sh
-git clone https://github.com/ngahm/AuctionExpress.git
+git clone https://github.com/jhansen1344/.git
 ```
 2. Restoring NuGetPackages
 ```sh
@@ -93,100 +87,11 @@ nuget restore AuctionExpress.sln
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Account Registration and Tokens
-Using the Account/Register api endpoint, a user can register and gain access to user-specific endpoints.  A list of endpoint access restrictions can be found in the Roles section.
 
-Tokens can be requested through /token and sending a registered user name and password.  The included front-end requests a token through the "Login" button and stores it as a cookie for use while the user is "signed in."  
-```sh
-public ActionResult Login(LoginBindingModel model, string returnUrl)
-        {
-                var pairs = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>( "grant_type", "password" ),
-                        new KeyValuePair<string, string>( "username", model.UserName ),
-                        new KeyValuePair<string, string> ( "Password", model.Password )
-                    };
-                var content = new FormUrlEncodedContent(pairs);
-                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44320/");
-                var response = client.PostAsync("token", content).Result;
-                var token= response.Content.ReadAsStringAsync().Result;
-                Response.Cookies.Add(CreateCookie(token));
-                //Response.Flush();
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("GetOpenProduct", "ProductView");
-                }
-                ModelState.AddModelError(string.Empty, response.Content.ReadAsStringAsync().Result);
+### Race Plans
 
-                return View();
-            }
-```
 
-Example of including stored token during api requests.
-```sh
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44320/api/");
-                string token = DeserializeToken();
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-                var responseTask = client.GetAsync("product");
-                responseTask.Wait();
-
-```
-Clicking "Logout"  sets the cookie expiration to the previous day.
-```sh
-public ActionResult LogOff()
-        {
-            if (Request.Cookies["UserToken"] != null)
-            {
-                Response.Cookies["UserToken"].Expires = DateTime.Now.AddDays(-1);
-            }
-            return RedirectToAction("Login","AccountView");
-        }
-```
-### Roles
-There are three important user roles that the api uses to grant/restrict access to api endpoints:Admin, ActiveUser, InActiveUser.  
-
-Upon registration, a user is automatically added into the ActiveUser role, allowing them to perform actions such as post and bid on products.
-
-Throught the Account/Deactivate endpoint, a user is moved to the InActiveUser role and are no longer allowed to perform actions such as post and bid on products while maintaining the integrity of the database.
-
-The Admin role is used for administration purposes such as assigning users to roles and creating product categories.
-
-Below is a detailed view into which endpoints can be accessed based on user roles.
-
-Non-signedin users/inactiveusers
-- Account
-- RegisterLogin
-- GetOpenAuctions
-- GetOpenAuctionsByCategory
-- Getspecific auction byid
-- Getlist of all cateogries
-- get specific category
-
-Admin
-- All Admin endpoints
-- Post new category
-- Update Category
-- Delete Category
-- GetAllTransactions
-- GetAllBids
-
-ActiveUser
-- DeactivateUser
-- PostProduct
-- Get User's products
-- UpdateProduct
-- DeleteProduct
-- All Bid endpoints
-- All Transaction endpoints
-- GetAllProducts
-
-### Products
+### Runs
 Users can post products they want to sell with the following information.
 ```sh
 public class Product
@@ -243,37 +148,17 @@ public class Product
     }
 ```
 
-### Bids
-Users can also bid on products.  When a user attempts to place a bid, it is evaluated against the existing product to determine if the bid is valid.
-```sh
-        public string ValidateBid(BidCreate bid)
-        {
-            var prodDetail = GetProductById(bid.ProductId);
+### Locations
 
-            if (prodDetail == null)
-                return "Product has been removed or does not exist.";
-            if (prodDetail.ProductSeller == _userId.ToString())
-                return "Users can not bid on products they are selling.";
-            if (!prodDetail.ProductIsActive)
-                return "Auction is closed";
-            if (prodDetail.MinimumSellingPrice > bid.BidPrice)
-                return "Bid must be higher than produt's minimum selling price.";
-            if (prodDetail.HighestBid > bid.BidPrice)
-                return "Bid must be higher than current selling price.";
-            return "";
-        }
-```
-### Categories
-Basic class for grouping similar products together.  Administered by users in the Admin role.
+### Forecast Events
 
-### Transactions
-When an auction ends, the product owner can create and administer a transaction based off the winning bid.  This is to simulate a third party service that would handle payment processing from the information of the winning bidder.
 
 <!-- ROADMAP -->
 ## Roadmap
 - Proposed additional feautures.
 - Integration with third-party calendar and fitness-tracker api's/services.
-- Forecasts based on 
+- Forecasts based on run locations
+- Logic to provide suggested run times based on forecast, user preferences and previous commitments.
 
 
 <!-- CONTACT -->
