@@ -1,63 +1,48 @@
 ﻿@model IEnumerable<PlanMyRun.Models.RacePlanModels.RacePlanListItem>
 
 @{
-    ViewBag.Title = "GetTemplates";
+    ViewBag.Title = "Plan Templates";
 }
 
-<h2>GetTemplates</h2>
+<div class="container">
+    <div class=" margin text-center">
+        <h2>
+            @ViewBag.Title
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RaceName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RaceLength)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RaceDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPublic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfRuns)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RaceName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RaceLength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GoalTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RaceDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPublic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfRuns)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+           
+
+        </h2>
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="row justify-content-center">
+            <div class="col-auto mb-4">
+                <div class="card margin">
+                    <div class="card-header">@Html.DisplayFor(modelItem => item.RaceName)</div>
+                    <div class="row justify-content-around">
+                        <a href="@Url.Action("CreateFromTemplate","RacePlan", new { id = item.Id })" title="Create From Template"><img alt="Create From Template" src="@Url.Content("~/Content/assets/plus-square.svg")" /></a>
+                        <a href="@Url.Action("Details","RacePlan", new { id = item.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
+
+                    </div>
+                    <div class="card-body">
+                        <ul>
+
+                            <li>@Html.DisplayNameFor(model => model.RaceLength): @Html.DisplayFor(modelItem => item.RaceLength)</li>
+                            <li> @Html.DisplayNameFor(model => model.GoalTime):  @Html.DisplayFor(modelItem => item.GoalTime)</li>
+                            <li> @Html.DisplayNameFor(model => model.RaceDate):  @String.Format("{0:d}", item.RaceDate)</li>
+                            <li>@Html.DisplayNameFor(model => model.IsPublic): @Html.DisplayFor(modelItem => item.IsPublic)</li>
+                            <li>@Html.DisplayNameFor(model => model.NumberOfRuns): @Html.DisplayFor(modelItem => item.NumberOfRuns)</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+</div>

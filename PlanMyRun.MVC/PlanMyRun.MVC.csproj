@@ -193,6 +193,7 @@
   <ItemGroup>
     <Content Include="Content\assets\box-arrow-left.svg" />
     <Content Include="Content\assets\info-square.svg" />
+    <Content Include="Content\assets\logo_cropped.png" />
     <Content Include="Content\assets\pencil-square.svg" />
     <Content Include="Content\assets\plus-square.svg" />
     <Content Include="Content\assets\PMR_logo.png" />

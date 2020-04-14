@@ -8,7 +8,7 @@
 */
 
 body {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     padding-bottom: 0;
     background-color: #595758;
     color: #00394A;
@@ -24,18 +24,20 @@ footer {
     flex-shrink: 0;
 }
 
-a img {
-    background-color: #D6F9DD;
-}
-
-.navbar-brand {
-    background-color: #2274A5;
+a {
+    color: #EA4E18;
 }
 
 h2 {
     color: #D6F9DD;
-    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
 }
+
+.card h2 {
+    color: #00394A;
+}
+
+
+
 .btn {
     background-color: #00394A;
     color: #D6F9DD;
@@ -48,6 +50,10 @@ h2 {
 
 a:hover {
     color: #D6F9DD;
+}
+
+.card a:hover {
+    color: #595758;
 }
 .btn:hover {
     background-color: #EA4E18;
@@ -99,7 +105,7 @@ a:hover {
 }
 
 .nav-item {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
