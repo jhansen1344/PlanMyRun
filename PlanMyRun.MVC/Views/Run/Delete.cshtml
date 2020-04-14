@@ -1,89 +1,44 @@
 ﻿@model PlanMyRun.Models.RunModels.RunDetail
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Run";
 }
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("Details","Run",new { id = Model.Id })" title="Back to Details"><img alt="Back To Details" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="card-body">
 
-<h2>Delete</h2>
+                    <h3>Sure you want to delete?</h3>
+                    <div>
+                        <ul>
+                            <li>@Html.DisplayNameFor(model => model.PlannedDistance): @Html.DisplayFor(model => model.PlannedDistance)</li>
+                            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime)</li>
+                            <li>@Html.DisplayNameFor(model => model.ScheduleDateTime): @Html.DisplayFor(model => model.ScheduleDateTime)</li>
+                            <li> @Html.DisplayNameFor(model => model.RacePlanName):  @Html.DisplayFor(model => model.RacePlanName)</li>
+                            <li> @Html.DisplayNameFor(model => model.LocationName): @Html.DisplayFor(model => model.LocationName)</li>
+                            <li> @Html.DisplayNameFor(model => model.ActualDistance):  @Html.DisplayFor(model => model.ActualDistance)</li>
+                            <li>@Html.DisplayNameFor(model => model.ActualTime):  @Html.DisplayFor(model => model.ActualTime)</li>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>RunDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanId)
-        </dt>
+                        </ul>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanId)
-        </dd>
+                            <div class="form-actions no-color text-center">
+                                <input type="submit" value="Delete" class="btn btn-default" />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanName)
-        </dt>
+                            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlannedDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlannedDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduleDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ScheduleDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualTime)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a href="@Url.Action("Index","Run")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-
-    }
+    </div>
 </div>
+

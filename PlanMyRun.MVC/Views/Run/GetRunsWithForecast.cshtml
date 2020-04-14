@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<PlanMyRun.Models.RunModels.DailyRunForecast>
 
 @{
-    ViewBag.Title = "GetRunsWithForecast";
+    ViewBag.Title = "Runs and Forecast";
 }
 
 @*<%-- used for ajax in AddAntiForgeryToken() --%>*@
 <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
 
-<h2>GetRunsWithForecast</h2>
 
 <div class="container">
     <div>
-
+        <div class="text-center">
+            <h2>Weekly Forecast and Runs</h2>
+        </div>
 
         @foreach (var item in Model)
         {
@@ -32,8 +33,18 @@
         }
     </div>
 </div>
-<div class="container-fluid">
-    <div id="calendar"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto mb-4">
+                <div class="card margin">
+                    <div class="card-header text-center"><h2> Runs for this week</h2></div>
+                    <div class="card-body">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-scrollable">

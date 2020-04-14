@@ -1,90 +1,90 @@
 ﻿@model PlanMyRun.Models.RunModels.RunDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Run Details";
 }
 
-<h2>Details</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto mb-4">
+                <div class="card margin">
+                    <div>
+                        <a href="@Url.Action("Index","Run")" title="Back to List"><img alt="Back To List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                    </div>
+                    <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                    <div class="row justify-content-around">
+                        <a href="@Url.Action("Edit","Run", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+                        <a href="@Url.Action("Delete","Run", new { id = Model.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+                    </div>
+                    <div class="card-body">
 
-<div>
-    <h4>RunDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanId)
-        </dt>
+                        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanId)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PlannedDistance)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanName)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PlannedDistance)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanName)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.EstimatedTime)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlannedDistance)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.EstimatedTime)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlannedDistance)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ScheduleDateTime)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.ScheduleDateTime)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedTime)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RacePlanName)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduleDateTime)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RacePlanName)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ScheduleDateTime)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationName)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LocationName)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LocationName)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.LocationName)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualDistance)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ActualDistance)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ActualDistance)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.ActualDistance)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualTime)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ActualTime)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ActualTime)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.ActualTime)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Description)
+                            </dd>
 
-    </dl>
-</div>
-<p>
-    <a href="@Url.Action("Edit","Run", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
-    <a href="@Url.Action("Index","Run")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
-</p>
+                        </dl>
+                    </div>
+

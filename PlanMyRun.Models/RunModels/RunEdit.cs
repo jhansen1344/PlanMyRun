@@ -14,7 +14,7 @@ namespace PlanMyRun.Models.RunModels
         [Display(Name = "Race Id")]
         public int RacePlanId { get; set; }
         public IEnumerable<SelectListItem> RacePlan { get; set; }
-        [Display(Name = "Planned Distance for Run.")]
+        [Display(Name = "Planned Distance for Run")]
         public double PlannedDistance { get; set; }
 
         [Display(Name = "Date for Run")]
@@ -25,10 +25,10 @@ namespace PlanMyRun.Models.RunModels
         public IEnumerable<SelectListItem> Locations { get; set; }
         [Display(Name = "Location of Run")]
         public double? ActualDistance { get; set; }
-        [Display(Name = "Actual Time To Complete.")]
+        [Display(Name = "Actual Time To Complete")]
         public TimeSpan? ActualTime { get; set; }
 
-        [Display(Name = "Notes about this Run:")]
+        [Display(Name = "Notes about this Run")]
         public string Description { get; set; }
     }
 
