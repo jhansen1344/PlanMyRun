@@ -26,12 +26,34 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("Race Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</button></li>
+                       
                         @if (Request.IsAuthenticated)
                         {
-                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</button></li>
-                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</button></li>
-                            <li class="nav-item"><button class="btn btn-sm" type="button">@Html.ActionLink("Forecast", "Index", "Forecast", null, new { @class = "nav-link" })</button></li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Race Plans</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Plans", "Index", "RacePlan", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Create New Plan", "Create", "RacePlan", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Available Templates", "GetTemplates", "RacePlan", null, new { @class = "nav-link" })</li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Runs</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Runs", "Index", "Run", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Create New Run", "Create", "Run", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Schedule Runs", "GetRunsWithForecast", "Run", null, new { @class = "nav-link" })</li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Locations</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Locations", "Index", "Location", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Create Location", "Create", "Location", null, new { @class = "nav-link" })</li>
+                                </ul>
+                            </li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")

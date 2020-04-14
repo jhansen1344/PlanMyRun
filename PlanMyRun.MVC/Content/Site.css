@@ -34,6 +34,9 @@ footer {
     padding:0;
 }
 
+a:hover {
+    color: #D6F9DD;
+}
 .btn:hover {
     background-color: #EA4E18;
     color: #D6F9DD;
@@ -41,6 +44,27 @@ footer {
 
 .nav-link {
     color: #D6F9DD;
+}
+
+    .nav-link:hover {
+        background-color: #EA4E18;
+        color: #D6F9DD;
+    }
+.dropdown-menu {
+    background-color: #00394A;
+    color: #D6F9DD;
+}
+
+.dropdown-toggle:hover {
+    background-color: #EA4E18;
+    color: #D6F9DD;
+}
+.dropdown-menu li:hover {
+    background-color: #EA4E18;
+    color: #D6F9DD;
+}
+.navbar-toggler-icon {
+    background-color: #EA4E18;
 }
 
 .padding {
