@@ -18,8 +18,6 @@ namespace PlanMyRun.Services
         private readonly ApplicationDbContext _context;
         private readonly string _zipCode;
         private readonly TimeSpan _userPace;
-        
-
 
         public RunService(Guid userId, string zipCode, TimeSpan userPace)
         {

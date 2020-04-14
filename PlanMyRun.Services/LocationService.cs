@@ -19,18 +19,17 @@ namespace PlanMyRun.Services
             _userId = userId;
             _context = new ApplicationDbContext();
         }
-
         public async Task<bool> CreateLocationAsync(LocationCreate model)
         {
             var entity =
                 new Location()
                 {
-                  Name=model.Name,
-                  UserId=_userId.ToString(),
-                  MaxDistance=model.MaxDistance,
-                  HasLoops=model.HasLoops,
-                  Address=model.Address,
-                  PathType=model.PathType
+                    Name = model.Name,
+                    UserId = _userId.ToString(),
+                    MaxDistance = model.MaxDistance,
+                    HasLoops = model.HasLoops,
+                    Address = model.Address,
+                    PathType = model.PathType
                 };
             _context.Locations.Add(entity);
             return await _context.SaveChangesAsync() == 1;
@@ -44,10 +43,10 @@ namespace PlanMyRun.Services
                     e =>
                         new LocationListItem
                         {
-                            Id=e.Id,
-                            Name=e.Name,
-                            MaxDistance=e.MaxDistance,
-                            HasLoops=e.HasLoops
+                            Id = e.Id,
+                            Name = e.Name,
+                            MaxDistance = e.MaxDistance,
+                            HasLoops = e.HasLoops
                         }
                 );
             return runList.ToList();
@@ -61,11 +60,11 @@ namespace PlanMyRun.Services
             var model = new LocationDetail()
             {
                 Id = entity.Id,
-                Name=entity.Name,
-                MaxDistance=entity.MaxDistance,
-                HasLoops=entity.HasLoops,
-                Address=entity.Address,
-                PathType=entity.PathType,
+                Name = entity.Name,
+                MaxDistance = entity.MaxDistance,
+                HasLoops = entity.HasLoops,
+                Address = entity.Address,
+                PathType = entity.PathType,
                 RunsAtLocation = entity.RunsAtLocation.Select(run => new RunListItem
                 {
                     Id = run.Id,

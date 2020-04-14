@@ -115,8 +115,8 @@ namespace PlanMyRun.MVC.Controllers
                 ActualDistance = detail.ActualDistance,
                 ActualTime = detail.ActualTime,
                 Description = detail.Description,
-                RacePlan=listModel.RacePlan,
-                Locations=listModel.Locations
+                RacePlan = listModel.RacePlan,
+                Locations = listModel.Locations
             };
             return View(model);
         }
@@ -154,15 +154,14 @@ namespace PlanMyRun.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-
         private RunService CreateRunService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var user = UserManager.FindById(userId.ToString());
             string zipCode = user.ZipCode;
             var userPace = user.Pace;
-            
-          var service = new RunService(userId, zipCode,userPace);
+
+            var service = new RunService(userId, zipCode, userPace);
             return service;
         }
     }

@@ -76,7 +76,7 @@ namespace PlanMyRun.MVC.Controllers
                 return View(model);
             }
             RacePlanService service = CreateRacePlanService();
-            if(await service.CreateRacePlanAsync(model))
+            if (await service.CreateRacePlanAsync(model))
             {
                 TempData["SaveResult"] = "Plan successfully created.";
                 return RedirectToAction("Index");
@@ -92,26 +92,26 @@ namespace PlanMyRun.MVC.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Edit (int id)
+        public async Task<ActionResult> Edit(int id)
         {
             var service = CreateRacePlanService();
             var detail = await service.GetPlanByIdAsync(id);
             var model = new RacePlanEdit
             {
-                Id=detail.Id,
-                RaceName=detail.RaceName,
-                RaceDate=detail.RaceDate,
-                IsPublic=detail.IsPublic,
-                RaceLength=detail.RaceLength,
-                GoalTime=detail.GoalTime,
-                Description=detail.Description
+                Id = detail.Id,
+                RaceName = detail.RaceName,
+                RaceDate = detail.RaceDate,
+                IsPublic = detail.IsPublic,
+                RaceLength = detail.RaceLength,
+                GoalTime = detail.GoalTime,
+                Description = detail.Description
             };
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit (RacePlanEdit model)
+        public async Task<ActionResult> Edit(RacePlanEdit model)
         {
             var service = CreateRacePlanService();
             if (await service.EditRacePlanAsync(model))
@@ -152,7 +152,5 @@ namespace PlanMyRun.MVC.Controllers
             var service = new RacePlanService(userId, zipCode, userPace);
             return service;
         }
-
-
     }
 }

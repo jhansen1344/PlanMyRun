@@ -42,7 +42,7 @@ namespace PlanMyRun.MVC.Controllers
             var model = await service.GetAvailableRunTimes();
             var jsonResult = new JsonResult { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             return jsonResult;
-           // return View(model);
+            // return View(model);
         }
 
         public ActionResult Details(ForecastHourlyModel model)

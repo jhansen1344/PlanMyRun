@@ -111,7 +111,6 @@ namespace PlanMyRun.Services
                 {
                     RacePlanId = entity.Id,
                     PlannedDistance = item.PlannedDistance,
-                    //EstimatedTime = TimeSpan.FromMinutes(_userPace.TotalMinutes * model.PlannedDistance),
                     ScheduleDateTime = entity.RaceDate-(existingRace.RaceDate-item.ScheduledDateTime),
                     Description = item.Description,
                     LocationId = item.LocationId
@@ -124,11 +123,6 @@ namespace PlanMyRun.Services
                     return false;
                 }
             }
-
-           
-
-            //var savedRuns = await runService.CreateFromTemplate(newId, existingRace.ListOfRuns);
-            
 
             return savedChanges;
         }
