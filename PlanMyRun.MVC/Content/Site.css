@@ -60,7 +60,7 @@ a:hover {
     color: #D6F9DD;
 }
 
-.nav-link {
+.navbar-dark .navbar-nav .nav-link {
     color: #D6F9DD;
 }
 
@@ -81,9 +81,6 @@ a:hover {
     background-color: #EA4E18;
     color: #D6F9DD;
 }
-.navbar-toggler-icon {
-    background-color: #EA4E18;
-}
 
 .padding {
     padding-top: 1em;
@@ -100,13 +97,14 @@ a:hover {
     color: #D6F9DD;
 }
 
+.navbar-dark {
+    color: #D6F9DD;
+}
+
 .navbar-brand {
     padding: 0;
 }
 
-.nav-item {
-    /*margin-top: 50px;*/
-}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
