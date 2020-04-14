@@ -292,53 +292,67 @@ https://www.toshalinfotech.com/Blogs/ID/115/How-to-Integrate-Full-calendar-with-
 https://stackoverflow.com/questions/43437575/jquery-fullcalendar-callback-is-not-defined-error/43473348
 
 Add extra fields to full calendar
+
 https://stackoverflow.com/questions/3585481/add-extra-fields-to-fullcalendar
 https://fullcalendar.io/docs/eventRender
 
 ### RazorPage Resources
 multiple models in view for forecast and runs
+
 https://www.c-sharpcorner.com/article/asp-net-mvc5-multiple-view-models-in-single-view/
 
 Partial views
+
 https://www.tutorialsteacher.com/mvc/partial-view-in-asp.net-mvc
 
 CRUD Users
+
 https://www.yogihosting.com/aspnet-core-identity-create-read-update-delete-users/
 
-###Formatting and Parsing
+### Formatting and Parsing
 Display Decimal with no zero's (hight/low temp, precip)
+
 https://stackoverflow.com/questions/20848969/what-is-the-proper-data-annotation-to-format-my-decimal-property
 
 Specifying format for date from weather api
+
 https://stackoverflow.com/questions/21256132/deserializing-dates-with-dd-mm-yyyy-format-using-json-net
 
-###Data Validation
+### Data Validation
 
 DateTime compare
+
 https://docs.microsoft.com/en-us/dotnet/api/system.datetime.compare?view=netframework-4.8
 
 ZipCode validation
+
 https://stackoverflow.com/questions/14942602/c-validation-for-us-or-canadian-zip-code
 
-###JSON and AJAX
+### JSON and AJAX
 Json
+
 https://stackoverflow.com/questions/21578814/how-to-receive-json-as-an-mvc-5-action-method-parameter
 
 AntiForgery Token
+
 https://stackoverflow.com/questions/4074199/jquery-ajax-calls-and-the-html-antiforgerytoken/4074289#4074289
 https://forums.asp.net/t/1991886.aspx?Using+AntiForgeryToken+in+ajax+action+call+in+the+index+view
 
-###Bootstrap, CSS, Styling
+### Bootstrap, CSS, Styling
 Navbar styling
+
 https://getbootstrap.com/docs/4.4/components/navbar/
 
 Color scheme palette
+
 https://coolors.co/browser/best/1
 
 styling css list
+
 https://www.bitdegree.org/learn/css-list-style
 
 Updating bootstrap
+
 https://stackoverflow.com/questions/48550955/mvc-bootstrap-navbar-not-working-after-running-nuget-updates
 
 ### ReadMe
