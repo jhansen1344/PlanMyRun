@@ -21,13 +21,15 @@ namespace PlanMyRun.Models.RunModels
         [Display(Name = "Date for Run")]
         public DateTime ScheduleDateTime { get; set; }
         public DateTime End { get; set; }
-        [Display(Name = "Location Id")]
         public int? LocationId { get; set; }
+        [Display(Name = "Location")]
+        public string LocationName { get; set; }
+        [Display(Name = "Actual Distance")]
         public double? ActualDistance { get; set; }
-        [Display(Name = "Actual Time To Complete.")]
+        [Display(Name = "Actual Time To Complete")]
         public TimeSpan? ActualTime { get; set; }
 
-        [Display(Name = "Notes about this Run:")]
+        [Display(Name = "Notes about this Run")]
         public string Description { get; set; }
     }
 }

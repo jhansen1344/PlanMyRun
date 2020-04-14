@@ -1,78 +1,41 @@
 ﻿@model PlanMyRun.Models.RunModels.RunDetail
 
 
-<div class="card">
-    @*@if(Model==null)
-    {
-    <div class="card-header">@Html.DisplayFor(model => model.PlannedDistance) Mile Run For @Html.DisplayFor(model => model.RacePlanName)</div>
-    <div class="card-body">
-        <ul>
+    <div class="card text-center">
+    
+        <div class="card-header forecast-body">@String.Format("{0:d}", Model.ScheduleDateTime)</div>
+        <div class="card-body forecast-body">
 
-            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime)</li>
-            <li> @Html.DisplayNameFor(model => model.ScheduleDateTime): @Html.DisplayFor(model => model.ScheduleDateTime)</li>
-            <li> @Html.DisplayNameFor(model => model.LocationId): @Html.DisplayFor(model => model.LocationId)</li>
-            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime) </li>
-            <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </li>
-            @if (Model.ActualDistance != null)
-            {
-                <li> @Html.DisplayNameFor(model => model.ActualDistance): @Html.DisplayFor(model => model.ActualDistance)</li>
-            }
-            @if (Model.ActualTime != null)
-            {
-                <li> @Html.DisplayNameFor(model => model.ActualTime): @Html.DisplayFor(model => model.ActualTime)</li>
-            }
 
-        </ul>
+            <ul>
+                <li>@Html.DisplayFor(model => model.PlannedDistance) Mile Run</li>
+                <li>Est. Time: @Html.DisplayFor(model => model.EstimatedTime)</li>
+                @if (Model.LocationName != "")
+                {
+                    <li> Location: @Html.DisplayFor(model => model.LocationName)</li>
+                }
+                else
+                {
+                    <li> Location:N/A</li>
+                }
+                @if (Model.ActualDistance != null)
+                {
+                    <li> @Html.DisplayNameFor(model => model.ActualDistance): @Html.DisplayFor(model => model.ActualDistance)</li>
+                }
+                @if (Model.ActualTime != null)
+                {
+                    <li> @Html.DisplayNameFor(model => model.ActualTime): @Html.DisplayFor(model => model.ActualTime)</li>
+                }
 
-        <ul>
-            <li>@Html.ActionLink("Update Run", "Edit", new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Advanced Stats", "Details", new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Delete Run", "Delete", new { id = Model.Id })</li>
-        </ul>
+            </ul>
+
+            <div class="row justify-content-around">
+                <a href="@Url.Action("Edit","Run", new { id = Model.Id })" title="Edit"><img alt="Edit" src="@Url.Content("~/Content/assets/pencil-square.svg")" /></a>
+                <a href="@Url.Action("Details","Run", new { id = Model.Id })" title="Details"><img alt="Details" src="@Url.Content("~/Content/assets/info-square.svg")" /></a>
+                <a href="@Url.Action("Delete","Run", new { id = Model.Id })" title="Delete"><img alt="Delete" src="@Url.Content("~/Content/assets/trash.svg")" /></a>
+            </div>
+        </div>
+
     </div>
-    }
-    else{*@
-    <div class="card-header">@Html.DisplayFor(model => model.PlannedDistance) Mile Run For @Html.DisplayFor(model => model.RacePlanName)</div>
-    <div class="card-body">
-        <ul>
-
-            @if (Model.Description != null)
-            {
-                <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </li>
-            }
-            else
-            {
-                <li>@Html.DisplayNameFor(model => model.Description): N/A </li>
-            }
-            <li> @Html.DisplayNameFor(model => model.ScheduleDateTime): @Html.DisplayFor(model => model.ScheduleDateTime)</li>
-            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime)</li>
-            @if (Model.LocationId != null)
-            {
-                <li> @Html.DisplayNameFor(model => model.LocationId): @Html.DisplayFor(model => model.LocationId)</li>
-            }
-            else
-            {
-                <li> @Html.DisplayNameFor(model => model.LocationId):N/A</li>
-            }
-            <li>@Html.DisplayNameFor(model => model.EstimatedTime): @Html.DisplayFor(model => model.EstimatedTime) </li>
-            @if (Model.ActualDistance != null)
-            {
-                <li> @Html.DisplayNameFor(model => model.ActualDistance): @Html.DisplayFor(model => model.ActualDistance)</li>
-            }
-            @if (Model.ActualTime != null)
-            {
-                <li> @Html.DisplayNameFor(model => model.ActualTime): @Html.DisplayFor(model => model.ActualTime)</li>
-            }
-
-        </ul>
-
-        <ul>
-            <li>@Html.ActionLink("Update Run", "Edit", new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Advanced Stats", "Details", new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Delete Run", "Delete", new { id = Model.Id })</li>
-        </ul>
-    </div>
-    @*}*@
-</div>
 
 

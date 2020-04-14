@@ -58,7 +58,6 @@ namespace PlanMyRun.Services
                             RacePlanName = e.RacePlan.RaceName,
                             PlannedDistance = e.PlannedDistance,
                             EstimatedTime = e.EstimatedTime,
-                            LocationId = e.LocationId,
                             ScheduledDateTime = e.ScheduledDateTime,
                             ActualDistance = e.ActualDistance,
                             ActualTime = e.ActualTime
@@ -80,11 +79,18 @@ namespace PlanMyRun.Services
                 PlannedDistance = entity.PlannedDistance,
                 EstimatedTime = entity.EstimatedTime,
                 ScheduleDateTime = entity.ScheduledDateTime,
-                LocationId = entity.LocationId,
                 ActualDistance = entity.ActualDistance,
                 ActualTime = entity.ActualTime,
                 Description = entity.Description
             };
+            if(entity.Location!=null)
+            {
+                model.LocationName = entity.Location.Name;
+            }
+            else
+            {
+                model.LocationName = "";
+            }
             return model;
         }
 
@@ -104,7 +110,7 @@ namespace PlanMyRun.Services
                         EstimatedTime = e.EstimatedTime,
                         ScheduleDateTime = e.ScheduledDateTime,
                         End = e.ScheduledDateTime.AddHours(e.EstimatedTime.TotalHours),
-                        LocationId = e.LocationId,
+ 
                         ActualDistance = e.ActualDistance,
                         ActualTime = e.ActualTime,
                         Description = e.Description
@@ -159,12 +165,13 @@ namespace PlanMyRun.Services
                         PlannedDistance = run.PlannedDistance,
                         EstimatedTime = run.EstimatedTime,
                         ScheduleDateTime = run.ScheduledDateTime,
-                        LocationId = run.LocationId,
                         ActualDistance = run.ActualDistance,
                         ActualTime = run.ActualTime,
                         Description = run.Description
-
                     };
+                    if (run.Location != null)
+                    { model.DaysRun.LocationName = run.Location.Name; }
+                    else { model.DaysRun.LocationName = ""; }
                 }
                     
                 dailyRunForecasts.Add(model);

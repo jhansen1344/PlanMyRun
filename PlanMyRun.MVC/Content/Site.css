@@ -97,6 +97,11 @@ a:hover {
     padding-top: 100px;
 }
 
+.col{
+    padding-left: 7px;
+    padding-right:7px;
+}
+
 body, wrapper {
     min-height: 100vh;
 }
@@ -134,4 +139,9 @@ ul {
 .card {
     background-color: #D6F9DD;
     color: #00394A;
+}
+
+.forecast-body{
+    padding-right:.12rem;
+    padding-left:.12rem;
 }
