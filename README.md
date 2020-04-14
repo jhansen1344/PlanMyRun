@@ -281,14 +281,12 @@ When an auction ends, the product owner can create and administer a transaction 
 
 - Jeremy Hansen - jhansen1344@gmail.com
 
-Project Link: [https://github.com/ngahm/AuctionExpress]
-
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 ### FullCalendar Plugin Resources
 Full Calendar plug in
+
 https://fullcalendar.io/docs
 https://www.toshalinfotech.com/Blogs/ID/115/How-to-Integrate-Full-calendar-with-MVC-application
 https://stackoverflow.com/questions/43437575/jquery-fullcalendar-callback-is-not-defined-error/43473348
