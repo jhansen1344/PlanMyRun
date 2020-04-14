@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PlanMyRun.Models.RacePlanModels;
 using PlanMyRun.Models.RunModels;
 using PlanMyRun.Services;
 using System;
@@ -44,7 +45,7 @@ namespace PlanMyRun.MVC.Controllers
 
         public ActionResult EditRunsInPlan(int id)
         {
-            var model = new RunDetail()
+            var model = new RacePlanDetail()
             {
                 Id = id
             };

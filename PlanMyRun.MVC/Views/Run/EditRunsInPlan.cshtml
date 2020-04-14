@@ -1,219 +1,133 @@
-﻿@model PlanMyRun.Models.RunModels.RunDetail
+﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
 
 @{
-    ViewBag.Title = "EditRunsInPlan";
+    ViewBag.Title = "Edit Runs In Plan";
 }
 
-@{
-    ViewBag.Title = "EditPlanRuns";
-}
 @*<%-- used for ajax in AddAntiForgeryToken() --%>*@
 <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
-
-<h2>EditRunsInPlan</h2>
-
-<div>
-    <h4>RunDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RacePlanName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RacePlanName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlannedDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlannedDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduleDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ScheduleDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.End)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.End)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualDistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualDistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    <a href="@Url.Action("Details","RacePlan",new { id = Model.Id })" title="Back to Plan"><img alt="Back to Plan" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
-</p>
-
-<h2>EditPlanRuns</h2>
-
-<h2>Runs</h2>
-
-<div id="calendar"></div>
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="eventTitle"></span></h4>
-            </div>
-            <div class="modal-body">
-
-                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
-                </button>
-                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                    <span class="glyphicon glyphicon-pencil"></span> Edit
-                </button>
-                <p id="pDetails"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("Details","RacePlan",new { id = Model.Id })" title="Back to Templates"><img alt="Back To Templates" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="myModalSave" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Save Event</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <input type="hidden" id="Id" />
-                    <input type="hidden" id="RacePlanId" />
-                    @*<div class="form-group">
-                            <label>Race Plan Id</label>
-                            <input type="text" id="RacePlanId" class="form-control" />
-                        </div>*@
-                    <div class="form-group">
-                        <label>Planned Distance</label>
-                        <input type="text" id="PlannedDistance" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" id="RunDescription" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Start</label>
-                        <div class="input-group date" id="dtp1">
-                            <input type="text" id="ScheduleDateTime" class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                                        <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </button>
+                                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                    </button>
+                                    <p id="pDetails"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                            <label>Estimated Time</label>
-                            <input type="text" id="EstimatedTime" class="form-control" />
-                        </div>*@
 
-                    <div class="form-group">
-                        <label>Location Id</label>
-                        <input type="text" id="LocationId" class="form-control" />
+                    <div id="myModalSave" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Save Event</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <input type="hidden" id="Id" />
+                                        <input type="hidden" id="RacePlanId" />
+                                        @*<div class="form-group">
+                                                <label>Race Plan Id</label>
+                                                <input type="text" id="RacePlanId" class="form-control" />
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label>Planned Distance</label>
+                                            <input type="text" id="PlannedDistance" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" id="RunDescription" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Start</label>
+                                            <div class="input-group date" id="dtp1">
+                                                <input type="text" id="ScheduleDateTime" class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label>Estimated Time</label>
+                                                <input type="text" id="EstimatedTime" class="form-control" />
+                                            </div>*@
+
+                                        <div class="form-group">
+                                            <label>Location Id</label>
+                                            <input type="text" id="LocationId" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Actual Distance</label>
+                                            <input type="text" id="ActualDistance" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Actual Time</label>
+                                            <input type="text" id="ActualTime" class="form-control" />
+                                        </div>
+                                        <button type="button" id="runSave" class="btn btn-success">Save</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Actual Distance</label>
-                        <input type="text" id="ActualDistance" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Actual Time</label>
-                        <input type="text" id="ActualTime" class="form-control" />
-                    </div>
-                    <button type="button" id="runSave" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@*MainFunctionality css
-    DayGrid css
-    Time grid css*@
-<link href="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.css" rel="stylesheet" />
-<link href="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet" />
-<link href="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet" />
-<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+                    @*MainFunctionality css
+                        DayGrid css
+                        Time grid css*@
+                    <link href="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.css" rel="stylesheet" />
+                    <link href="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.css" rel="stylesheet" />
+                    <link href="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.css" rel="stylesheet" />
+                    <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 
 
-@section scripts{
+                    @section scripts{
 
-    @*Moment js
-        MainFunctionality js
-        Interaction js
-        daygrid js
-        timegrid js
-        bootstrap js
-        moment js*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/interaction@4.4.0/main.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
-    <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
-    <script>
+                        @*Moment js
+                            MainFunctionality js
+                            Interaction js
+                            daygrid js
+                            timegrid js
+                            bootstrap js
+                            moment js*@
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/core@4.4.0/main.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/interaction@4.4.0/main.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/daygrid@4.4.0/main.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/timegrid@4.4.0/main.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/bootstrap@4.4.0/main.min.js"></script>
+                        <script src="https://unpkg.com/@("@")fullcalendar/moment@4.4.0/main.min.js"></script>
+                        <script>
         var calendar;
         $(document).ready(function () {
             RenderCalendar();
@@ -475,6 +389,6 @@
                 }
             })
 
-    </script>
-}
+                        </script>
+                    }
 

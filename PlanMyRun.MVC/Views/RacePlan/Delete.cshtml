@@ -1,72 +1,43 @@
 ﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Plan";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("Details","RacePlan",new { id = Model.Id })" title="Back to Details"><img alt="Back To Details" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="card-body">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>RacePlanDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceName)
-        </dt>
+                    <h3>Sure you want to delete?</h3>
+                    <div>
+                        <ul>
+                            <li> @Html.DisplayNameFor(model => model.RaceName):  @Html.DisplayFor(model => model.RaceName)</li>
+                            <li>@Html.DisplayNameFor(model => model.RaceDate): @String.Format("{0:d}", Model.RaceDate)</li>
+                            <li> @Html.DisplayNameFor(model => model.RaceLength): @Html.DisplayFor(model => model.RaceLength)  </li>
+                            <li>@Html.DisplayNameFor(model => model.GoalTime): @Html.DisplayFor(model => model.GoalTime)</li>
+                            <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</li>
+                            <li>@Html.DisplayNameFor(model => model.IsPublic): @Html.DisplayFor(model => model.IsPublic) </li>
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceName)
-        </dd>
+                        </ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceDate)
-        </dt>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceDate)
-        </dd>
+                            <div class="form-actions no-color text-center">
+                                <input type="submit" value="Delete" class="btn btn-default" />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublic)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsPublic)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceLength)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RaceLength)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GoalTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GoalTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a href="@Url.Action("Index","RacePlan")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>

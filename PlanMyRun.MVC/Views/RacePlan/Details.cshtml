@@ -1,73 +1,94 @@
 ﻿@model PlanMyRun.Models.RacePlanModels.RacePlanDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Plan Details";
 }
 @*<%-- used for ajax in AddAntiForgeryToken() --%>*@
 <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-4">
+            <div class="card margin">
+                <div>
+                    <a href="@Url.Action("GetTemplates","RacePlan")" title="Back to Templates"><img alt="Back To Templates" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
+                </div>
+                <div class="card-header text-center"><h2> @ViewBag.Title</h2></div>
+                <div class="card-body">
 
-<h2>Details</h2>
+                    <div>
+                        <div class="row justify-content-around">
+                            <a href="@Url.Action("Edit","RacePlan", new { id = Model.Id })" title="Edit Plan"><img alt="Edit Plan Details" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Details</a>
+                            <a href="@Url.Action("EditRunsInPlan","Run", new { id = Model.Id })" title="Edit Runs"><img alt="Edit Plan Runs" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Runs</a>
 
-<div>
-    <h4>RacePlanDetail</h4>
+                            @if (Model.IsPublic)
+                            {
+                                @Html.ActionLink("Use as Template", "CreateFromTemplate", new { id = Model.Id })
+                            }
+                        </div>
 
-        @Html.ActionLink("Use as Template", "CreateFromTemplate", new { id = Model.Id })
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RaceName)
+                            </dt>
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceName)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RaceName)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceName)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RaceDate)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceDate)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RaceDate)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceDate)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.IsPublic)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublic)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.IsPublic)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsPublic)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RaceLength)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceLength)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RaceLength)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceLength)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.GoalTime)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GoalTime)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.GoalTime)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.GoalTime)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Description)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        </dl>
+                    </div>
 
-    </dl>
+                    <h4>Runs In This Plan</h4>
+
+
+                    <div id="calendar"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<div id="calendar"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -210,17 +231,12 @@
 
 
 
-        
+
     </script>
 
 
     <p>
-        <a href="@Url.Action("Edit","RacePlan", new { id = Model.Id })" title="Edit Plan"><img alt="Edit Plan Details" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Details</a>
-        <a href="@Url.Action("EditRunsInPlan","Run", new { id = Model.Id })" title="Edit Runs"><img alt="Edit Plan Runs" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Runs</a>
 
-        <div>
-            <a href="@Url.Action("Index","RacePlan")" title="Back to List"><img alt="Back to List" src="@Url.Content("~/Content/assets/box-arrow-left.svg")" /></a>
-        </div>
 
     </p>
-    }
+}
