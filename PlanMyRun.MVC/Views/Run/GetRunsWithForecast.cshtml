@@ -9,6 +9,7 @@
 
 <h2>GetRunsWithForecast</h2>
 
+
 <table class="table">
     <tr>
         <th>
@@ -17,18 +18,18 @@
         <th></th>
     </tr>
 </table>
-<div class="container-fluid">
-    <div class="row">
+<div class="container">
+    <div>
 
 
         @foreach (var item in Model)
         {
-            <div class="col">
-                <div class="padding">
+            <div class="row">
+                <div class="col padding">
 
                     @Html.Partial("_ForecastDayPartial", item.DaysForecast)
                 </div>
-                <div class="padding">
+                <div class="col padding">
 
                     @if (item.DaysRun.Id != 0)
                     {
