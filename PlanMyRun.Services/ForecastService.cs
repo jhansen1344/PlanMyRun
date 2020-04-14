@@ -147,14 +147,13 @@ namespace PlanMyRun.Services
                                 }
 
                             }
-                            else
-                            {
-                                startRain = item.Time / 100;
-                                isRaining = true;
-                                description = item.Wx_Desc;
+                            else { 
+                            startRain = item.Time / 100;
+                            isRaining = true;
+                            description = item.Wx_Desc;
                             }
                         }
-                        if (Int32.Parse(item.Prob_Precip_Pct) < 70 && isRaining || forecastDay.TimeFrames.Count() == forecastDay.TimeFrames.ToList().IndexOf(item) + 1 && isRaining)
+                        if (Int32.Parse(item.Prob_Precip_Pct) < 70 && isRaining || forecastDay.TimeFrames.Count()==forecastDay.TimeFrames.ToList().IndexOf(item)+1 && isRaining)
                         {
                             var endRain = item.Time / 100;
                             isRaining = false;
