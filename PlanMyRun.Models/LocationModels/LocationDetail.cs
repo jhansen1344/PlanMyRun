@@ -12,9 +12,9 @@ namespace PlanMyRun.Models.LocationModels
     {
 
         public int Id { get; set; }
-        [Display(Name = "Location Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Display(Name = "Maximum Distance without laps")]
+        [Display(Name = "Maximum Distance Without Laps")]
         public double MaxDistance { get; set; }
         [Display(Name = "Has Loops")]
         public bool HasLoops { get; set; }
@@ -22,7 +22,7 @@ namespace PlanMyRun.Models.LocationModels
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]
         public string PathType { get; set; }
-        [Display(Name = "Runs at this Location")]
+        [Display(Name = "Runs at Location")]
         public List<RunListItem> RunsAtLocation { get; set; }
     }
 }

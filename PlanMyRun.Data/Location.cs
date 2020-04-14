@@ -20,6 +20,7 @@ namespace PlanMyRun.Data
         [Required]
         public bool HasLoops { get; set; }
         [Required]
+        [DataType(DataType.PostalCode)]
         public string Address { get; set; }
         public string PathType { get; set; }
         public virtual List<Run> RunsAtLocation { get; set; }

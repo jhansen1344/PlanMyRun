@@ -10,7 +10,7 @@ namespace PlanMyRun.Models.RacePlanModels
     public class RacePlanEdit
     {
         public int Id { get; set; }
-        [Display(Name = "Race Name")]
+        [Display(Name = "Plan Name")]
         public string RaceName { get; set; }
         [Display(Name = "Race Date")]
         public DateTime RaceDate { get; set; }
@@ -20,7 +20,7 @@ namespace PlanMyRun.Models.RacePlanModels
         public double? RaceLength { get; set; }
         [Display(Name = "Goal Finish Time")]
         public TimeSpan? GoalTime { get; set; }
-        [Display(Name = "Description of Race")]
+        [Display(Name = "Description of Plan")]
         public string Description { get; set; }
 
     }

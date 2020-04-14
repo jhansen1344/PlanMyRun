@@ -16,13 +16,13 @@ namespace PlanMyRun.Models.LocationModels
         public string Name { get; set; }
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid number.")]
-        [Display(Name = "Maximum Distance without laps")]
+        [Display(Name = "Maximum Distance Without Laps")]
         public double MaxDistance { get; set; }
         [Required]
         [Display(Name = "Has Loops")]
         public bool HasLoops { get; set; }
         [Required]
-
+        [DataType(DataType.PostalCode)]
         [Display(Name = "Location ZipCode")]
         public string Address { get; set; }
         [Display(Name = "Path Types at Location")]

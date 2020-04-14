@@ -13,7 +13,7 @@ namespace PlanMyRun.Models.RacePlanModels
         [Required]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(50, ErrorMessage = "Please enter less than 50 characters.")]
-        [Display(Name = "Race Name")]
+        [Display(Name = "Plan Name")]
         public string RaceName { get; set; }
         [Required]
         [DataType(DataType.Date, ErrorMessage =("Please enter a valid date"))]
@@ -27,7 +27,7 @@ namespace PlanMyRun.Models.RacePlanModels
         public double? RaceLength { get; set; }
         [Display(Name = "Goal Finish Time")]
         public TimeSpan? GoalTime { get; set; }
-        [Display(Name = "Description of Race")]
+        [Display(Name = "Description of Plan")]
         [MaxLength(1000,ErrorMessage ="Please enter a shorter description.")]
         public string Description { get; set; }
     }

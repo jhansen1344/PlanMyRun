@@ -10,7 +10,7 @@ namespace PlanMyRun.Models.RacePlanModels
     public class RacePlanListItem
     {
         public int Id { get; set; }
-        [Display(Name = "Race Name")]
+        [Display(Name = "Plan Name")]
         public string RaceName { get; set; }
         [Display(Name = "Race Length")]
         public double? RaceLength { get; set; }
