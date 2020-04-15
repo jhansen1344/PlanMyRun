@@ -46,7 +46,9 @@ https://planmyrun.azurewebsites.net/
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+PlanMyRun is a .Net Entity FrameWork MVC application utilizing an n-tier architecture built during the phase of the Jan.-April 2020 Full-time Software Development bootcamp at ElevenFifty Academy. 
 
+Through the application, users can create run training plans for upcoming races. Using the WeatherUnlockedAPI the application will display the forecast for upcoming days along with the runs that are scheduled for those days. The runs will block out time(s) based on the forecast and user preferences and allow the user to schedule/re-schedule runs.
 
 ### Built With
 
@@ -70,12 +72,20 @@ To get a local copy up and running follow these simple steps.
  
 1. Clone the repo
 ```sh
-git clone https://github.com/jhansen1344/.git
+git clone https://github.com/jhansen1344/PlanMyRun.git
 ```
 2. Restoring NuGetPackages
 ```sh
-nuget restore AuctionExpress.sln
+nuget restore PlanMyRun.sln
 ```
+3. Registering With WeatherUnlocked
+Register with WeatherUnlocked and insert the AppId and AppKey into lines 40 and 41 in the ForecastService.
+```sh
+        readonly string uri = "http://api.weatherunlocked.com/api/forecast/";
+        private string appId = "exampleAppId";
+        private string appKey = "exampleAppKey";
+```
+
 3. Database Setup
 - Update Database connection if needed.
 - Enable and add a migration
@@ -87,71 +97,13 @@ nuget restore AuctionExpress.sln
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-
 ### Race Plans
 
-
 ### Runs
-Users can post products they want to sell with the following information.
-```sh
-public class Product
-    {
-        [Key]
-        public int ProductId { get; set; }
-        [Required]
-        public string ProductName { get; set; }
-        [Required]
-        public string ProductDescription { get; set; }
-        [Required]
-        [Range(0, int.MaxValue)]
-        public int ProductQuantity { get; set; }
-        public DateTimeOffset ProductStartTime { get; set; } = DateTimeOffset.Now;
-        [Required]
-        public DateTimeOffset ProductCloseTime { get; set; }
-        public bool ProductIsActive
-        {
-            get
-            {
-                if (DateTimeOffset.Now < ProductStartTime || DateTimeOffset.Now > ProductCloseTime)
-                {
-                    return false;
-                }
-                else
-                    return true;
-            }
-        }
-
-        [ForeignKey(nameof(ProductCategoryCombo))]
-        public int? ProductCategoryId { get; set; }
-        public virtual Category ProductCategoryCombo { get; set; }
-
-        [ForeignKey(nameof(Seller))]
-        [Required]
-        public string ProductSeller { get; set; }
-        public virtual ApplicationUser Seller { get; set; }
-
-        public virtual ICollection<Bid> ProductBids { get; set; }
-
-        public double HighestBid
-        {
-            get
-            {
-                if (ProductBids.Count >0)
-                {
-                    var item = ProductBids.Max(x => x.BidPrice);
-                    return item;
-                }
-                    return 0;
-            }
-        }
-        public double MinimumSellingPrice { get; set; }
-    }
-```
 
 ### Locations
 
 ### Forecast Events
-
 
 <!-- ROADMAP -->
 ## Roadmap
