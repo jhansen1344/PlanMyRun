@@ -208,6 +208,10 @@ CRUD Users
 
 https://www.yogihosting.com/aspnet-core-identity-create-read-update-delete-users/
 
+Using ViewBag
+
+https://www.tutorialsteacher.com/mvc/viewbag-in-asp.net-mvc
+
 ### Formatting and Parsing
 Display Decimal with no zero's (hight/low temp, precip)
 
