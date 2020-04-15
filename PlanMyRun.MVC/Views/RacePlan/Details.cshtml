@@ -17,8 +17,13 @@
 
                     <div>
                         <div class="row justify-content-around">
-                            <a href="@Url.Action("Edit","RacePlan", new { id = Model.Id })" title="Edit Plan"><img alt="Edit Plan Details" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Details</a>
-                            <a href="@Url.Action("EditRunsInPlan","Run", new { id = Model.Id })" title="Edit Runs"><img alt="Edit Plan Runs" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Runs</a>
+                            @if (ViewBag.Editable)
+                            {
+
+                                <a href="@Url.Action("Edit","RacePlan", new { id = Model.Id })" title="Edit Plan"><img alt="Edit Plan Details" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Details</a>
+                                <a href="@Url.Action("EditRunsInPlan","Run", new { id = Model.Id })" title="Edit Runs"><img alt="Edit Plan Runs" src="@Url.Content("~/Content/assets/pencil-square.svg")" />Edit Plan Runs</a>
+                                @Html.ActionLink("Use as Template", "CreateFromTemplate", new { id = Model.Id })
+                            }
 
                             @if (Model.IsPublic)
                             {

@@ -419,18 +419,32 @@ namespace PlanMyRun.MVC.Controllers
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
-                return View(user);
+            {
+                var model = new UpdateUserModel()
+                {
+                    Id=user.Id,
+                    Email = user.Email,
+                    Pace = user.Pace,
+                    ZipCode = user.ZipCode,
+                    LikesDark = user.LikesDark,
+                    LikesHeat = user.LikesHeat,
+                    LikesMorning = user.LikesMorning,
+                    LikesRain = user.LikesRain,
+                };
+                return View(model);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public async Task<ActionResult>Update(ApplicationUser model)
+        public async Task<ActionResult>Update(UpdateUserModel model)
         {
             var user = await UserManager.FindByIdAsync(model.Id);
             if (user != null)
             {
                 user.Email = model.Email;
-                user.UserName = model.UserName;
+                user.UserName = model.Email;
                 user.Pace = model.Pace;
                 user.ZipCode = model.ZipCode;
                 user.LikesDark = model.LikesDark;

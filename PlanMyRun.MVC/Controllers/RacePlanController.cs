@@ -87,26 +87,42 @@ namespace PlanMyRun.MVC.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
+            var userId = User.Identity.GetUserId();
             var service = CreateRacePlanService();
             var model = await service.GetPlanByIdAsync(id);
+            if (userId == model.OwnerId)
+            {
+                ViewBag.Editable = true;
+            }
+            else
+            {
+                ViewBag.Editable = false;
+            }
             return View(model);
         }
 
         public async Task<ActionResult> Edit(int id)
         {
+
             var service = CreateRacePlanService();
             var detail = await service.GetPlanByIdAsync(id);
-            var model = new RacePlanEdit
+            var userId = User.Identity.GetUserId();
+            if (detail.OwnerId==userId)
             {
-                Id = detail.Id,
-                RaceName = detail.RaceName,
-                RaceDate = detail.RaceDate,
-                IsPublic = detail.IsPublic,
-                RaceLength = detail.RaceLength,
-                GoalTime = detail.GoalTime,
-                Description = detail.Description
-            };
-            return View(model);
+                var model = new RacePlanEdit
+                {
+                    Id = detail.Id,
+                    RaceName = detail.RaceName,
+                    RaceDate = detail.RaceDate,
+                    IsPublic = detail.IsPublic,
+                    RaceLength = detail.RaceLength,
+                    GoalTime = detail.GoalTime,
+                    Description = detail.Description
+                };
+                return View(model);
+            }
+            return RedirectToAction("Details", new { id });
+            
         }
 
         [HttpPost]

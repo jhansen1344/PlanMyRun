@@ -113,7 +113,7 @@ namespace PlanMyRun.Services
                     PlannedDistance = item.PlannedDistance,
                     ScheduleDateTime = entity.RaceDate-(existingRace.RaceDate-item.ScheduledDateTime),
                     Description = item.Description,
-                    LocationId = item.LocationId
+                    LocationId = null,
                 };
                 var savedRun = await runService.CreateRunAsync(runCreate);
                 if (savedRun)
@@ -142,6 +142,7 @@ namespace PlanMyRun.Services
                 RaceLength = entity.RaceLength,
                 GoalTime = entity.GoalTime,
                 Description = entity.Description,
+                OwnerId=entity.UserId,
                 ListOfRuns = entity.ListOfRuns.Select(run => new RunListItem
                 {
                     Id=run.Id,

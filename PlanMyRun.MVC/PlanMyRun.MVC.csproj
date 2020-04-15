@@ -371,7 +371,7 @@
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Delete.cshtml" />
     <Content Include="Views\Shared\UnusedViews\Index.cshtml" />
-    <Content Include="Views\Account\Update.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\Update.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -397,6 +397,7 @@
     <Content Include="Views\Run\EditRunsInPlan.cshtml" />
     <Content Include="Views\RacePlan\Delete.cshtml" />
     <Content Include="Views\RacePlan\Edit.cshtml" />
+    <Content Include="Views\Account\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

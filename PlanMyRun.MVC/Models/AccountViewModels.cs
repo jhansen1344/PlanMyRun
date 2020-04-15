@@ -85,6 +85,7 @@ namespace PlanMyRun.MVC.Models
         [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
         public string ZipCode { get; set; }
         [Required]
+        [RegularExpression(@"((([0-1][0-9])|(2[0-3]))(:[0-5][0-9])(:[0-5][0-9])?)", ErrorMessage = "Time must be between 00:00:00 to 23:59:00")]
         [Display(Name = "User's average pace.")]
         public TimeSpan Pace { get; set; }
         [Display(Name = "Prefer to run in the heat of the day.")]
@@ -124,5 +125,34 @@ namespace PlanMyRun.MVC.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class UpdateUserModel
+    {
+        [Required]
+        public string Id { get; set; }
+        
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+     
+        [Required]
+        [Display(Name = "Zip Code")]
+        [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
+        public string ZipCode { get; set; }
+        [Required]
+        [RegularExpression(@"((([0-1][0-9])|(2[0-3]))(:[0-5][0-9])(:[0-5][0-9])?)", ErrorMessage = "Time must be between 00:00:00 to 23:59:00")]
+        [Display(Name = "User's average pace.")]
+        public TimeSpan Pace { get; set; }
+        [Display(Name = "Prefer to run in the heat of the day.")]
+        public bool LikesHeat { get; set; }
+        [Display(Name = "Ok with a few sprinkles.")]
+        public bool LikesRain { get; set; }
+        [Display(Name = "Prefer to run in the morning.")]
+        public bool LikesMorning { get; set; }
+        [Display(Name = "Ok with starting or ending in the dark.")]
+        public bool LikesDark { get; set; }
     }
 }

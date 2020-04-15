@@ -24,6 +24,8 @@ namespace PlanMyRun.Models.RacePlanModels
         [Display(Name = "Description of Plan")]
         public string Description { get; set; }
         [Display(Name = "Runs in this plan")]
+
         public List<RunListItem> ListOfRuns { get; set; }
+        public string OwnerId { get; set; }
     }
 }

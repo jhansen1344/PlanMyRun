@@ -96,7 +96,7 @@ namespace PlanMyRun.Services
         {
             var entityList = await _context.Runs.ToListAsync();
             var runList = entityList
-                .Where(e => e.RacePlan.UserId == _userId.ToString() && e.RacePlanId == id)
+                .Where(e => e.RacePlanId == id)
                 .Select(
                     e =>
                     new RunDetail()
@@ -152,7 +152,7 @@ namespace PlanMyRun.Services
                     Date = item.Date,
                     DaysForecast = item
                 };
-                var run = entityList.SingleOrDefault(e => e.RacePlan.UserId == _userId.ToString() && e.ScheduledDateTime.Date== item.Date.Date);
+                var run = entityList.FirstOrDefault(e => e.RacePlan.UserId == _userId.ToString() && e.ScheduledDateTime.Date== item.Date.Date);
                 if(run!=null)
                 {
                     model.DaysRun = new RunDetail()
