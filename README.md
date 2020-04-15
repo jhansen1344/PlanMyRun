@@ -46,7 +46,9 @@ https://planmyrun.azurewebsites.net/
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+PlanMyRun is a .Net Entity FrameWork MVC application utilizing an n-tier architecture built during the phase of the Jan.-April 2020 Full-time Software Development bootcamp at ElevenFifty Academy. 
 
+Through the application, users can create run training plans for upcoming races. Using the WeatherUnlockedAPI the application will display the forecast for upcoming days along with the runs that are scheduled for those days. The runs will block out time(s) based on the forecast and user preferences and allow the user to schedule/re-schedule runs.
 
 ### Built With
 
@@ -70,88 +72,100 @@ To get a local copy up and running follow these simple steps.
  
 1. Clone the repo
 ```sh
-git clone https://github.com/jhansen1344/.git
+git clone https://github.com/jhansen1344/PlanMyRun.git
 ```
 2. Restoring NuGetPackages
 ```sh
-nuget restore AuctionExpress.sln
+nuget restore PlanMyRun.sln
 ```
-3. Database Setup
+3. Registering With WeatherUnlocked
+Register with WeatherUnlocked and insert the AppId and AppKey into lines 40 and 41 in the ForecastService.
+```sh
+        readonly string uri = "http://api.weatherunlocked.com/api/forecast/";
+        private string appId = "exampleAppId";
+        private string appKey = "exampleAppKey";
+```
+
+4. Database Setup
 - Update Database connection if needed.
 - Enable and add a migration
 - Update database.
 
-4. Create Account and Login
+5. Create Account and Login
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
+During registration, the user is asked to answer some questions about their running preferences. This and the zipcode they provide are used to display forecast events on the calendar along with upcoming runs the user has.
 
 ### Race Plans
+User can create a training plan with general information about the race they are training for, including the date.  They can then assign runs to include with this plan.
 
+If the user elects to make the plan public, other users can use it as a template to create their own plan.  They will need to enter new information about the race, but the runs assigned to the template will copy over (with out the actual distance and time) to the new plan 
+and are scheduled at the same time interval before the new race date as the existing date.  The below code snippet shows this calculation.
 
-### Runs
-Users can post products they want to sell with the following information.
 ```sh
-public class Product
-    {
-        [Key]
-        public int ProductId { get; set; }
-        [Required]
-        public string ProductName { get; set; }
-        [Required]
-        public string ProductDescription { get; set; }
-        [Required]
-        [Range(0, int.MaxValue)]
-        public int ProductQuantity { get; set; }
-        public DateTimeOffset ProductStartTime { get; set; } = DateTimeOffset.Now;
-        [Required]
-        public DateTimeOffset ProductCloseTime { get; set; }
-        public bool ProductIsActive
-        {
-            get
+            List<RunCreate> templateRuns = new List<RunCreate>();
+            foreach (var item in existingRace.ListOfRuns)
             {
-                if (DateTimeOffset.Now < ProductStartTime || DateTimeOffset.Now > ProductCloseTime)
+                var runCreate = new RunCreate()
                 {
-                    return false;
-                }
-                else
-                    return true;
-            }
-        }
+                    RacePlanId = entity.Id,
+                    PlannedDistance = item.PlannedDistance,
+                    ScheduleDateTime = entity.RaceDate-(existingRace.RaceDate-item.ScheduledDateTime),
+                    Description = item.Description,
+                    LocationId = item.LocationId
+                };
+                var savedRun = await runService.CreateRunAsync(runCreate);
 
-        [ForeignKey(nameof(ProductCategoryCombo))]
-        public int? ProductCategoryId { get; set; }
-        public virtual Category ProductCategoryCombo { get; set; }
-
-        [ForeignKey(nameof(Seller))]
-        [Required]
-        public string ProductSeller { get; set; }
-        public virtual ApplicationUser Seller { get; set; }
-
-        public virtual ICollection<Bid> ProductBids { get; set; }
-
-        public double HighestBid
-        {
-            get
-            {
-                if (ProductBids.Count >0)
-                {
-                    var item = ProductBids.Max(x => x.BidPrice);
-                    return item;
-                }
-                    return 0;
-            }
-        }
-        public double MinimumSellingPrice { get; set; }
-    }
 ```
+### Runs
+Once users create a training plan, they can assign runs to it.  Runs consist of general information such as Planned Distance, Schedule Date and Time, Location, etc.
+
+The estimated time to complete the run is calculated based off the user's pace that they provide and the planned distance for the run.
+
+Once the run is complete, the user can update the run with the actual time and distance.
 
 ### Locations
+Runs can also be assigned to user-created locations.  Location objects contain information for reference such as location, maximum distance, path types.
 
 ### Forecast Events
+The application uses the WeatherUnlockedAPI to fetch the forecast for the upcoming days.  Using this information, the applcation creates events when the user would not want to run based off their preferences.  These events include excessive heat, excessive precipitation, morning, and lack of light.  The code below creates events when their is excessive heat.
 
+The forecast events are displayed on a calendar along with upcoming runs so that the user can schedule them accordingly.
+
+```sh
+foreach (var item in forecastDay.TimeFrames)
+                {
+                    if (!_likesHeat)
+                    {
+                        if (item.FeelsLike_F >= 89 && !isHot)
+                        {
+                            startHeat = item.Time / 100;
+                            isHot = true;
+                        }
+                        if (item.FeelsLike_F < 89 && isHot)
+                        {
+                            var endHeat = item.Time / 100;
+                            isHot = false;
+                            var startTime = forecastDay.Date.AddHours(startHeat);
+                            var endTime = forecastDay.Date.AddHours(endHeat);
+
+                            var heatEvent = new ForecastEvent()
+                            {
+                                StartTime = startTime,
+                                EndTime = endTime,
+                                Description = "Too hot"
+                            };
+                            listForecastEvents.Add(heatEvent);
+                        }
+                    }
+```
+
+
+### FullCalendar plugin
+
+The FullCalendar plugin is used in a number of views to display and dynamically add/edit runs, as well as forecast events created as explained above.  
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -164,7 +178,7 @@ public class Product
 <!-- CONTACT -->
 ## Contact
 
-- Jeremy Hansen - jhansen1344@gmail.com
+- Jeremy Hansen - https://www.linkedin.com/in/jeremy-hansen/
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
