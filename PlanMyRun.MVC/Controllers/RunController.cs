@@ -78,11 +78,14 @@ namespace PlanMyRun.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RunCreate model)
         {
+            var service = CreateRunService();
             if (!ModelState.IsValid)
             {
+                var selectItemList= await service.GetCreateSelectListAsync();
+                model.RacePlan = selectItemList.RacePlan;
+                model.Locations = selectItemList.Locations;
                 return View(model);
             }
-            var service = CreateRunService();
             if (await service.CreateRunAsync(model))
             {
                 TempData["SaveResult"] = "Run created successfully.";

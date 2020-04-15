@@ -359,7 +359,7 @@
     <Content Include="Views\RacePlan\Create.cshtml" />
     <Content Include="Views\RacePlan\Index.cshtml" />
     <Content Include="Views\RacePlan\Details.cshtml" />
-    <Content Include="Views\RacePlan\Edit.cshtml" />
+    <Content Include="Views\Shared\UnusedViews\Edit.cshtml" />
     <Content Include="Views\Run\Index.cshtml" />
     <Content Include="Views\Run\Create.cshtml" />
     <Content Include="Views\Run\Details.cshtml" />
@@ -396,6 +396,7 @@
     <Content Include="Views\Shared\UnusedViews\EditPlanRuns.cshtml" />
     <Content Include="Views\Run\EditRunsInPlan.cshtml" />
     <Content Include="Views\RacePlan\Delete.cshtml" />
+    <Content Include="Views\RacePlan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
