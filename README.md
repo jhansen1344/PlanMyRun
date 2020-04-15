@@ -227,6 +227,11 @@ ZipCode validation
 
 https://stackoverflow.com/questions/14942602/c-validation-for-us-or-canadian-zip-code
 
+TimeSpan
+
+https://stackoverflow.com/questions/18624766/range-and-displayformat-attributes-on-timespan
+
+
 ### JSON and AJAX
 Json
 
