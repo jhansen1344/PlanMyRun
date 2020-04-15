@@ -165,7 +165,7 @@ foreach (var item in forecastDay.TimeFrames)
 
 ### FullCalendar plugin
 
-The FullCalendar plugin is used in a number of views to display and dynamically add/edit runs.  
+The FullCalendar plugin is used in a number of views to display and dynamically add/edit runs, as well as forecast events created as explained above.  
 
 <!-- ROADMAP -->
 ## Roadmap
