@@ -86,24 +86,86 @@ Register with WeatherUnlocked and insert the AppId and AppKey into lines 40 and 
         private string appKey = "exampleAppKey";
 ```
 
-3. Database Setup
+4. Database Setup
 - Update Database connection if needed.
 - Enable and add a migration
 - Update database.
 
-4. Create Account and Login
+5. Create Account and Login
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+During registration, the user is asked to answer some questions about their running preferences. This and the zipcode they provide are used to display forecast events on the calendar along with upcoming runs the user has.
 
 ### Race Plans
+User can create a training plan with general information about the race they are training for, including the date.  They can then assign runs to include with this plan.
 
+If the user elects to make the plan public, other users can use it as a template to create their own plan.  They will need to enter new information about the race, but the runs assigned to the template will copy over (with out the actual distance and time) to the new plan 
+and are scheduled at the same time interval before the new race date as the existing date.  The below code snippet shows this calculation.
+
+```sh
+            List<RunCreate> templateRuns = new List<RunCreate>();
+            foreach (var item in existingRace.ListOfRuns)
+            {
+                var runCreate = new RunCreate()
+                {
+                    RacePlanId = entity.Id,
+                    PlannedDistance = item.PlannedDistance,
+                    ScheduleDateTime = entity.RaceDate-(existingRace.RaceDate-item.ScheduledDateTime),
+                    Description = item.Description,
+                    LocationId = item.LocationId
+                };
+                var savedRun = await runService.CreateRunAsync(runCreate);
+
+```
 ### Runs
+Once users create a training plan, they can assign runs to it.  Runs consist of general information such as Planned Distance, Schedule Date and Time, Location, etc.
+
+The estimated time to complete the run is calculated based off the user's pace that they provide and the planned distance for the run.
+
+Once the run is complete, the user can update the run with the actual time and distance.
 
 ### Locations
+Runs can also be assigned to user-created locations.  Location objects contain information for reference such as location, maximum distance, path types.
 
 ### Forecast Events
+The application uses the WeatherUnlockedAPI to fetch the forecast for the upcoming days.  Using this information, the applcation creates events when the user would not want to run based off their preferences.  These events include excessive heat, excessive precipitation, morning, and lack of light.  The code below creates events when their is excessive heat.
+
+The forecast events are displayed on a calendar along with upcoming runs so that the user can schedule them accordingly.
+
+```sh
+foreach (var item in forecastDay.TimeFrames)
+                {
+                    if (!_likesHeat)
+                    {
+                        if (item.FeelsLike_F >= 89 && !isHot)
+                        {
+                            startHeat = item.Time / 100;
+                            isHot = true;
+                        }
+                        if (item.FeelsLike_F < 89 && isHot)
+                        {
+                            var endHeat = item.Time / 100;
+                            isHot = false;
+                            var startTime = forecastDay.Date.AddHours(startHeat);
+                            var endTime = forecastDay.Date.AddHours(endHeat);
+
+                            var heatEvent = new ForecastEvent()
+                            {
+                                StartTime = startTime,
+                                EndTime = endTime,
+                                Description = "Too hot"
+                            };
+                            listForecastEvents.Add(heatEvent);
+                        }
+                    }
+```
+
+
+### FullCalendar plugin
+
+The FullCalendar plugin is used in a number of views to display and dynamically add/edit runs.  
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -116,7 +178,7 @@ Register with WeatherUnlocked and insert the AppId and AppKey into lines 40 and 
 <!-- CONTACT -->
 ## Contact
 
-- Jeremy Hansen - jhansen1344@gmail.com
+- Jeremy Hansen - https://www.linkedin.com/in/jeremy-hansen/
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
