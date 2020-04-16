@@ -8,8 +8,8 @@ namespace PlanMyRun.Models.ForecastModels
 {
     public class ForecastEvent
     {
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTimeOffset StartTime { get; set; }
+        public DateTimeOffset EndTime { get; set; }
         public string Description { get; set; }
     }
 }

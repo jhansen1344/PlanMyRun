@@ -9,6 +9,7 @@ namespace PlanMyRun.Models.ForecastModels
 {
     public class ForecastHourlyModel
     {
+        public int UTCTime { get; set; }
         public int Time { get; set; }
         public string Wx_Desc { get; set; }
         public int Wx_Code { get; set; }

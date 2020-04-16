@@ -9,7 +9,7 @@ namespace PlanMyRun.Models.RunModels
 {
     public class DailyRunForecast
     {
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
         public RunDetail DaysRun { get; set; } = new RunDetail();
         public ForecastDayModel DaysForecast { get; set; }
     }

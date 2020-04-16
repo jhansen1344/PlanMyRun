@@ -73,103 +73,108 @@ namespace PlanMyRun.Services
             var weeklyForecast = await GetForecastAsync();
             foreach (var forecastDay in weeklyForecast.Days)
             {
-
-                if (_likesDark)
+                if (DateTimeOffset.Compare(forecastDay.Date, DateTimeOffset.Now.Date) >= 0)
                 {
-                    morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(1));
-                    nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(1));
-                }
-                else
-                {
-                    morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(.5));
-                    nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(.5));
-
-                }
-
-                if (!_likesMorning)
-                {
-                    morningUnavailable = new TimeSpan(11, 59, 00);
-                }
-                var morningEvent = new ForecastEvent()
-                {
-                    StartTime = forecastDay.Date,
-                    EndTime = forecastDay.Date.Add(morningUnavailable),
-                    Description = "Too early."
-                };
-                listForecastEvents.Add(morningEvent);
-                var nightEvent = new ForecastEvent()
-                {
-                    StartTime = forecastDay.Date.Add(nightUnavailable),
-                    EndTime = forecastDay.Date.AddDays(1),
-                    Description = "Too late."
-                };
-                listForecastEvents.Add(nightEvent);
-
-
-                foreach (var item in forecastDay.TimeFrames)
-                {
-                    if (!_likesHeat)
+                    var offset = (forecastDay.TimeFrames.FirstOrDefault().UTCTime - forecastDay.TimeFrames.FirstOrDefault().Time) / 100;
+                    forecastDay.Date = forecastDay.Date.AddHours(offset - 1);
+                    if (_likesDark)
                     {
-                        if (item.FeelsLike_F >= 89 && !isHot)
-                        {
-                            startHeat = item.Time / 100;
-                            isHot = true;
-                        }
-                        if (item.FeelsLike_F < 89 && isHot)
-                        {
-                            var endHeat = item.Time / 100;
-                            isHot = false;
-                            var startTime = forecastDay.Date.AddHours(startHeat);
-                            var endTime = forecastDay.Date.AddHours(endHeat);
-
-                            var heatEvent = new ForecastEvent()
-                            {
-                                StartTime = startTime,
-                                EndTime = endTime,
-                                Description = "Too hot"
-                            };
-                            listForecastEvents.Add(heatEvent);
-                        }
+                        morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(1));
+                        nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(1));
                     }
-                    if (item.Prob_Precip_Pct != "<1")
+                    else
                     {
-                        if (Int32.Parse(item.Prob_Precip_Pct) > 70 && !isRaining)
+                        morningUnavailable = forecastDay.Sunrise_Time.Subtract(TimeSpan.FromHours(.5));
+                        nightUnavailable = forecastDay.Sunset_Time.Add(TimeSpan.FromHours(.5));
+                    }
+
+                    if (!_likesMorning)
+                    {
+                        morningUnavailable = TimeSpan.FromHours(12);
+                    }
+                    var morningEvent = new ForecastEvent()
+                    {
+                        StartTime = forecastDay.Date,
+                        EndTime = forecastDay.Date.Add(morningUnavailable),
+                        Description = "Too early."
+                    };
+                    listForecastEvents.Add(morningEvent);
+
+                    var nightEvent = new ForecastEvent()
+                    {
+                        StartTime = forecastDay.Date.Add(nightUnavailable),
+                        EndTime = forecastDay.Date.AddDays(1),
+                        Description = "Too late."
+                    };
+                    listForecastEvents.Add(nightEvent);
+
+
+                    foreach (var item in forecastDay.TimeFrames)
+                    {
+                        if (!_likesHeat)
                         {
-                            if (_likesRain && Int32.Parse(item.Prob_Precip_Pct) < 85)
+                            if (item.FeelsLike_F >= 89 && !isHot)
                             {
-                                if (item.Wx_Code == 21 || item.Wx_Code == 50 || item.Wx_Code == 60) { continue; }
+                                startHeat = item.Time / 100;
+                                isHot = true;
+                            }
+                            if (item.FeelsLike_F < 89 && isHot)
+                            {
+                                var endHeat = item.Time / 100;
+                                isHot = false;
+                                var startTime = forecastDay.Date.AddHours(startHeat);
+                                var endTime = forecastDay.Date.AddHours(endHeat);
+
+                                var heatEvent = new ForecastEvent()
+                                {
+                                    StartTime = startTime,
+                                    EndTime = endTime,
+                                    Description = "Too hot"
+                                };
+                                listForecastEvents.Add(heatEvent);
+                            }
+                        }
+                        if (item.Prob_Precip_Pct != "<1")
+                        {
+                            if (Int32.Parse(item.Prob_Precip_Pct) > 70 && !isRaining)
+                            {
+                                if (_likesRain && Int32.Parse(item.Prob_Precip_Pct) < 85)
+                                {
+                                    if (item.Wx_Code == 21 || item.Wx_Code == 50 || item.Wx_Code == 60 ||item.Wx_Code == 51) { continue; }
+                                    else
+                                    {
+                                        startRain = item.Time / 100;
+                                        isRaining = true;
+                                        description = item.Wx_Desc;
+
+                                    }
+
+                                }
                                 else
                                 {
                                     startRain = item.Time / 100;
                                     isRaining = true;
                                     description = item.Wx_Desc;
-
                                 }
-
                             }
-                            else { 
-                            startRain = item.Time / 100;
-                            isRaining = true;
-                            description = item.Wx_Desc;
-                            }
-                        }
-                        if (Int32.Parse(item.Prob_Precip_Pct) < 70 && isRaining || forecastDay.TimeFrames.Count()==forecastDay.TimeFrames.ToList().IndexOf(item)+1 && isRaining)
-                        {
-                            var endRain = item.Time / 100;
-                            isRaining = false;
-                            var startTime = forecastDay.Date.AddHours(startRain);
-                            var endTime = forecastDay.Date.AddHours(endRain);
-                            var rainEvent = new ForecastEvent()
+                            if (Int32.Parse(item.Prob_Precip_Pct) <= 70 && isRaining || forecastDay.TimeFrames.Count() == forecastDay.TimeFrames.ToList().IndexOf(item) + 1 && isRaining)
                             {
-                                StartTime = startTime,
-                                EndTime = endTime,
-                                Description = description,
-                            };
-                            listForecastEvents.Add(rainEvent);
+                                var endRain = item.Time / 100;
+                                isRaining = false;
+                                var startTime = forecastDay.Date.AddHours(startRain);
+                                var endTime = forecastDay.Date.AddHours(endRain);
+                                var rainEvent = new ForecastEvent()
+                                {
+                                    StartTime = startTime,
+                                    EndTime = endTime,
+                                    Description = description,
+                                };
+                                listForecastEvents.Add(rainEvent);
+                            }
+
                         }
 
                     }
-
                 }
             }
 
