@@ -156,8 +156,8 @@
                                     title: v.PlannedDistance + ' Mile Run',
                                     id: v.Id,
                                     description: v.Description,
-                                    start: moment(v.ScheduleDateTime).format(),
-                                    end: v.End != null ? moment(v.End).format() : null,
+                                    start: moment.utc(v.ScheduleDateTime).format(),
+                                    end: v.End != null ? moment.utc(v.End).format() : null,
                                   extendedProps: {
                                       raceName: v.RacePlanName,
                                       plannedDistance: v.PlannedDistance,

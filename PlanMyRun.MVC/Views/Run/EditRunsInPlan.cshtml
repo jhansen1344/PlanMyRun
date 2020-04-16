@@ -142,8 +142,8 @@
                                     title: v.PlannedDistance + ' Mile Run',
                                     id: v.Id,
                                     description: v.Description,
-                                    start: moment(v.ScheduleDateTime).format(),
-                                    end: v.End != null ? moment(v.End).format() : null,
+                                    start: moment.utc(v.ScheduleDateTime).format(),
+                                    end: v.End != null ? moment.utc(v.End).format() : null,
                                     extendedProps: {
                                       raceName: v.RacePlanName,
                                       plannedDistance: v.PlannedDistance,
@@ -221,11 +221,11 @@
 
                             Id: info.event.id,
                             RacePlanId: info.event.extendedProps.racePlanId,
-                            Description: info.event.extendedProps.Description,
+                            Description: info.event.extendedProps.description,
                             PlannedDistance: info.event.extendedProps.plannedDistance,
                             EstimatedTime: info.event.extendedProps.estimatedTime,
-                            ScheduleDateTime: moment(info.event.start).format('MM/DD/YYYY HH:mm'),
-                            End: info.event.end != null ? moment(info.event.end).format('DD/MM/YYYY HH:mm A') : null,
+                            ScheduleDateTime: moment.utc(info.event.start).format('MM/DD/YYYY HH:mm'),
+                            End: info.event.end != null ? moment.utc(info.event.end).format('DD/MM/YYYY HH:mm A') : null,
                             LocationId: info.event.extendedProps.locationId,
                             ActualDistance: info.event.extendedProps.actualDistance,
                             ActualTime: info.event.extendedProps.acutalTime,
@@ -240,8 +240,8 @@
                             id: 0,
                             title: '',
 
-                            start: moment(start.start).format("DD-MMM-YYYY h:mm a"),
-                            end: moment(start.end).format("DD-MMM-YYYY h:mm a"),
+                            start: moment.utc(start.start).format("DD-MMM-YYYY h:mm a"),
+                            end: moment.utc(start.end).format("DD-MMM-YYYY h:mm a"),
                             extendedProps: {
                                 description: '',
                                 plannedDistance: '',
@@ -252,7 +252,6 @@
 
                             }
                         };
-                        selectedEvent = selectedEvent;
                         openAddEditForm();
 
                     },
@@ -310,11 +309,11 @@
                     $('#RunDescription').val(selectedEvent.extendedProps.description);
                     $('#PlannedDistance').val(selectedEvent.extendedProps.plannedDistance);
                      $('#EstimatedTime').val(selectedEvent.extendedProps.estimatedTime);
-                    $('#ScheduleDateTime').val(moment(selectedEvent.start).format('MM/DD/YYYY h:mm A'));
+                    $('#ScheduleDateTime').val(moment.utc(selectedEvent.start).format('MM/DD/YYYY h:mm A'));
                     $('#LocationId').val(selectedEvent.extendedProps.locationId);
                     $('#ActualDistance').val(selectedEvent.extendedProps.actualDistance);
                     $('#ActualTime').val(selectedEvent.extendedProps.actualTime);
-                    $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD/MM/YYYY HH:mm A') : '');
+                    $('#txtEnd').val(selectedEvent.end != null ? moment.utc(selectedEvent.end).format('DD/MM/YYYY HH:mm A') : '');
 
             }
 
@@ -337,7 +336,7 @@
                     LocationId:$('#LocationId').val(),
                     ActualDistance:$('#ActualDistance').val(),
                     ActualTime:$('#ActualTime').val(),
-                    ScheduleDateTime: $('#ScheduleDateTime').val(),
+                    ScheduleDateTime: ($('#ScheduleDateTime').val()),
                     Description: $('#RunDescription').val()
 
                 }

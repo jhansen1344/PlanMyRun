@@ -22,7 +22,7 @@ namespace PlanMyRun.Models.RunModels
         [Required]
         [Display(Name = "Date for Run")]
         [DataType(DataType.Date, ErrorMessage = ("Please enter a valid date"))]
-        public DateTime ScheduleDateTime { get; set; }
+        public DateTimeOffset ScheduleDateTime { get; set; }
         [Display(Name = "Notes about this Run")]
         [MaxLength(1000, ErrorMessage = "Please enter a shorter note")]
         public string Description { get; set; }

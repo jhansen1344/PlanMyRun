@@ -19,8 +19,9 @@ namespace PlanMyRun.Models.RunModels
         [Display(Name = "Estimated Time to Complete")]
         public TimeSpan EstimatedTime { get; set; }
         [Display(Name = "Date for Run")]
-        public DateTime ScheduleDateTime { get; set; }
-        public DateTime End { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:G}")]
+        public DateTimeOffset ScheduleDateTime { get; set; }
+        public DateTimeOffset End { get; set; }
         public int? LocationId { get; set; }
         [Display(Name = "Location")]
         public string LocationName { get; set; }

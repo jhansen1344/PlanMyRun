@@ -14,6 +14,7 @@ namespace PlanMyRun.Models.RacePlanModels
         [Display(Name = "Plan Name")]
         public string RaceName { get; set; }
         [Display(Name = "Race Date")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime RaceDate { get; set; }
         [Display(Name = "Can others use this plan as a template?")]
         public bool IsPublic { get; set; }

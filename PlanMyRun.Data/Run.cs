@@ -21,7 +21,7 @@ namespace PlanMyRun.Data
         [Required]
         public TimeSpan EstimatedTime { get; set; }
         [Required]
-        public DateTime ScheduledDateTime { get; set;}
+        public DateTimeOffset ScheduledDateTime { get; set;}
         public string Description { get; set; }
         public TimeSpan? ActualTime { get; set; }
         public double? ActualDistance { get; set; }
