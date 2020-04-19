@@ -37,8 +37,8 @@ namespace PlanMyRun.Services
             _likesRain = runner.LikesRain;
         }
         readonly string uri = "http://api.weatherunlocked.com/api/forecast/";
-        private string appId = "0582982b";
-        private string appKey = "1bf4c33953cec0914f0b50a66f13b552";
+        private string appId = "AppId";
+        private string appKey = "AppKey";
         private readonly string _userZip;
 
         public async Task<ForecastResultModel> GetForecastAsync()
